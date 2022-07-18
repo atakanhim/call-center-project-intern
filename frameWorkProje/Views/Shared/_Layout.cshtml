@@ -22,7 +22,7 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("Logout", "LogOut", "Login")</li>
-                    <li>@Html.ActionLink("Login", "Index", "Login")</li>
+                    <li style="color:red">hoş geldiniz @HttpContext.Current.User.Identity.Name</li>
                 </ul>
             </div>
         </div>

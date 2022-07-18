@@ -40,6 +40,7 @@ namespace frameWorkProje.Controllers
                 if (user != null)
                 {
                     FormsAuthentication.SetAuthCookie(user.UserName, false);
+                
                     return RedirectToAction("Index","Home");
                 }
                 else
