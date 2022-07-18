@@ -13,7 +13,7 @@ using System.Web.Security;
 
 namespace frameWorkProje.Controllers
 {
-    [AllowAnonymous]
+    [AllowAnonymous] 
     public class LoginController : Controller
     {
         // GET: Login
@@ -29,6 +29,7 @@ namespace frameWorkProje.Controllers
             FormsAuthentication.SignOut();
             return RedirectToAction("Index");
         }
+
         [HttpPost]
         public ActionResult Index(UserLoginModel model)
         {

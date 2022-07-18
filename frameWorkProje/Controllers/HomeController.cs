@@ -6,14 +6,20 @@ using System.Web.Mvc;
 
 namespace frameWorkProje.Controllers
 {
-    [Authorize]
+   
     public class HomeController : Controller
     {
         public ActionResult Index()
         {// Anasayfa
             return View();
         }
+        [Authorize(Roles ="personel,admin")]
+        public ActionResult Deneme()
+        {// Anasayfa
 
-      
+            return View();
+        }
+
+
     }
 }

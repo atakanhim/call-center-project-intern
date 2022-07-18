@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataAccessLayer.Concreate;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -37,10 +38,13 @@ namespace frameWorkProje.Security
 
         public override string[] GetRolesForUser(string username)
         {
-            throw new NotImplementedException();
+            using (var c = new Context())
+            {
+                var y = c.Users.Where(x => x.UserName == username).FirstOrDefault();
 
+                return new string[] { y.UserPosition };
+            }
         }
-
         public override string[] GetUsersInRole(string roleName)
         {
             throw new NotImplementedException();
