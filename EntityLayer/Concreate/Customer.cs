@@ -12,9 +12,9 @@ namespace EntityLayer.Concreate
         [Key]
         public int CustomerId { get; set; }
         public string CustomerName { get; set; }
-        public long CustomerPhone { get; set; }
+        public long? CustomerPhone { get; set; }
         public string CustomerAddress { get; set; }
-        public DateTime CustomerDate { get; set; } 
+        public DateTime? CustomerDate { get; set; }
 
         public List<CallLog> CallLogs { get; set; }
     }

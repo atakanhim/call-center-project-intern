@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BusinessLayer.Concreate;
+using DataAccessLayer.EntityFramework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,14 +8,21 @@ using System.Web.Mvc;
 
 namespace frameWorkProje.Controllers
 {
-   
+    [Authorize(Roles = "personel,admin")]
     public class HomeController : Controller
     {
-        public ActionResult Index()
-        {// Anasayfa
-            return View();
+        JobManager jm = new JobManager(new EfJobRepository());
+
+        public ActionResult Index(string ad = "", int? numara = null, string abc = "")
+        {
+              var values = jm.GetList();
+                return View(values);
+
         }
-        [Authorize(Roles ="personel,admin")]
+
+
+
+     
         public ActionResult Deneme()
         {// Anasayfa
 

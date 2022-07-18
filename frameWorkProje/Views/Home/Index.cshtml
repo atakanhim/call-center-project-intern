@@ -1,16 +1,61 @@
-﻿
+﻿@using EntityLayer.Concreate
+@model IEnumerable<Job>
+
 @{
-    ViewBag.Title = "Index";
+    ViewData["Title"] = "Index";
 }
 
-<h2>Burası Anasayfa</h2>
 
-@if (Convert.ToInt32(Session["roleId"]) == 2)
-{
-    <h2>adminsin</h2>
-}
-else
-{ 
-    <h2>Personelsin</h2>
-}
-<a href="/Home/Deneme">asdsadasd</a>
+<p>
+    @Html.ActionLink("yeni is kayıt olustur", "Index", "JobAdd")
+</p>
+
+<!-- 4 5 farklı sıralanmış tablo gonderecegim js ile kontrol edip ona göre listetecegim
+
+
+    -->
+<form method="get" id="filter">
+    <div class="form-group">
+        <input type="text" name="ad" class="form-control" placeholder="Ada Gore Filtrele " />
+    </div>
+    <div class="form-group">
+        <input type="number" name="numara" class="form-control" placeholder="Numaraya gore filtrele " />
+    </div>
+    <div class="form-group">
+        <input type="submit" name="submit" class="form-control" placeholder="Adı " />
+    </div>
+</form>
+<br />
+<br />
+<form method="get">
+    <button type="submit" name="abc" value="abc">DESC</button>
+</form>
+<table class="table" id="ornek">
+    <thead>
+        <tr>
+
+            <td> ÇAĞRI OLUŞTURAN MUSTERİ ADI</td>
+
+            <td> İŞ AÇIKLAMASI</td>
+            <td> İŞ DURUMU</td>
+            <td> ÇAGRI KODU</td>
+
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td> @item.CallLog.Customer.CustomerName </td>
+                <td> @item.JobDescription </td>
+                <td> @item.JobStatus </td>
+                <td> @item.CallLogId </td>
+
+            </tr>
+        }
+    </tbody>
+
+
+</table>
+

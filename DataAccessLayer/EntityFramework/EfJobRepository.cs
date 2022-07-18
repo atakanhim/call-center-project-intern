@@ -12,14 +12,6 @@ namespace DataAccessLayer.EntityFramework
 {
     public class EfJobRepository : GenericRepository<Job>, IJobDal
     {
-        public List<Job> GetJobWithfilter(string ad, int? numara = null, string abc = "")
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Job> GetJobWithUser()
-        {
-            throw new NotImplementedException();
-        }
+     
     }
 }

@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewData["Title"] = "CustomerAdd";
+}
+@{
+    var tamam = ViewBag.SuccessMessage;
+}
+<h1>@tamam</h1>
+<form asp-action="CustomerAdd" asp-controller="Customer" method="post">
+
+    Müşteri adı: <input type="text" name="CustomerName" /><br />
+    Müşteri Adresi: <input type="text" name="CustomerAddress" /><br />
+    Müşteri Date: <input type="datetime" name="CustomerDate" /><br />
+    Müşteri Telefon: <input type="text" name="CustomerPhone" value="@tamam" readonly />
+    <button>bas</button>
+</form>

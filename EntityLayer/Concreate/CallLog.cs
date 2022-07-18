@@ -12,12 +12,12 @@ namespace EntityLayer.Concreate
         [Key]
         public int CallLogId { get; set; }
         public string CallLogDesc { get; set; }
-        public bool CallLogStatus { get; set; }
-        public DateTime CreatingTime { get; set; }
-        public DateTime UpdatingTime { get; set; }
-        public long  CalllNumber { get; set; }
+        public bool? CallLogStatus { get; set; }
+        public DateTime? CreatingTime { get; set; }
+        public DateTime? UpdatingTime { get; set; }
+        public long? CalllNumber { get; set; }
 
-        public int CustomerId { get; set; }
+        public int? CustomerId { get; set; }
         public Customer Customer { get; set; }
 
         public List<Job> Jobs { get; set; }

@@ -9,7 +9,6 @@ namespace DataAccessLayer.Abstract
 {
     public interface IJobDal : IGenericDal<Job>
     {
-        List<Job> GetJobWithUser();
-        List<Job> GetJobWithfilter(string ad, int? numara = null, string abc = "");
+       
     }
 }
