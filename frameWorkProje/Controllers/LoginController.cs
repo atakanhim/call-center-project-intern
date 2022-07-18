@@ -23,7 +23,7 @@ namespace frameWorkProje.Controllers
             return View();
         }
 
-     
+
         public ActionResult LogOut()
         {
             FormsAuthentication.SignOut();
@@ -32,16 +32,21 @@ namespace frameWorkProje.Controllers
         [HttpPost]
         public ActionResult Index(UserLoginModel model)
         {
-            
+
             using (var c = new Context())
             {
 
-                var user= c.Users.Where(x => x.UserName == model.UserName && x.UserPassword==model.PassWord).FirstOrDefault();
+                var user = c.Users.Where(x => x.UserName == model.UserName && x.UserPassword == model.PassWord).FirstOrDefault();
                 if (user != null)
                 {
+                    var roleId = 1; // 1 ise personel
+                    if (user.UserPosition == "admin")
+                        roleId = 2;// 2 ise admin
                     FormsAuthentication.SetAuthCookie(user.UserName, false);
-                
-                    return RedirectToAction("Index","Home");
+                    Session.Add("userId", user.UserId);
+                    Session.Add("roleId", roleId);
+
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {
@@ -49,9 +54,9 @@ namespace frameWorkProje.Controllers
                     return View(model);
                 }
 
-                
+
             }
-         
+
         }
     }
 }

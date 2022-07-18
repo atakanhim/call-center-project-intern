@@ -5,3 +5,12 @@
 
 <h2>Burası Anasayfa</h2>
 
+@if (Convert.ToInt32(Session["roleId"]) == 2)
+{
+    <h2>adminsin</h2>
+}
+else
+{ 
+    <h2>Personelsin</h2>
+}
+
