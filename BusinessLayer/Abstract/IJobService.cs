@@ -13,8 +13,9 @@ namespace BusinessLayer.Abstract
         void JobDelete(Job job);
         void JobUpdate(Job job);
         List<Job> GetList();
-        Job GetById(int id); 
+        Job GetById(int id);
 
-       
+        List<Job> GetJobListWithUser();
+        List<Job> GetJobWithfilter(string ad, int? numara = null, string abc = "");
     }
 }

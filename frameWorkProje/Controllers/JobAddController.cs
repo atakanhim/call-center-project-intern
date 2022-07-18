@@ -17,7 +17,7 @@ namespace frameWorkProje.Controllers
         public ActionResult Index()
         {
 
-            var values = cm.CallLogList();
+            var values = cm.GetCallLogListWithCustomer();
 
             return View(values);
         }

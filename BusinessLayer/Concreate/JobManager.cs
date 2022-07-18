@@ -25,7 +25,15 @@ namespace BusinessLayer.Concreate
             throw new NotImplementedException();
         }
 
-      
+        public List<Job> GetJobListWithUser()
+        {
+            return _jobDal.GetJobWithUser();
+        }
+
+        public List<Job> GetJobWithfilter(string ad, int? numara = null, string abc = "")
+        {
+            throw new NotImplementedException();
+        }
 
         public List<Job> GetList()
         {
