@@ -9,10 +9,11 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace frameWorkProje.Controllers
 {
-
+    [AllowAnonymous]
     public class LoginController : Controller
     {
         // GET: Login
@@ -21,15 +22,35 @@ namespace frameWorkProje.Controllers
         {
             return View();
         }
+
+     
+        public ActionResult LogOut()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index");
+        }
         [HttpPost]
         public ActionResult Index(UserLoginModel model)
         {
-             var userKontrol = um.GetByName(model.UserName);
-            if (userKontrol != null)
+            
+            using (var c = new Context())
             {
-                return View(model);
+
+                var user= c.Users.Where(x => x.UserName == model.UserName && x.UserPassword==model.PassWord).FirstOrDefault();
+                if (user != null)
+                {
+                    FormsAuthentication.SetAuthCookie(user.UserName, false);
+                    return RedirectToAction("Index","Home");
+                }
+                else
+                {
+                    ViewBag.mesaj = "Gecersiz Kullanici Adi";
+                    return View(model);
+                }
+
+                
             }
-            return View(model);
+         
         }
     }
 }

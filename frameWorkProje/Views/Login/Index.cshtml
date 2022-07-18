@@ -11,16 +11,18 @@
     <div id="formContent">
         <!-- Tabs Titles -->
         <!-- Icon -->
-        <div class="fadeIn first">
+        @*<div class="fadeIn first">
             <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" />
-        </div>
+        </div>*@
 
         <!-- Login Form -->
+        @ViewBag.mesaj <br />
 
         @using (Html.BeginForm("Index", "Login", FormMethod.Post))
         {
             @Html.LabelFor(m => m.UserName)
             @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", placeholder = "Kullanici Adı" })<br />
+
             @Html.LabelFor(m => m.PassWord)
             @Html.TextBoxFor(m => m.PassWord, new { @class = "form-control", placeholder = "Şifre" })<br />
 
@@ -31,8 +33,8 @@
 
         <!-- Remind Passowrd -->
         @*<div id="formFooter">
-                <a class="underlineHover" href="#">Forgot Password?</a>
-            </div>*@
+            <a class="underlineHover" href="#">Forgot Password?</a>
+        </div>*@
 
     </div>
 </div>
