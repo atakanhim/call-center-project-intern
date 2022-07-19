@@ -43,18 +43,15 @@ namespace DataAccessLayer.EntityFramework
                             select job
                               ).ToList();
             }
-            if (abc != "")
+            if (abc == "ASC")
             {
-                jobValue = (from job in c.Jobs
-                            join call in c.CallLogs
-                              on job.CallLogId equals call.CallLogId
-                            join cust in c.Customers
-                              on call.CustomerId equals cust.CustomerId
-                            orderby job.CallLogId 
-                            select job
-                              ).ToList();
+                jobValue = jobValue.OrderBy(o => o.CallLogId).ToList();
             }
 
+            if (abc == "DESC")
+            {
+                jobValue = jobValue.OrderByDescending(o => o.CallLogId).ToList();
+            }
 
             return jobValue;
 

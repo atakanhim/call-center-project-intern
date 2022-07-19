@@ -16,9 +16,9 @@ namespace frameWorkProje.Controllers
         JobManager jm = new JobManager(new EfJobRepository());
         CustomerManager customerManager = new CustomerManager(new EfCustomerRepository());
 
-        public ActionResult Index(string ad = "", int? numara = null, string abc = "")
+        public ActionResult Index(string ad = "", int? numara = null, string siralama = "")
         {
-            if (ad == "" && numara == null && abc == "")
+            if (ad == "" && numara == null && siralama == "")
             {
                 var values = jm.GetList();
                 return View(values);
@@ -26,7 +26,7 @@ namespace frameWorkProje.Controllers
            
             else
             {
-                var values = jm.GetJobWithfilter(ad, numara, abc);
+                var values = jm.GetJobWithfilter(ad, numara, siralama);
                 return View(values);
             }
 

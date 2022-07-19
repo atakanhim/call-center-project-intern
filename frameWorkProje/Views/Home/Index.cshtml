@@ -6,20 +6,33 @@
 }
 
 
-<p>
+<h3 style="text-align:right">
     @Html.ActionLink("yeni is kayıt olustur", "CreateJob", "JobAdd")
-</p>
+</h3>
+    
+<h1 style="text-align:center;margin-top:30px"> İŞ KAYITLARI</h1>
 
 <!-- 4 5 farklı sıralanmış tablo gonderecegim js ile kontrol edip ona göre listetecegim
 
-   
+
     -->
 <form method="get" id="filter">
     <div class="form-group">
         <input type="text" name="ad" class="form-control" placeholder="Ada Gore Filtrele " />
     </div>
     <div class="form-group">
-        <input type="number" name="numara" class="form-control" placeholder="Numaraya gore filtrele " />
+        <input type="number" name="numara" class="form-control" placeholder="Çağrı koduna filtrele " />
+    </div>
+    <div class="form-group">
+           <p>CagrıKoduna Gore</p>
+        <select name="siralama">
+            <option value="ASC">
+                 ARTAN
+            </option>
+           <option value="DESC">
+                 AZALAN
+            </option>
+        </select>
     </div>
     <div class="form-group">
         <input type="submit" name="submit" class="form-control" placeholder="Adı " />
@@ -27,9 +40,7 @@
 </form>
 <br />
 <br />
-<form method="get">
-    <button type="submit" name="abc" value="abc">DESC</button>
-</form>
+
 <table class="table" id="ornek">
     <thead>
         <tr>
