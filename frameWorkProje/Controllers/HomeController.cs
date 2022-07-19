@@ -15,7 +15,7 @@ namespace frameWorkProje.Controllers
 
         public ActionResult Index(string ad = "", int? numara = null, string abc = "")
         {
-              var values = jm.GetJobListWithUser();
+              var values = jm.GetList();
                 return View(values);
 
         }

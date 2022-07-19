@@ -14,16 +14,17 @@ namespace frameWorkProje.Controllers
     {
         JobManager jm = new JobManager(new EfJobRepository());
         CallLogManager cm = new CallLogManager(new EfCallLogRepository());
-        public ActionResult Index()
+        public ActionResult CreateJob()
         {
 
-            var values = cm.GetCallLogListWithCustomer();
+            var values = cm.CallLogList();
 
             return View(values);
         }
 
+
         [HttpPost]
-        public ActionResult CreateJob(Job job)
+        public ActionResult CreateJob(Job job)// iş ekleniyor fakat iş eklendikten sonra iş durumu false olmasu lazım
         {
             job.CreatingTime = DateTime.Now;
             job.UpdatingTime = DateTime.Now;
@@ -35,7 +36,7 @@ namespace frameWorkProje.Controllers
             {
                 var user = db.CallLogs.Where(x => x.CallLogId == job.CallLogId).FirstOrDefault();
 
-                user.CallLogStatus = true;
+                user.CallLogStatus = false;
 
                 db.SaveChanges();
             }

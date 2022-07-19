@@ -7,12 +7,12 @@
 
 
 <p>
-    @Html.ActionLink("yeni is kayıt olustur", "Index", "JobAdd")
+    @Html.ActionLink("yeni is kayıt olustur", "CreateJob", "JobAdd")
 </p>
 
 <!-- 4 5 farklı sıralanmış tablo gonderecegim js ile kontrol edip ona göre listetecegim
 
-
+   
     -->
 <form method="get" id="filter">
     <div class="form-group">
@@ -47,7 +47,7 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td> @item.CallLog.Customer.CustomerName </td>
+                <td> @item.JobMethods </td>
                 <td> @item.JobDescription </td>
                 <td> @item.JobStatus </td>
                 <td> @item.CallLogId </td>

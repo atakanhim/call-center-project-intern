@@ -176,7 +176,7 @@
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Deneme.cshtml" />
-    <Content Include="Views\JobAdd\Index.cshtml" />
+    <Content Include="Views\JobAdd\CreateJob.cshtml" />
     <Content Include="Views\Customer\CustomerAdd.cshtml" />
   </ItemGroup>
   <ItemGroup>
