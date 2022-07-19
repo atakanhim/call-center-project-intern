@@ -16,6 +16,6 @@ namespace EntityLayer.Concreate
         public string CustomerAddress { get; set; }
         public DateTime? CustomerDate { get; set; }
 
-        public List<CallLog> CallLogs { get; set; }
+        public ICollection<CallLog> CallLogs { get; set; }
     }
 }

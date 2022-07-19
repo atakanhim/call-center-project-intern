@@ -19,6 +19,6 @@ namespace EntityLayer.Concreate
         public string UserPosition { get; set; }
         public DateTime? UserDate { get; set; }
 
-        public List<Job> Jobs { get; set; }
+        public ICollection<Job> Jobs { get; set; }
     }
 }

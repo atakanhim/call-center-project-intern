@@ -18,8 +18,8 @@ namespace EntityLayer.Concreate
         public long? CalllNumber { get; set; }
 
         public int? CustomerId { get; set; }
-        public Customer Customer { get; set; }
+        public virtual Customer Customer { get; set; }
 
-        public List<Job> Jobs { get; set; }
+        public ICollection<Job> Jobs { get; set; }
     }
 }

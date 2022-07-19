@@ -19,9 +19,9 @@ namespace EntityLayer.Concreate
         public DateTime? UpdatingTime { get; set; }
 
         public int CallLogId { get; set; }
-        public CallLog CallLog { get; set; }
+        public virtual CallLog CallLog { get; set; }
 
         public int UserId { get; set; }
-        public User User { get; set; }
+        public virtual User User { get; set; }
     }
 }
