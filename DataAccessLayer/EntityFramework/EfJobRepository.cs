@@ -18,95 +18,136 @@ namespace DataAccessLayer.EntityFramework
 
 
             Context c = new Context();
-            List<Job> jobValue = new List<Job>();
-            if (ad != null && numara != null & abc != null)//hepsi dolu ise
-            {
-               return jobValue = (from job in c.Jobs
-                            join call in c.CallLogs
-                              on job.CallLogId equals call.CallLogId
-                            join cust in c.Customers
-                              on call.CustomerId equals cust.CustomerId
-                            where (cust.CustomerName.Contains(ad) && call.CallLogId == numara)
-                            orderby cust.CustomerName
-                            select job
-                                 ).ToList();
-            }
-            else if (ad != null && numara != null && abc == null)// sıralama yok sadece numara ve 
-            {
-                return jobValue = (from job in c.Jobs
-                            join call in c.CallLogs
-                              on job.CallLogId equals call.CallLogId
-                            join cust in c.Customers
-                              on call.CustomerId equals cust.CustomerId
-                            where (cust.CustomerName.Contains(ad) && call.CallLogId == numara)
-                            select job
-                                ).ToList();
+            List<Job> jobValue = c.Jobs.ToList();
 
-            }
-            else if (ad == null && numara != null && abc != null)//
+            
+            if (ad != "")
             {
-                return jobValue = (from job in c.Jobs
-                            join call in c.CallLogs
-                              on job.CallLogId equals call.CallLogId
-                            join cust in c.Customers
-                              on call.CustomerId equals cust.CustomerId
-                            where (call.CallLogId == numara)
-                            orderby cust.CustomerName
-                            select job
-                                ).ToList();
-
-            }
-            else if (ad != null && numara == null && abc != null)
-            {
-                return jobValue = (from job in c.Jobs
-                            join call in c.CallLogs
-                              on job.CallLogId equals call.CallLogId
-                            join cust in c.Customers
-                              on call.CustomerId equals cust.CustomerId
-                            where (cust.CustomerName.Contains(ad))
-                            orderby cust.CustomerName
-                            select job
-                          ).ToList();
-            }
-
-            else if (ad == null && numara == null && abc != null)
-            {
-                return jobValue = (from job in c.Jobs
-                            join call in c.CallLogs
-                              on job.CallLogId equals call.CallLogId
-                            join cust in c.Customers
-                              on call.CustomerId equals cust.CustomerId
-                            orderby cust.CustomerName
-                            select job
-                          ).ToList();
-            }
-            else if (ad != null && numara == null && abc == null)
-            {
-                return jobValue = (from job in c.Jobs
+                jobValue = (from job in c.Jobs
                             join call in c.CallLogs
                               on job.CallLogId equals call.CallLogId
                             join cust in c.Customers
                               on call.CustomerId equals cust.CustomerId
                             where (cust.CustomerName.Contains(ad))
                             select job
-                          ).ToList();
+                                ).ToList();
             }
-            else if (ad == null && numara != null && abc == null)
+            if (numara != null)
             {
-                return jobValue = (from job in c.Jobs
+                jobValue = (from job in c.Jobs
                             join call in c.CallLogs
                               on job.CallLogId equals call.CallLogId
                             join cust in c.Customers
                               on call.CustomerId equals cust.CustomerId
                             where (call.CallLogId == numara)
                             select job
-                          ).ToList();
+                              ).ToList();
+            }
+            if (abc != "")
+            {
+                jobValue = (from job in c.Jobs
+                            join call in c.CallLogs
+                              on job.CallLogId equals call.CallLogId
+                            join cust in c.Customers
+                              on call.CustomerId equals cust.CustomerId
+                            orderby job.CallLogId 
+                            select job
+                              ).ToList();
             }
 
-            else
-            {
-                return jobValue;
-            }
+
+            return jobValue;
+
+
+            //if (ad != null && numara != null & abc != null)//hepsi dolu ise
+            //{
+            //   return jobValue = (from job in c.Jobs
+            //                join call in c.CallLogs
+            //                  on job.CallLogId equals call.CallLogId
+            //                join cust in c.Customers
+            //                  on call.CustomerId equals cust.CustomerId
+            //                where (cust.CustomerName.Contains(ad) && call.CallLogId == numara)
+            //                orderby cust.CustomerName
+            //                select job
+            //                     ).ToList();
+            //}
+            //else if (ad != null && numara != null && abc == null)// sıralama yok sadece numara ve 
+            //{
+            //    return jobValue = (from job in c.Jobs
+            //                join call in c.CallLogs
+            //                  on job.CallLogId equals call.CallLogId
+            //                join cust in c.Customers
+            //                  on call.CustomerId equals cust.CustomerId
+            //                where (cust.CustomerName.Contains(ad) && call.CallLogId == numara)
+            //                select job
+            //                    ).ToList();
+
+            //}
+            //else if (ad == null && numara != null && abc != null)//
+            //{
+            //    return jobValue = (from job in c.Jobs
+            //                join call in c.CallLogs
+            //                  on job.CallLogId equals call.CallLogId
+            //                join cust in c.Customers
+            //                  on call.CustomerId equals cust.CustomerId
+            //                where (call.CallLogId == numara)
+            //                orderby cust.CustomerName
+            //                select job
+            //                    ).ToList();
+
+            //}
+            //else if (ad != null && numara == null && abc != null)
+            //{
+            //    return jobValue = (from job in c.Jobs
+            //                join call in c.CallLogs
+            //                  on job.CallLogId equals call.CallLogId
+            //                join cust in c.Customers
+            //                  on call.CustomerId equals cust.CustomerId
+            //                where (cust.CustomerName.Contains(ad))
+            //                orderby cust.CustomerName
+            //                select job
+            //              ).ToList();
+            //}
+
+            //else if (ad == null && numara == null && abc != null)
+            //{
+            //    return jobValue = (from job in c.Jobs
+            //                join call in c.CallLogs
+            //                  on job.CallLogId equals call.CallLogId
+            //                join cust in c.Customers
+            //                  on call.CustomerId equals cust.CustomerId
+            //                orderby cust.CustomerName
+            //                select job
+            //              ).ToList();
+            //}
+            //else if (ad != null && numara == null && abc == null)
+            //{
+            //    return jobValue = (from job in c.Jobs
+            //                join call in c.CallLogs
+            //                  on job.CallLogId equals call.CallLogId
+            //                join cust in c.Customers
+            //                  on call.CustomerId equals cust.CustomerId
+            //                where (cust.CustomerName.Contains(ad))
+            //                select job
+            //              ).ToList();
+            //}
+            //else if (ad == null && numara != null && abc == null)
+            //{
+            //    return jobValue = (from job in c.Jobs
+            //                join call in c.CallLogs
+            //                  on job.CallLogId equals call.CallLogId
+            //                join cust in c.Customers
+            //                  on call.CustomerId equals cust.CustomerId
+            //                where (call.CallLogId == numara)
+            //                select job
+            //              ).ToList();
+            //}
+
+            //else
+            //{
+            //    
+            //}
+           
         }
 
 

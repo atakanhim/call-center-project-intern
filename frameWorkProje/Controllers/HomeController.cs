@@ -14,7 +14,7 @@ namespace frameWorkProje.Controllers
     public class HomeController : Controller
     {
         JobManager jm = new JobManager(new EfJobRepository());
-        CustomerManager customerManager = new CustomerManager(new EfCustomerRepository());  
+        CustomerManager customerManager = new CustomerManager(new EfCustomerRepository());
 
         public ActionResult Index(string ad = "", int? numara = null, string abc = "")
         {
@@ -22,12 +22,10 @@ namespace frameWorkProje.Controllers
             {
                 var values = jm.GetList();
                 return View(values);
-
             }
+           
             else
             {
-
-     
                 var values = jm.GetJobWithfilter(ad, numara, abc);
                 return View(values);
             }
@@ -36,15 +34,15 @@ namespace frameWorkProje.Controllers
 
 
 
-     
+
         public ActionResult Deneme()
         {// Anasayfa
-            // 2 modeli anı sayfaya gondermeye calışmak 
+         // 2 modeli anı sayfaya gondermeye calışmak 
             var value1 = jm.GetList();
             var value2 = customerManager.CustomerList();
             ViewModel mymodel = new ViewModel();
             mymodel.Customers = value2;
-            mymodel.Jobs=value1;
+            mymodel.Jobs = value1;
             return View(mymodel);
         }
 
