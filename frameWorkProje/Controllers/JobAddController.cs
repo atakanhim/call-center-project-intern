@@ -14,12 +14,21 @@ namespace frameWorkProje.Controllers
     {
         JobManager jm = new JobManager(new EfJobRepository());
         CallLogManager cm = new CallLogManager(new EfCallLogRepository());
+        CustomerManager customerManager = new CustomerManager(new EfCustomerRepository());
         public ActionResult CreateJob()
         {
-
+            //List<CallLog> callLogs = (from x in cm.CallLogList()
+            //                          where x.CalllNumber == 555
+            //                          select x
+            //                          ).ToList();
+            List<CallLog> callLogs = (from x in cm.CallLogList()
+                                      join cus in customerManager.CustomerList()
+                                        on x.CustomerId equals cus.CustomerId
+                                      select x
+                                      ).ToList();
             var values = cm.CallLogList();
 
-            return View(values);
+            return View(callLogs);
         }
 
 
