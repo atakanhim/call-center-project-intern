@@ -1,7 +1,67 @@
-﻿
+﻿@using frameWorkProje.Models
+@model ViewModel
 @{
     ViewBag.Title = "Deneme";
 }
 
 <h2>Deneme</h2>
+<table class="table" id="ornek">
+    <thead>
+        <tr>
 
+            <td> ÇAĞRI OLUŞTURAN MUSTERİ ADI</td>
+
+            <td> İŞ AÇIKLAMASI</td>
+            <td> İŞ DURUMU</td>
+            <td> ÇAGRI KODU</td>
+
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Jobs)
+        {
+            <tr>
+                <td> @item.JobMethods </td>
+                <td> @item.JobDescription </td>
+                <td> @item.JobStatus </td>
+                <td> @item.CallLogId </td>
+
+            </tr>
+        }
+
+    </tbody>
+
+
+</table>
+<br />
+<h2>Custoemrs Tablosu</h2>
+<table class="table" id="ornek">
+    <thead>
+        <tr>
+
+            <td> CustomerName</td>
+
+            <td> CustomerPhone</td>
+            <td> CustomerAddress</td>
+            <td> CustomerDate</td>
+
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Customers)
+        {
+            <tr>
+                <td> @item.CustomerName </td>
+                <td> @item.CustomerPhone </td>
+                <td> @item.CustomerAddress </td>
+                <td> @item.CustomerDate </td>
+
+            </tr>
+        }
+
+    </tbody>
+
+
+</table>

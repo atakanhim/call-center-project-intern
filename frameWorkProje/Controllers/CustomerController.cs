@@ -1,7 +1,9 @@
 ﻿using BusinessLayer.Concreate;
+using BusinessLayer.ValidationRules;
 using DataAccessLayer.Concreate;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concreate;
+using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,22 +25,40 @@ namespace frameWorkProje.Controllers
                 return RedirectToAction("CreateJob", "JobAdd");
 
             ViewBag.SuccessMessage = numra;
-            return View(numra);
+            return View();
         }
         [HttpPost]
         public ActionResult CustomerAdd(Customer customer)
         {
-            cm.CustomerAdd(customer);
-            using (var c = new Context())
+
+            CustomerValidatior customerValidatior = new CustomerValidatior();
+
+            ValidationResult results = customerValidatior.Validate(customer);
+            if (results.IsValid)
             {
 
+                cm.CustomerAdd(customer);
+                using (var c = new Context())
+                {
 
-                var value = c.CallLogs.Where(x => x.CalllNumber == customer.CustomerPhone).FirstOrDefault();
-                value.CustomerId = customer.CustomerId;
-                
-                c.SaveChanges();
-                return RedirectToAction("CreateJob", "JobAdd");
+
+                    var value = c.CallLogs.Where(x => x.CalllNumber == customer.CustomerPhone).FirstOrDefault();
+                    value.CustomerId = customer.CustomerId;
+
+                    c.SaveChanges();
+                    return RedirectToAction("CreateJob", "JobAdd");
+                }
             }
+            else
+            {
+                foreach (var item in results.Errors)
+                {
+                    ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
+                }
+                return View();
+            }
+          
+         
 
             // customer name kaldırılacak gerek yok 
 

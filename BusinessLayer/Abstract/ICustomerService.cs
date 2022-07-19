@@ -11,5 +11,11 @@ namespace BusinessLayer.Abstract
     {
         void CustomerAdd(Customer cus);
         void CustomerUpdate(Customer cus);
+   
+        void CustomerDelete(Customer job);
+        List<Customer> CustomerList();
+        Customer GetById(int id);
+
+
     }
 }
