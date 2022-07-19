@@ -42,11 +42,11 @@ namespace frameWorkProje.Controllers
 
             using (var db = new Context())
             {
-              //  var userr = db.CallLogs.Where(x => x.CallLogId == job.CallLogId).FirstOrDefault();
+                var user = db.CallLogs.Where(x => x.CallLogId == job.CallLogId).FirstOrDefault();
 
-                 var user= cm.GetCallWithFilter(x => x.CallLogId == job.CallLogId);
+                // var user= cm.GetCallWithFilter(x => x.CallLogId == job.CallLogId);
 
-                if (user != null)             
+                         
                 user.CallLogStatus = false;// cagri durumu false oluyor böylece yanıtlanmıs demek
 
                 db.SaveChanges();
