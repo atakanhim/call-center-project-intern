@@ -43,7 +43,7 @@ namespace frameWorkProje.Controllers
 
 
                     var value = c.CallLogs.Where(x => x.CalllNumber == customer.CustomerPhone).FirstOrDefault();
-                    value.CustomerId = customer.CustomerId;
+                    value.CustomerId = customer.CustomerId;// burda 1 kere value null geldi neden geldi acaba   
 
                     c.SaveChanges();
                     return RedirectToAction("CreateJob", "JobAdd");

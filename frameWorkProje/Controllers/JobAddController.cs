@@ -14,7 +14,6 @@ namespace frameWorkProje.Controllers
     {
         JobManager jm = new JobManager(new EfJobRepository());
         CallLogManager cm = new CallLogManager(new EfCallLogRepository());
-        CustomerManager customerManager = new CustomerManager(new EfCustomerRepository());
         public ActionResult CreateJob()
         {
             //List<CallLog> callLogs = (from x in cm.CallLogList()
@@ -43,8 +42,11 @@ namespace frameWorkProje.Controllers
 
             using (var db = new Context())
             {
-                var user = db.CallLogs.Where(x => x.CallLogId == job.CallLogId).FirstOrDefault();
+              //  var userr = db.CallLogs.Where(x => x.CallLogId == job.CallLogId).FirstOrDefault();
 
+                 var user= cm.GetCallWithFilter(x => x.CallLogId == job.CallLogId);
+
+                if (user != null)             
                 user.CallLogStatus = false;// cagri durumu false oluyor böylece yanıtlanmıs demek
 
                 db.SaveChanges();

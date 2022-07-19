@@ -56,5 +56,10 @@ namespace DataAccessLayer.Repositories
 
             c.SaveChanges();
         }
+
+        public T GetEntityWithFilter(Expression<Func<T, bool>> filter)
+        {
+            return _object.Where(filter).FirstOrDefault();
+        }
     }
 }
