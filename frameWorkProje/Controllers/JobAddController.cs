@@ -24,7 +24,7 @@ namespace frameWorkProje.Controllers
 
 
         [HttpPost]
-        public ActionResult CreateJob(Job job)// iş ekleniyor fakat iş eklendikten sonra iş durumu false olmasu lazım
+        public ActionResult CreateJob(Job job)// 
         {
             job.CreatingTime = DateTime.Now;
             job.UpdatingTime = DateTime.Now;
