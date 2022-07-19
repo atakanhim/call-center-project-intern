@@ -14,8 +14,6 @@ namespace BusinessLayer.Abstract
         void JobUpdate(Job job);
         List<Job> GetList();
         Job GetById(int id);
-
-        List<Job> GetJobListWithUser();
         List<Job> GetJobWithfilter(string ad, int? numara = null, string abc = "");
     }
 }

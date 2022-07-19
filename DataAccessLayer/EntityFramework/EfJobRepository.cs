@@ -13,16 +13,103 @@ namespace DataAccessLayer.EntityFramework
 {
     public class EfJobRepository : GenericRepository<Job>, IJobDal
     {
-        Context c = new Context();
-        DbSet<Job> _object;
-        public List<Job> GetJobWithfilter(string ad, int? numara = null, string abc = "")
+        public List<Job> GetJobWithfilter(string ad = "", int? numara = null, string abc = "")
         {
-            throw new NotImplementedException();
+
+
+            Context c = new Context();
+            List<Job> jobValue = new List<Job>();
+            if (ad != null && numara != null & abc != null)//hepsi dolu ise
+            {
+               return jobValue = (from job in c.Jobs
+                            join call in c.CallLogs
+                              on job.CallLogId equals call.CallLogId
+                            join cust in c.Customers
+                              on call.CustomerId equals cust.CustomerId
+                            where (cust.CustomerName.Contains(ad) && call.CallLogId == numara)
+                            orderby cust.CustomerName
+                            select job
+                                 ).ToList();
+            }
+            else if (ad != null && numara != null && abc == null)// sıralama yok sadece numara ve 
+            {
+                return jobValue = (from job in c.Jobs
+                            join call in c.CallLogs
+                              on job.CallLogId equals call.CallLogId
+                            join cust in c.Customers
+                              on call.CustomerId equals cust.CustomerId
+                            where (cust.CustomerName.Contains(ad) && call.CallLogId == numara)
+                            select job
+                                ).ToList();
+
+            }
+            else if (ad == null && numara != null && abc != null)//
+            {
+                return jobValue = (from job in c.Jobs
+                            join call in c.CallLogs
+                              on job.CallLogId equals call.CallLogId
+                            join cust in c.Customers
+                              on call.CustomerId equals cust.CustomerId
+                            where (call.CallLogId == numara)
+                            orderby cust.CustomerName
+                            select job
+                                ).ToList();
+
+            }
+            else if (ad != null && numara == null && abc != null)
+            {
+                return jobValue = (from job in c.Jobs
+                            join call in c.CallLogs
+                              on job.CallLogId equals call.CallLogId
+                            join cust in c.Customers
+                              on call.CustomerId equals cust.CustomerId
+                            where (cust.CustomerName.Contains(ad))
+                            orderby cust.CustomerName
+                            select job
+                          ).ToList();
+            }
+
+            else if (ad == null && numara == null && abc != null)
+            {
+                return jobValue = (from job in c.Jobs
+                            join call in c.CallLogs
+                              on job.CallLogId equals call.CallLogId
+                            join cust in c.Customers
+                              on call.CustomerId equals cust.CustomerId
+                            orderby cust.CustomerName
+                            select job
+                          ).ToList();
+            }
+            else if (ad != null && numara == null && abc == null)
+            {
+                return jobValue = (from job in c.Jobs
+                            join call in c.CallLogs
+                              on job.CallLogId equals call.CallLogId
+                            join cust in c.Customers
+                              on call.CustomerId equals cust.CustomerId
+                            where (cust.CustomerName.Contains(ad))
+                            select job
+                          ).ToList();
+            }
+            else if (ad == null && numara != null && abc == null)
+            {
+                return jobValue = (from job in c.Jobs
+                            join call in c.CallLogs
+                              on job.CallLogId equals call.CallLogId
+                            join cust in c.Customers
+                              on call.CustomerId equals cust.CustomerId
+                            where (call.CallLogId == numara)
+                            select job
+                          ).ToList();
+            }
+
+            else
+            {
+                return jobValue;
+            }
         }
 
-        public List<Job> GetJobWithUser()
-        {
-            return _object.Include(x=>x.CallLog.Customer).ToList();
-        }
+
+
     }
 }

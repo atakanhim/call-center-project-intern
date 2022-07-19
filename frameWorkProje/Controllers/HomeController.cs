@@ -1,5 +1,6 @@
 ﻿using BusinessLayer.Concreate;
 using DataAccessLayer.EntityFramework;
+using EntityLayer.Concreate;
 using frameWorkProje.Models;
 using System;
 using System.Collections.Generic;
@@ -17,8 +18,19 @@ namespace frameWorkProje.Controllers
 
         public ActionResult Index(string ad = "", int? numara = null, string abc = "")
         {
-              var values = jm.GetList();
+            if (ad == "" && numara == null && abc == "")
+            {
+                var values = jm.GetList();
                 return View(values);
+
+            }
+            else
+            {
+
+     
+                var values = jm.GetJobWithfilter(ad, numara, abc);
+                return View(values);
+            }
 
         }
 
