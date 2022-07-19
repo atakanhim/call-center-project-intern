@@ -36,7 +36,7 @@ namespace frameWorkProje.Controllers
             {
                 var user = db.CallLogs.Where(x => x.CallLogId == job.CallLogId).FirstOrDefault();
 
-                user.CallLogStatus = false;
+                user.CallLogStatus = false;// cagri durumu false oluyor böylece yanıtlanmıs demek
 
                 db.SaveChanges();
             }

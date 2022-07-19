@@ -10,7 +10,7 @@
 
     Müşteri adı: <input type="text" name="CustomerName" /><br />
     Müşteri Adresi: <input type="text" name="CustomerAddress" /><br />
-    Müşteri Date: <input type="datetime" name="CustomerDate" /><br />
+    Müşteri Date: <input type="datetime" name="CustomerDate"  value="@DateTime.UtcNow" readonly/><br />
     Müşteri Telefon: <input type="text" name="CustomerPhone" value="@tamam" readonly />
     <button>bas</button>
 </form>

@@ -20,7 +20,7 @@ namespace frameWorkProje.Controllers
         {
             // callg witch customer yapacam
             if (numra == null)
-                return RedirectToAction("Index","JobAdd");
+                return RedirectToAction("CreateJob", "JobAdd");
 
             ViewBag.SuccessMessage = numra;
             return View(numra);
@@ -35,8 +35,9 @@ namespace frameWorkProje.Controllers
 
                 var value = c.CallLogs.Where(x => x.CalllNumber == customer.CustomerPhone).FirstOrDefault();
                 value.CustomerId = customer.CustomerId;
+                
                 c.SaveChanges();
-                return RedirectToAction("Index", "JobAdd");
+                return RedirectToAction("CreateJob", "JobAdd");
             }
 
             // customer name kaldırılacak gerek yok 
