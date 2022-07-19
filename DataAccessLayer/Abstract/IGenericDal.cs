@@ -16,5 +16,6 @@ namespace DataAccessLayer.Abstract
         T GetById(int id);
 
         List<T> GetListAll(Expression<Func<T, bool>> filter);
+        T GetEntityWithFilter(Expression<Func<T, bool>> filter);    
     }
 }

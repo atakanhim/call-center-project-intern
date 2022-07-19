@@ -1,0 +1,33 @@
+﻿@using EntityLayer.Concreate
+@model Customer
+@{
+    ViewData["Title"] = "CustomerAdd";
+}
+@{
+    var telefonno = ViewBag.SuccessMessage;
+}
+
+@*<form asp-action="CustomerAdd" asp-controller="Customer" method="post">
+
+        Müşteri adı: <input type="text" name="CustomerName" /><br />
+        Müşteri Adresi: <input type="text" name="CustomerAddress" /><br />
+        Müşteri Date: <input type="datetime" name="CustomerDate" value="@DateTime.UtcNow" readonly /><br />
+        Müşteri Telefon: <input type="text" name="CustomerPhone" value="@tamam" readonly />
+        <button>bas</button>
+    </form>*@
+
+<br />
+@using (Html.BeginForm("CustomerAdd", "Customer", FormMethod.Post))
+{
+    <div class="form-group">
+        Müşteri adı: <input type="text" name="CustomerName" /><br />
+        @Html.ValidationMessageFor(x => x.CustomerName)
+        <br />
+        Müşteri Adresi: <input type="text" name="CustomerAddress" /><br />
+        @Html.ValidationMessageFor(x => x.CustomerAddress)
+        <br />
+        Müşteri Date: <input type="datetime" name="CustomerDate" value="@DateTime.UtcNow" readonly /><br />
+        Müşteri Telefon: <input type="text" name="CustomerPhone" value="@telefonno" />
+    </div>
+    <button>bas</button>
+}

@@ -13,15 +13,15 @@ namespace EntityLayer.Concreate
         public int JobId { get; set; }
         public string JobDescription { get; set; }
         public string JobMethods { get; set; }
-        public bool IsImportant { get; set; }
+        public bool? IsImportant { get; set; }
         public string JobStatus { get; set; }
-        public DateTime CreatingTime { get; set; }
-        public DateTime UpdatingTime { get; set; }
+        public DateTime? CreatingTime { get; set; }
+        public DateTime? UpdatingTime { get; set; }
 
         public int CallLogId { get; set; }
-        public CallLog CallLog { get; set; }
+        public virtual CallLog CallLog { get; set; }
 
         public int UserId { get; set; }
-        public User User { get; set; }
+        public virtual User User { get; set; }
     }
 }

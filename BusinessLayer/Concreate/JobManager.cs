@@ -18,25 +18,23 @@ namespace BusinessLayer.Concreate
             _jobDal = jobDal;
         }
 
-        public List<Job> GetJobWithfilter(string ad, int? numara = null, string abc = "")
-        {
-            var value = _jobDal.GetJobWithfilter(ad, numara,abc);
-            return (value);
-        }
+     
 
         public Job GetById(int id)
         {
             throw new NotImplementedException();
         }
 
-        public List<Job> GetJobListWithUser()
+      
+        public List<Job> GetJobWithfilter(string ad, int? numara = null, string abc = "")
         {
-            return _jobDal.GetJobWithUser();
+            var value = _jobDal.GetJobWithfilter(ad, numara, abc);
+            return (value);
         }
 
         public List<Job> GetList()
         {
-            throw new NotImplementedException();
+            return _jobDal.GetListAll();
         }
 
         public void JobAdd(Job job)

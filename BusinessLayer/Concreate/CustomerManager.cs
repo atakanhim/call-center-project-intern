@@ -23,7 +23,22 @@ namespace BusinessLayer.Concreate
             _customerDal.Insert(cus);
         }
 
+        public void CustomerDelete(Customer job)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Customer> CustomerList()
+        {
+            return _customerDal.GetListAll();
+        }
+
         public void CustomerUpdate(Customer cus)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Customer GetById(int id)
         {
             throw new NotImplementedException();
         }

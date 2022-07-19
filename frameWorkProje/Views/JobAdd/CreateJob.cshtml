@@ -1,0 +1,98 @@
+﻿
+@{
+    ViewData["Title"] = "CreateJob";
+}
+@using EntityLayer.Concreate
+@model IEnumerable<CallLog>
+
+@section scripts {
+
+    <script src="~/js/isEkle.js"></script>
+
+}
+@{
+
+    var x = 0;
+    foreach (var item in Model)
+    {
+        x = item.CallLogId;
+    }
+
+}
+@*// burası yeni ekrana alınacak @avait li bişey olacal-->*@
+@if (x != 0)
+{
+    <table class="table">
+        <tr>
+            <th>Musteri Adı</th>
+            <th>Cagri Acıklama</th>
+            <th>Cagrı Durumu</th>
+            <th>Cagrı Numarası</th>
+            <th>*</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr class="kolon">
+
+                <td>
+                    @if (item.CustomerId != null)
+                    {
+                        @item.Customer.CustomerName
+                    }
+                    else
+                    {
+                        <p class="accept-policy" style="color: blue; text-decoration: underline; text-decoration-color: blue;">MUSTERI KAYITLI DEGIL</p>
+                    }
+                </td>
+                <td> @item.CallLogDesc</td>
+                <td> @item.CallLogStatus</td>
+                <td> @item.CalllNumber</td>
+                @if (item.CustomerId == null)
+                {
+                    <td> <button>@Html.ActionLink("Musteri Kaydet", "CustomerAdd", "Customer", new { numra = item.CalllNumber }, "")</button></td>
+                }
+            </tr>
+        }
+
+
+    </table>
+    <br />
+
+    <h1>ÇAĞRI EKLE</h1>
+  
+   
+
+    <form asp-action="CreateJob" asp-controller="JobAdd" method="post">
+        İŞ AÇIKLAMASI: <input id="desc" type="text" name="JobDescription" placeholder="is cok zor" /><br />
+        İŞ ÇÖZÜM YOLLARI: <input id="method" type="text" name="JobMethods" placeholder="yol yok" /><br />
+        ONEMLİ Mİ :
+        <select name="IsImportant">
+            <option value="true">Evet</option>
+            <option value="false">Hayır</option>
+        </select><br />
+        İş Durumunu seçiniz :
+        <select name="JobStatus">
+            <option value="aktif">Aktif</option>
+            <option value="deaktif">DeAktif</option>
+        </select><br />
+        Seçeceğiniz çagrının müşterisini seçiniz :
+        <select name="CallLogId">
+            @foreach (var item in Model)
+            {
+                if (item.CustomerId != null)
+                {
+                    <option value="@item.CallLogId">
+                        CAGRI, OLUSTURAN :@item.Customer.CustomerName ~&~ KODU: @item.CallLogId
+                    </option>
+                }
+
+            }
+        </select><br />
+
+        <button>İş Oluştur</button> 
+    </form>
+}
+else
+{
+    <h3> Herhangi bir çağrı kaydı bulunamamıştır.</h3>
+}
