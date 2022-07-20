@@ -4,65 +4,64 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>DETAY SAYFASI</h2>
 @if (Model == null)
 {
     <h1>@ViewBag.hata</h1>
 }
+
 else
 {
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <table class="table">
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Customer.CustomerName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CallLogDesc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CallLogStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatingTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UpdatingTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CalllNumber)
+        </th>
+        <th>*</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Customer.CustomerName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CallLogDesc)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CallLogStatus)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatingTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UpdatingTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CalllNumber)
-            </th>
-            <th></th>
+            <td>
+                <input type="text" name="CustomerName" value="@Html.DisplayFor(modelItem => item.Customer.CustomerName)" readonly>
+            </td>
+            <td>
+                <input type="text" name="CallLogDesc" value="@Html.DisplayFor(modelItem => item.CallLogDesc)">
+            </td>
+            <td>
+               
+                @Html.EditorFor(modelItem => item.CallLogStatus)
+            </td>
+            <td>
+                <input type="datetime" name="CreatingTime" value="@Html.DisplayFor(modelItem => item.CreatingTime)" readonly>
+            </td>
+            <td>
+                <input type="datetime" name="UpdatingTime" value="@Html.DisplayFor(modelItem => item.UpdatingTime)" readonly>
+            </td>
+            <td>
+                <input type="text" name="CalllNumber" value="@Html.DisplayFor(modelItem => item.CalllNumber)" readonly>
+            </td>
+            <td>
+                <button type="submit" class="btn btn-primary">Update</button>
+            </td>
         </tr>
 
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Customer.CustomerName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CallLogDesc)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CallLogStatus)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CreatingTime)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UpdatingTime)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CalllNumber)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.CallLogId }) |
-
-                </td>
-            </tr>
         }
 
     </table>

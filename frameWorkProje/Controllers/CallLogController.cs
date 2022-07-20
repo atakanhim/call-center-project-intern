@@ -21,9 +21,6 @@ namespace frameWorkProje.Controllers
                 model = callLogManager.GetCallLogListVithFilter(x => x.CallLogId == id);
             }
 
-
-
-
             return View(model);
         }
   }  }
