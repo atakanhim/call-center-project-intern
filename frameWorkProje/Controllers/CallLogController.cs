@@ -35,11 +35,5 @@ namespace frameWorkProje.Controllers
 
             return RedirectToAction("Index","CallLog");
         }
-        public ActionResult CallLogDetay(int id = 0)
-        {
-           
-          
-            return View();
-           
-        }
+       
     }  }
