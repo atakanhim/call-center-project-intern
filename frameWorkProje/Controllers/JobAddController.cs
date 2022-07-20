@@ -26,10 +26,17 @@ namespace frameWorkProje.Controllers
         [HttpPost]
         public ActionResult CreateJob(Job job)// 
         {
+            var sessionUserId = Convert.ToInt32(Session["userId"]);
 
             if (job.CallLogId == 0)
             {
+                // çagrı seçmemiş demektir
                 // js ile kontrol ediliyor zaten burasıda 2. kontrol yeri
+            }
+            else if(sessionUserId == 0)
+            {
+                // çagrı seçmemiş demektir
+                //  ekleme yapmayacak çünkü session oturumu açılammaıi
             }
             else
             {
@@ -42,7 +49,8 @@ namespace frameWorkProje.Controllers
                     // daha sonra job ekleniyor 
                     job.CreatingTime = DateTime.Now;
                     job.UpdatingTime = DateTime.Now;
-                    job.UserId = 1;// personel id giren kişi çekilece
+                   
+                    job.UserId = sessionUserId;// personel id giren kişi çekilece
 
 
                     jm.JobAdd(job);
