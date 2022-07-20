@@ -19,12 +19,12 @@ namespace BusinessLayer.Concreate
             _callLogdal = callLogdal;
         }
 
-        public void CallLogAdd(CallLog job)
+        public void CallLogAdd(CallLog call)
         {
             throw new NotImplementedException();
         }
 
-        public void CallLogDelete(CallLog job)
+        public void CallLogDelete(CallLog call)
         {
             throw new NotImplementedException();
         }
@@ -34,9 +34,9 @@ namespace BusinessLayer.Concreate
             return _callLogdal.GetListAll(x=>x.CallLogStatus==true);
         }
 
-        public void CallLogUpdate(CallLog job)
+        public void CallLogUpdate(CallLog call)
         {
-            throw new NotImplementedException();
+            _callLogdal.Update(call);
         }
 
         public CallLog GetById(int id)

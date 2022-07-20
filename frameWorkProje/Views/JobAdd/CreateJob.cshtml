@@ -6,10 +6,8 @@
 @model IEnumerable<CallLog>
 
 @section scripts {
-
-    <script src="~/js/isEkle.js"></script>
-
-}
+    <script src="~/Scripts/CreateJob.js"></script>
+    }
 @{
 
     var x = 0;
@@ -19,6 +17,7 @@
     }
 
 }
+
 @*// burası yeni ekrana alınacak @avait li bişey olacal-->*@
 @if (x != 0)
 {
@@ -59,8 +58,8 @@
     <br />
 
     <h1>ÇAĞRI EKLE</h1>
-  
-   
+
+    <h1>@ViewBag.v</h1>
 
     <form asp-action="CreateJob" asp-controller="JobAdd" method="post">
         İŞ AÇIKLAMASI: <input id="desc" type="text" name="JobDescription" placeholder="is cok zor" /><br />
@@ -81,7 +80,7 @@
             {
                 if (item.CustomerId != null)
                 {
-                    <option value="@item.CallLogId">
+                    <option id="calllogId" value="@item.CallLogId">
                         CAGRI, OLUSTURAN :@item.Customer.CustomerName ~&~ KODU: @item.CallLogId
                     </option>
                 }
@@ -89,7 +88,7 @@
             }
         </select><br />
 
-        <button>İş Oluştur</button> 
+        <button id="bas">İş Oluştur</button>
     </form>
 }
 else

@@ -16,15 +16,7 @@ namespace frameWorkProje.Controllers
         CallLogManager cm = new CallLogManager(new EfCallLogRepository());
         public ActionResult CreateJob()
         {
-            //List<CallLog> callLogs = (from x in cm.CallLogList()
-            //                          where x.CalllNumber == 555
-            //                          select x
-            //                          ).ToList();
-            //List<CallLog> callLogs = (from x in cm.CallLogList()
-            //                          join cus in customerManager.CustomerList()
-            //                            on x.CustomerId equals cus.CustomerId
-            //                          select x
-            //                          ).ToList();
+  
             var values = cm.CallLogList();
 
             return View(values);
@@ -34,23 +26,29 @@ namespace frameWorkProje.Controllers
         [HttpPost]
         public ActionResult CreateJob(Job job)// 
         {
-            job.CreatingTime = DateTime.Now;
-            job.UpdatingTime = DateTime.Now;
-            job.UserId = 1;
-            jm.JobAdd(job);
-            // update edilecek çagrı seçildi çagrı durumu false olacak
 
-            using (var db = new Context())
+            if (job.CallLogId == 0)
             {
-                var user = db.CallLogs.Where(x => x.CallLogId == job.CallLogId).FirstOrDefault();
-
-                // var user= cm.GetCallWithFilter(x => x.CallLogId == job.CallLogId);
-
-                         
-                user.CallLogStatus = false;// cagri durumu false oluyor böylece yanıtlanmıs demek
-
-                db.SaveChanges();
+                // js ile kontrol ediliyor zaten burasıda 2. kontrol yeri
             }
+            else
+            {
+
+                using (var db = new Context())
+                {
+                    var user = cm.GetCallWithFilter(x => x.CallLogId == job.CallLogId);
+                    user.CallLogStatus = false;// cagri durumu false oluyor böylece yanıtlanmıs demek
+                    cm.CallLogUpdate(user);
+                    // daha sonra job ekleniyor 
+                    job.CreatingTime = DateTime.Now;
+                    job.UpdatingTime = DateTime.Now;
+                    job.UserId = 1;// personel id giren kişi çekilece
+
+
+                    jm.JobAdd(job);
+                }
+            }
+
             return RedirectToAction("Index", "Home");
         }
     }
