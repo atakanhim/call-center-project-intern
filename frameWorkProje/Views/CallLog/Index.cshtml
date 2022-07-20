@@ -1,4 +1,4 @@
-﻿@model IEnumerable<EntityLayer.Concreate.CallLog>
+﻿@model EntityLayer.Concreate.CallLog
 
 @{
     ViewBag.Title = "Index";
@@ -12,57 +12,66 @@
 
 else
 {
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Customer.CustomerName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CallLogDesc)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CallLogStatus)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatingTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UpdatingTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CalllNumber)
-        </th>
-        <th>*</th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+    <table class="table" style="margin-left:-185px">
         <tr>
-            <td>
-                <input type="text" name="CustomerName" value="@Html.DisplayFor(modelItem => item.Customer.CustomerName)" readonly>
-            </td>
-            <td>
-                <input type="text" name="CallLogDesc" value="@Html.DisplayFor(modelItem => item.CallLogDesc)">
-            </td>
-            <td>
-               
-                @Html.EditorFor(modelItem => item.CallLogStatus)
-            </td>
-            <td>
-                <input type="datetime" name="CreatingTime" value="@Html.DisplayFor(modelItem => item.CreatingTime)" readonly>
-            </td>
-            <td>
-                <input type="datetime" name="UpdatingTime" value="@Html.DisplayFor(modelItem => item.UpdatingTime)" readonly>
-            </td>
-            <td>
-                <input type="text" name="CalllNumber" value="@Html.DisplayFor(modelItem => item.CalllNumber)" readonly>
-            </td>
-            <td>
-                <button type="submit" class="btn btn-primary">Update</button>
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.CallLogId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Customer.CustomerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CallLogDesc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CallLogStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatingTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UpdatingTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CalllNumber)
+            </th>
+            <th>*</th>
         </tr>
 
+
+        @using (Html.BeginForm("Index", "CallLog", FormMethod.Post))
+        {
+
+
+            <tr>
+                <td>
+                    @Html.TextBoxFor(c => c.CallLogId, new { @readonly = true })
+                </td>
+                <td>
+                    @Html.TextBoxFor(c => c.Customer.CustomerName, new { @readonly = true })
+                </td>
+                <td>
+                    @Html.TextBoxFor(c => c.CallLogDesc)
+                </td>
+                <td>            
+                    @Html.TextBoxFor(c => c.CallLogStatus, new { @readonly = true })
+                </td>
+                <td>
+                    @Html.TextBoxFor(c => c.CreatingTime, new { @readonly = true })
+                </td>
+                <td>
+                    @Html.TextBoxFor(c => c.UpdatingTime, new { @readonly = true })
+                </td>
+                <td>
+                    @Html.TextBoxFor(c => c.CalllNumber, new { @readonly = true })
+                </td>
+                <td>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </td>
+            </tr>
+
         }
+
 
     </table>
 
