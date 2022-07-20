@@ -14,7 +14,7 @@ namespace BusinessLayer.ValidationRules
         {
             RuleFor(x => x.CustomerName).NotEmpty().WithMessage("Musteri Adını Doldurunuz");
             RuleFor(x => x.CustomerPhone).NotEmpty().WithMessage("Telefon Nosunu Doldurunuz");
-            RuleFor(x => x.CustomerAddress).NotEmpty().WithMessage("en az 3");
+            RuleFor(x => x.CustomerAddress).NotEmpty().WithMessage("Customer Adreess Boş Bırakılamaz");
             RuleFor(x => x.CustomerDate).NotEmpty().WithMessage("Olusturma Zamaı Doldurunuz");
 
 

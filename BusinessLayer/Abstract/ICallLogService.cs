@@ -10,12 +10,14 @@ namespace BusinessLayer.Abstract
 {
     public interface ICallLogService
     {
-        void CallLogAdd(CallLog job);
-        void CallLogDelete(CallLog job);
-        void CallLogUpdate(CallLog job);
+        void CallLogAdd(CallLog call);
+        void CallLogDelete(CallLog call);
+        void CallLogUpdate(CallLog call);
         List<CallLog> CallLogList();
+        List<CallLog> GetAllList();
+
         CallLog GetById(int id);
         CallLog GetCallWithFilter(Expression<Func<CallLog, bool>> filter);
-        List<CallLog> GetCallLogListWithCustomer();
+        List<CallLog> GetCallLogListVithFilter(Expression<Func<CallLog, bool>> filter);
     }
 }

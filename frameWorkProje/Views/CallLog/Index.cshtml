@@ -1,0 +1,78 @@
+﻿@model EntityLayer.Concreate.CallLog
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>ÇAĞRI DETAY SAYFASI</h2>
+@if (Model == null)
+{
+    <h1>@ViewBag.hata</h1>
+}
+
+else
+{
+    <table class="table" style="margin-left:-185px">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CallLogId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Customer.CustomerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CallLogDesc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CallLogStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatingTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UpdatingTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CalllNumber)
+            </th>
+            <th>*</th>
+        </tr>
+
+
+        @using (Html.BeginForm("Index", "CallLog", FormMethod.Post))
+        {
+
+
+            <tr>
+                <td>
+                    @Html.TextBoxFor(c => c.CallLogId, new { @readonly = true })
+                </td>
+                <td>
+                    @Html.TextBoxFor(c => c.Customer.CustomerName, new { @readonly = true })
+                </td>
+                <td>
+                    @Html.TextBoxFor(c => c.CallLogDesc)
+                </td>
+                <td>            
+                    @Html.TextBoxFor(c => c.CallLogStatus, new { @readonly = true })
+                </td>
+                <td>
+                    @Html.TextBoxFor(c => c.CreatingTime, new { @readonly = true })
+                </td>
+                <td>
+                    @Html.TextBoxFor(c => c.UpdatingTime, new { @readonly = true })
+                </td>
+                <td>
+                    @Html.TextBoxFor(c => c.CalllNumber, new { @readonly = true })
+                </td>
+                <td>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </td>
+            </tr>
+
+        }
+
+
+    </table>
+
+}
