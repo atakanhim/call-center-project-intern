@@ -24,7 +24,7 @@ namespace frameWorkProje.Controllers
             if (numra == null)
                 return RedirectToAction("CreateJob", "JobAdd");
 
-            ViewBag.SuccessMessage = numra;
+            ViewBag.tel = numra;
             return View();
         }
         [HttpPost]
@@ -55,6 +55,8 @@ namespace frameWorkProje.Controllers
                 {
                     ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
                 }
+
+                ViewBag.tel = customer.CustomerPhone;
                 return View();
             }
           
