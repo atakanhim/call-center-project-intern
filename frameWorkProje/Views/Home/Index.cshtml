@@ -71,7 +71,7 @@
                 {
                     <td>@item.User.UserName</td>
                 }
-                <td>@Html.ActionLink("Detaay", "Index", "CallLog", new { id = item.CallLogId }, new { id = item.CallLogId })  </td>
+                <td>@Html.ActionLink("Detaay", "Index", "CallLog", new { id = item.CallLogId,persoId=item.UserId }, new { id = item.CallLogId })  </td>
 
             </tr>
         }

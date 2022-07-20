@@ -12,15 +12,43 @@ namespace frameWorkProje.Controllers
     public class CallLogController : Controller
     {
         CallLogManager callLogManager = new CallLogManager(new EfCallLogRepository());
+        JobManager jm = new JobManager(new EfJobRepository());
+
         // GET: CallLog
-        public ActionResult Index(int id = 0)
+        public ActionResult Index(int id = 0, int persoId = 0)
         {
-            if (id <= 0)
+            var userId = Convert.ToInt32(Session["userId"]);// user ıd çagırıyoruz
+            var roleId = Convert.ToInt32(Session["roleId"]);// rolu cagırıyoruz
+            var model = new CallLog();
+            if (id <= 0 || persoId <= 0)
             {
-                return RedirectToAction("Index","Home");
+                return RedirectToAction("Index", "Home");
             }
-            var model = callLogManager.GetById(id);
-            
+            else
+            {
+                if (isAdmin())
+                {
+                     model = callLogManager.GetById(id);//bunu adminde çagırırız
+                }
+                else
+                {
+                    var jobList = jm.GetJobWithfilter("", null, "", false, Convert.ToInt32(Session["userId"]));
+                    foreach (var item in jobList)
+                    {
+                        if (item.UserId == persoId && item.CallLogId == id)
+                        {
+                            model = callLogManager.GetById(id);//bunu adminde çagırırız
+                            return View(model);
+                        }
+                        else
+                        {
+                            return RedirectToAction("Index", "Home");// personel ise tüm herkesin cagrılarına gidemez.     
+                        }
+                    }
+                }
+
+            }
+                 
             return View(model);
         }
         [HttpPost]
@@ -31,9 +59,17 @@ namespace frameWorkProje.Controllers
             updaet.CallLogDesc = call.CallLogDesc;
             updaet.UpdatingTime = DateTime.Now;
             callLogManager.CallLogUpdate(updaet);
-             
 
-            return RedirectToAction("Index","CallLog");
+
+            return RedirectToAction("Index", "CallLog");
         }
-       
-    }  }
+        public bool isAdmin()
+        {
+            if (Convert.ToInt32(Session["roleId"]) == 2)
+            {
+                return true;
+            }
+            return false;
+        }
+    }
+}
