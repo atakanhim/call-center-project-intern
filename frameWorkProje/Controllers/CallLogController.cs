@@ -26,9 +26,14 @@ namespace frameWorkProje.Controllers
         [HttpPost]
         public ActionResult Index(CallLog call)
         {
-   // veri geliyor
+            // veri geliyor
+            var updaet = callLogManager.GetById(call.CallLogId);
+            updaet.CallLogDesc = call.CallLogDesc;
+            updaet.UpdatingTime = DateTime.Now;
+            callLogManager.CallLogUpdate(updaet);
 
-            return View();
+
+            return RedirectToAction("Index","CallLog");
         }
         public ActionResult CallLogDetay(int id = 0)
         {
