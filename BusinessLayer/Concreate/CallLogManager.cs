@@ -33,20 +33,25 @@ namespace BusinessLayer.Concreate
         {
             return _callLogdal.GetListAll(x=>x.CallLogStatus==true);
         }
-
+        public List<CallLog> GetAllList()
+        {
+            return _callLogdal.GetListAll();
+        }
         public void CallLogUpdate(CallLog call)
         {
             _callLogdal.Update(call);
         }
+
+      
 
         public CallLog GetById(int id)
         {
             return _callLogdal.GetById(id);
         }
 
-        public List<CallLog> GetCallLogListWithCustomer()
+        public List<CallLog> GetCallLogListVithFilter(Expression<Func<CallLog, bool>> filter)
         {
-            return _callLogdal.GetCallWithCustomer();
+            return _callLogdal.GetListAll(filter);
         }
 
         public CallLog GetCallWithFilter(Expression<Func<CallLog, bool>> filter)

@@ -50,7 +50,7 @@
             <td> İŞ AÇIKLAMASI</td>
             <td> İŞ DURUMU</td>
             <td> ÇAGRI KODU</td>
-
+            <td>*</td>
 
         </tr>
     </thead>
@@ -62,7 +62,7 @@
                 <td> @item.JobDescription </td>
                 <td> @item.JobStatus </td>
                 <td> @item.CallLogId </td>
-
+                <td>@Html.ActionLink("Detaay", "Index","CallLog" ,new { id = item.CallLogId }, new { id = item.CallLogId })  </td>
             </tr>
         }
     </tbody>
