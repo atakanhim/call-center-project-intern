@@ -20,7 +20,7 @@ namespace frameWorkProje.Controllers
                 return RedirectToAction("Index","Home");
             }
             var model = callLogManager.GetById(id);
-           
+            
             return View(model);
         }
         [HttpPost]
