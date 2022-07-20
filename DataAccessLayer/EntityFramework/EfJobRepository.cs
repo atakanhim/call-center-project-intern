@@ -13,7 +13,7 @@ namespace DataAccessLayer.EntityFramework
 {
     public class EfJobRepository : GenericRepository<Job>, IJobDal
     {
-        public List<Job> GetJobWithfilter(string ad = "", int? numara = null, string abc = "")
+        public List<Job> GetJobWithfilter(string ad = "", int? numara = null, string abc = "", bool adminmi = false,int userId=0)
         {
 
 
@@ -43,6 +43,21 @@ namespace DataAccessLayer.EntityFramework
                             select job
                               ).ToList();
             }
+            if (adminmi==false)
+            {
+                
+                jobValue = (from job in c.Jobs
+                            join us in c.Users
+                                on job.UserId equals us.UserId
+                            join call in c.CallLogs
+                              on job.CallLogId equals call.CallLogId
+                            join cust in c.Customers
+                              on call.CustomerId equals cust.CustomerId
+                            where (job.UserId == userId)
+                            select job
+                            ).ToList();
+
+            }
             if (abc == "ASC")
             {
                 jobValue = jobValue.OrderBy(o => o.CallLogId).ToList();
@@ -52,7 +67,7 @@ namespace DataAccessLayer.EntityFramework
             {
                 jobValue = jobValue.OrderByDescending(o => o.CallLogId).ToList();
             }
-
+         
             return jobValue;
 
 
