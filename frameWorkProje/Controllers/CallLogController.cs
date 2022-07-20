@@ -31,7 +31,7 @@ namespace frameWorkProje.Controllers
             updaet.CallLogDesc = call.CallLogDesc;
             updaet.UpdatingTime = DateTime.Now;
             callLogManager.CallLogUpdate(updaet);
-
+             
 
             return RedirectToAction("Index","CallLog");
         }
