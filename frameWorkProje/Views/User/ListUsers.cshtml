@@ -1,0 +1,57 @@
+﻿@model IEnumerable<EntityLayer.Concreate.User>
+
+@{
+    ViewBag.Title = "ListUsers";
+}
+
+<h2 style="text-align:center">ListUsers</h2>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserPhone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserMail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserPosition)
+        </th>
+        <th>
+            Kayır Tarihi
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @item.UserName
+        </td>
+        <td>
+            @item.UserPhone
+        </td>
+        <td>
+            @item.UserMail
+        </td>
+        <td>
+            @item.UserAddress
+        </td>
+        <td>
+            @item.UserPosition
+        </td>
+        <td>
+             @item.UserDate
+        </td>
+        <td>
+           <button class="btn btn-success">Yalandan</button>
+        </td>
+    </tr>
+}
+
+</table>

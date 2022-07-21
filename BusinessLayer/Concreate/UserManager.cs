@@ -28,6 +28,11 @@ namespace BusinessLayer.Concreate
             return _userDal.GetByName(name);
         }
 
+        public List<User> ListOnlyPersonel()
+        {
+           return _userDal.ListOnlyPersonel();
+        }
+
         public void UserAdd(User user)
         {
             throw new NotImplementedException();
