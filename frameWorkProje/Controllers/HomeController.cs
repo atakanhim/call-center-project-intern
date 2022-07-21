@@ -11,8 +11,7 @@ using System.Web.Mvc;
 
 namespace frameWorkProje.Controllers
 {
-    //[Authorize(Roles = "personel,admin")]
-    [AllowAnonymous]
+    [Authorize(Roles = "personel,admin")]
     public class HomeController : Controller
     {
         JobManager jm = new JobManager(new EfJobRepository());
@@ -20,23 +19,23 @@ namespace frameWorkProje.Controllers
         CallLogManager callLogManager = new CallLogManager(new EfCallLogRepository());
         public ActionResult Index(string ad = "", int? numara = null, string siralama = "")
         {
-            
+
             if (ad == "" && numara == null && siralama == "")
             {
-                
+
                 if (isAdmin())
                 {
                     var values = jm.GetList();
                     return View(values);
                 }
-                else 
+                else
                 {
-                    var values2 = jm.GetJobWithfilter("",null,"",isAdmin(),Convert.ToInt32(Session["userId"]));
+                    var values2 = jm.GetJobWithfilter("", null, "", isAdmin(), Convert.ToInt32(Session["userId"]));
                     return View(values2);
                 }
-               
+
             }
-           
+
             else
             {
                 var values = jm.GetJobWithfilter(ad, numara, siralama, isAdmin(), Convert.ToInt32(Session["userId"]));
@@ -44,18 +43,6 @@ namespace frameWorkProje.Controllers
             }
 
         }
-        public ActionResult Deneme(int cusid=0)
-        {// Anasayfa
-         // 2 modeli anı sayfaya gondermeye calışmak 
-        
-            var customers = customerManager.CustomerList();
-      
-            return View(customers);
-        }
-
-
-
-
 
         public bool isAdmin()
         {

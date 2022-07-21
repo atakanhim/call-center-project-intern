@@ -22,6 +22,11 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("Logout", "LogOut", "Login")</li>
+                    @if (Convert.ToInt32(Session["roleId"]) == 2)
+                    {
+                        <li>@Html.ActionLink("Müşteriler", "ListCustomers", "Customer")</li>
+
+                    }
                     <li style="color:red">hoş geldiniz @HttpContext.Current.User.Identity.Name</li>
                 </ul>
             </div>
@@ -30,7 +35,7 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
-     
+
     </div>
 
     @Scripts.Render("~/bundles/jquery")

@@ -13,7 +13,7 @@ using System.Web.Security;
 
 namespace frameWorkProje.Controllers
 {
-    [AllowAnonymous] 
+    [AllowAnonymous] // loginden girsinler diye
     public class LoginController : Controller
     {
         // GET: Login

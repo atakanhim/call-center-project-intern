@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace frameWorkProje.Controllers
 {
-    [AllowAnonymous]
+   
     public class CallLogController : Controller
     {
         CallLogManager callLogManager = new CallLogManager(new EfCallLogRepository());
@@ -68,6 +68,7 @@ namespace frameWorkProje.Controllers
         public ActionResult Cagrilar(int id = 0)
         {
             var callogList = new List<CallLog>();
+             
             using (var c = new Context())
             {
                 callogList = (from call in c.CallLogs
@@ -76,10 +77,8 @@ namespace frameWorkProje.Controllers
                               where (call.CustomerId == id)
                               select call
                                   ).ToList();
+            }        
 
-            }
-
-            
             return View(callogList);
         }
         public bool isAdmin()
