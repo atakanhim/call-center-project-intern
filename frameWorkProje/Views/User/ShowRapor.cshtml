@@ -7,13 +7,13 @@
 <h2 style="text-align:center">Show Rapor</h2>
 <form asp-action="ShowRapor" asp-controller="User" method="get">
     <select name="deger">
-        <option value="gunluk">
+        <option value="1">
             Günlük Rapor
         </option>
-        <option value="aylik">
+        <option value="30">
             Aylik Rapor
         </option>
-        <option value="yillik">
+        <option value="365">
             Yıllık Rapor
         </option>
     </select>
@@ -29,24 +29,31 @@
 
             <td> İŞ AÇIKLAMASI</td>
             <td> İŞ DURUMU</td>
-            <td> ÇAGRI KODU</td>       
-                <td> ILGILENEN PERSONEL </td>
+            <td> ÇAGRI KODU</td>
+            <td> ILGILENEN PERSONEL </td>
             <td>*</td>
 
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @if (Model != null)
         {
-            <tr>
-                <td> @item.CallLog.Customer.CustomerName </td>
-                <td> @item.JobDescription </td>
-                <td> @item.JobStatus </td>
-                <td> @item.CallLogId </td>         
-                    <td>@item.User.UserName</td>       
-                <td>@Html.ActionLink("Cagri Detayı", "Index", "CallLog", new { id = item.CallLogId, persoId = item.UserId }, new { id = item.CallLogId })  </td>
 
-            </tr>
+            foreach (var item in Model)
+            {
+
+                <tr>
+                    <td> @item.CallLog.Customer.CustomerName </td>
+                    <td> @item.JobDescription </td>
+                    <td> @item.JobStatus </td>
+                    <td> @item.CallLogId </td>
+                    <td>@item.User.UserName</td>
+                    <td>@Html.ActionLink("Cagri Detayı", "Index", "CallLog", new { id = item.CallLogId, persoId = item.UserId }, new { id = item.CallLogId })  </td>
+
+                </tr>
+
+
+            }
         }
     </tbody>
 
