@@ -61,6 +61,7 @@ namespace frameWorkProje.Controllers
             }
 
         }
+        [Authorize(Roles = "admin")]
         public ActionResult ListCustomers(int cusid = 0)
         {
 

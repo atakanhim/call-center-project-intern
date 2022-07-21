@@ -10,5 +10,6 @@ namespace DataAccessLayer.Abstract
     public interface IUserDal : IGenericDal<User>
     {
         User GetByName(string name);
+        List<User> ListOnlyPersonel();
     }
 }
