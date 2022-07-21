@@ -1,0 +1,52 @@
+﻿@using EntityLayer.Concreate
+@model List<CallLog>
+@{
+    ViewBag.Title = "Cagrilar";
+}
+
+<h2>Cagrilar</h2>
+
+<div class="">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <a href="~/Home/Index" class="close" data-dismiss="modal" aria-label="Close">
+                   x
+                </a>
+            </div>
+            <div class="modal-body">
+                <table class="table" id="ornek">
+                    <thead>
+                        <tr>
+                            <td>CallLogId</td>
+                            <td> CalllNumber</td>
+                            <td> CallLogDesc</td>
+                            <td> CallLogStatus</td>
+                            <td> CreatingTime</td>
+                            <td width="300px"></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.CallLogId</td>
+                                <td> @item.CalllNumber </td>
+                                <td> @item.CallLogDesc </td>
+                                <td> @item.CallLogStatus </td>
+                                <td> @item.CreatingTime </td>
+                                <td>
+                                <td>@Html.ActionLink("Detaay", "Index", "CallLog", new { id = item.CallLogId, persoId=1}, new { id = item.CallLogId })  </td>
+                               
+                            </tr>
+                        }
+
+                    </tbody>
+
+
+                </table>
+            </div>       
+        </div>
+    </div>
+</div>

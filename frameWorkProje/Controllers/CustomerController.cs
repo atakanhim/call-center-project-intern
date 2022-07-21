@@ -59,14 +59,15 @@ namespace frameWorkProje.Controllers
                 ViewBag.tel = customer.CustomerPhone;
                 return View();
             }
-          
-         
 
-            // customer name kaldırılacak gerek yok 
+        }
+        public ActionResult ListCustomers(int cusid = 0)
+        {
 
-            // customer eklendiyse call log veritabanında aynı telefon nosu bulunan veriyi
-            // çekip customer ıdsini customer idsi olarak giricez
-            //get ıd from calllog
+            var customers = cm.CustomerList();
+
+            return View(customers);
         }
     }
+
 }

@@ -1,4 +1,5 @@
 ﻿using BusinessLayer.Concreate;
+using DataAccessLayer.Concreate;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concreate;
 using System;
@@ -9,6 +10,7 @@ using System.Web.Mvc;
 
 namespace frameWorkProje.Controllers
 {
+   
     public class CallLogController : Controller
     {
         CallLogManager callLogManager = new CallLogManager(new EfCallLogRepository());
@@ -62,6 +64,22 @@ namespace frameWorkProje.Controllers
 
 
             return RedirectToAction("Index", "CallLog");
+        }
+        public ActionResult Cagrilar(int id = 0)
+        {
+            var callogList = new List<CallLog>();
+             
+            using (var c = new Context())
+            {
+                callogList = (from call in c.CallLogs
+                              join cust in c.Customers
+                              on call.CustomerId equals cust.CustomerId
+                              where (call.CustomerId == id)
+                              select call
+                                  ).ToList();
+            }        
+
+            return View(callogList);
         }
         public bool isAdmin()
         {

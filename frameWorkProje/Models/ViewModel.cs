@@ -10,5 +10,6 @@ namespace frameWorkProje.Models
     {
         public IEnumerable<Customer> Customers { get; set; }
         public IEnumerable<Job> Jobs { get; set; }
+        public IEnumerable<CallLog> Calllogs { get; set; }
     }
 }
