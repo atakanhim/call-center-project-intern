@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace frameWorkProje.Controllers
 {
-   
+
     public class CallLogController : Controller
     {
         CallLogManager callLogManager = new CallLogManager(new EfCallLogRepository());
@@ -30,7 +30,7 @@ namespace frameWorkProje.Controllers
             {
                 if (isAdmin())
                 {
-                     model = callLogManager.GetById(id);//bunu adminde çagırırız
+                    model = callLogManager.GetById(id);//bunu adminde çagırırız
                 }
                 else
                 {
@@ -50,7 +50,7 @@ namespace frameWorkProje.Controllers
                 }
 
             }
-                 
+
             return View(model);
         }
         [HttpPost]
@@ -67,18 +67,18 @@ namespace frameWorkProje.Controllers
         }
         public ActionResult Cagrilar(int id = 0)
         {
+            Context c = new Context();
             var callogList = new List<CallLog>();
-             
-            using (var c = new Context())
-            {
-                callogList = (from call in c.CallLogs
-                              join cust in c.Customers
-                              on call.CustomerId equals cust.CustomerId
-                              where (call.CustomerId == id)
-                              select call
-                                  ).ToList();
-            }        
 
+
+            callogList = (from call in c.CallLogs
+                          join cust in c.Customers
+                          on call.CustomerId equals cust.CustomerId
+                          where (call.CustomerId == id)
+                          select call
+                              ).ToList();
+
+             
             return View(callogList);
         }
         public bool isAdmin()
