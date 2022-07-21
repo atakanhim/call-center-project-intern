@@ -64,11 +64,19 @@ namespace frameWorkProje.Controllers
         [Authorize(Roles = "admin")]
         public ActionResult ListCustomers(int cusid = 0)
         {
+            Context c = new Context();
+     
+            var dt = DateTime.Now.AddDays(-7);
+
+           var callogList = (from call in c.Customers
+                          where (call.CustomerDate > dt)
+                          select call
+                              ).ToList();   
 
             var customers = cm.CustomerList();
 
             return View(customers);
         }
     }
-
+    // giriş yapan personelin id si ile listelettiğimiz listede ilk olarak o son 1 günde oluşturudugu işleri falan filan 
 }
