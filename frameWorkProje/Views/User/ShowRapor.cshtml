@@ -20,42 +20,50 @@
     <button type="submit">Listele</button>
 </form>
 
+@if (Model != null)
+{
+    <table class="table">
+        <thead>
+            <tr>
 
-<table class="table">
-    <thead>
-        <tr>
+                <td> ÇAĞRI OLUŞTURAN MUSTERİ ADI</td>
+                <td> İŞ AÇIKLAMASI</td>
+                <td> İŞ DURUMU</td>
+                <td> ÇAGRI KODU</td>
+                <td> ILGILENEN PERSONEL </td>
+                <td>*</td>
 
-            <td> ÇAĞRI OLUŞTURAN MUSTERİ ADI</td>
+            </tr>
+        </thead>
+        <tbody>
 
-            <td> İŞ AÇIKLAMASI</td>
-            <td> İŞ DURUMU</td>
-            <td> ÇAGRI KODU</td>
-            <td> ILGILENEN PERSONEL </td>
-            <td>*</td>
 
-        </tr>
-    </thead>
-    <tbody>
-        @if (Model != null)
-        {
-
-            foreach (var item in Model)
+            @foreach (var item in Model)
             {
 
-                <tr>
-                    <td> @item.CallLog.Customer.CustomerName </td>
-                    <td> @item.JobDescription </td>
-                    <td> @item.JobStatus </td>
-                    <td> @item.CallLogId </td>
-                    <td>@item.User.UserName</td>
-                    <td>@Html.ActionLink("Cagri Detayı", "Index", "CallLog", new { id = item.CallLogId, persoId = item.UserId }, new { id = item.CallLogId })  </td>
+            <tr>
+                <td> @item.CallLog.Customer.CustomerName </td>
+                <td> @item.JobDescription </td>
+                <td> @item.JobStatus </td>
+                <td> @item.CallLogId </td>
+                <td>@item.User.UserName</td>
+                <td>@Html.ActionLink("Cagri Detayı", "Index", "CallLog", new { id = item.CallLogId, persoId = item.UserId }, new { id = item.CallLogId })  </td>
 
-                </tr>
+            </tr>
 
 
             }
-        }
-    </tbody>
+
+            <tr>
+                <td>
+                    BU PERSONEL TARAFINDAN CEVAPLANAN TELEFON: @ViewBag.count 
+                </td>
+                <td>
+                    BU PERSONEL TARAFINDAN TAMAMLANAN İŞ: @ViewBag.tamamlananis
+                </td>
+            </tr>
+        </tbody>
 
 
-</table>
+    </table>
+}
