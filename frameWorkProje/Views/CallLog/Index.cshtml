@@ -2,12 +2,16 @@
 
 @{
     ViewBag.Title = "Index";
+
+    var ya = Model.CallLogStatus.Value;
+    var za = !ya;
 }
 
 <h2>ÇAĞRI DETAY SAYFASI</h2>
 @if (Model == null)
 {
     <h1>@ViewBag.hata</h1>
+
 }
 
 else
@@ -53,9 +57,17 @@ else
                 <td>
                     @Html.TextBoxFor(c => c.CallLogDesc)
                 </td>
-                <td>            
-                    @Html.TextBoxFor(c => c.CallLogStatus, new { @readonly = true })
-                </td>
+                <td>
+                    <select name="CallLogStatus">
+                        <option value="@ya">
+                            @ya
+                        </option>
+                        <option value="!@za">
+                            @za
+                        </option>
+
+
+                    </select>
                 <td>
                     @Html.TextBoxFor(c => c.CreatingTime, new { @readonly = true })
                 </td>
