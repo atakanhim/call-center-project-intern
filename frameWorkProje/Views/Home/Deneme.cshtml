@@ -1,18 +1,8 @@
-﻿@using frameWorkProje.Models
-@model ViewModel
+﻿@using EntityLayer.Concreate
+@model List<Customer>
 @{
 
     ViewBag.Title = "Deneme";
-
-}@{
-    var show = false;
-    foreach (var item in Model.Calllogs)
-    {
-        if (item != null)
-        {
-             show = true;
-        }
-    }
 
 }
 <h2>Kayıtlı Müşteriler </h2>
@@ -28,7 +18,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Customers)
+        @foreach (var item in Model)
         {
             <tr>
                 <td>@item.CustomerId</td>
@@ -38,7 +28,7 @@
                 <td> @item.CustomerDate </td>
                 <td>
                     <button id="butonss" type="button">
-                        <p style="color:black">  @Html.ActionLink("Musteri Kaydet", "Deneme", "Home", new { cusid = item.CustomerId }, "")</p>
+                        <p style="color:black">  @Html.ActionLink("Çağrı Kayıtları", "Cagrilar", "CallLog", new { id = item.CustomerId }, "")</p>
                     </button>
                 </td>
             </tr>
@@ -48,54 +38,4 @@
 
 
 </table>
-
-<!-- Modal -->
-@if (show)
-{
-    <div class="">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <table class="table" id="ornek">
-                        <thead>
-                            <tr>
-                                <td>Muşteri Id</td>
-                                <td> Müşteri Adı</td>
-                                <td> Müşteri Telefon</td>
-                                <td> Müşteri Adresi</td>
-                                <td> Müşteri Kayıt Tarihi</td>
-                                <td width="300px"></td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in Model.Calllogs)
-                            {
-                                <tr>
-                                    <td>@item.CallLogId</td>
-                                    <td> @item.CalllNumber </td>
-                                    <td> @item.CallLogDesc </td>
-                                    <td> @item.CallLogStatus </td>
-                                    <td> @item.CreatingTime </td>
-                                    <td><button>ekle</button></td>
-                                </tr>
-                            }
-
-                        </tbody>
-
-
-                    </table>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
 }

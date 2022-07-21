@@ -47,33 +47,21 @@ namespace frameWorkProje.Controllers
         public ActionResult Deneme(int cusid=0)
         {// Anasayfa
          // 2 modeli anı sayfaya gondermeye calışmak 
-            var callogList = new List<CallLog>();
-            var value2 = customerManager.CustomerList();
-            ViewModel mymodel = new ViewModel();
-            mymodel.Customers = value2;
         
-
-         
-            using (var c = new Context())
-            {
-                callogList = (from call in c.CallLogs
-                              join cust in c.Customers
-                              on call.CustomerId equals cust.CustomerId           
-                            where (call.CustomerId==cusid)
-                            select call
-                                  ).ToList();
-
-                mymodel.Calllogs = callogList;
-            }
-                
-
-            return View(mymodel);
+            var customers = customerManager.CustomerList();
+      
+            return View(customers);
         }
+
+
+
+
 
         public bool isAdmin()
         {
             if (Convert.ToInt32(Session["roleId"]) == 2)
             {
+
                 return true;
             }
             return false;
