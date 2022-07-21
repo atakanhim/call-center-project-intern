@@ -1,63 +1,42 @@
 ﻿@using frameWorkProje.Models
 @model ViewModel
 @{
+
     ViewBag.Title = "Deneme";
+
+}@{
+    var customerId = ViewBag.customerId;
+    <script type="text/javascript">
+        const btn = document.getElementById("butonss");
+
+    </script>
 }
-
-<h2>Deneme</h2>
+<h2>Kayıtlı Müşteriler </h2>
 <table class="table" id="ornek">
     <thead>
         <tr>
-
-            <td> ÇAĞRI OLUŞTURAN MUSTERİ ADI</td>
-
-            <td> İŞ AÇIKLAMASI</td>
-            <td> İŞ DURUMU</td>
-            <td> ÇAGRI KODU</td>
-
-
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Jobs)
-        {
-            <tr>
-                <td> @item.JobMethods </td>
-                <td> @item.JobDescription </td>
-                <td> @item.JobStatus </td>
-                <td> @item.CallLog.CallLogDesc </td>
-
-            </tr>
-        }
-
-    </tbody>
-
-
-</table>
-<br />
-<h2>Custoemrs Tablosu</h2>
-<table class="table" id="ornek">
-    <thead>
-        <tr>
-
-            <td> CustomerName</td>
-
-            <td> CustomerPhone</td>
-            <td> CustomerAddress</td>
-            <td> CustomerDate</td>
-
-
+            <td>Muşteri Id</td>
+            <td> Müşteri Adı</td>
+            <td> Müşteri Telefon</td>
+            <td> Müşteri Adresi</td>
+            <td> Müşteri Kayıt Tarihi</td>
+            <td>*</td>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model.Customers)
         {
             <tr>
+                <td>@item.CustomerId</td>
                 <td> @item.CustomerName </td>
                 <td> @item.CustomerPhone </td>
                 <td> @item.CustomerAddress </td>
                 <td> @item.CustomerDate </td>
-
+                <td>
+                    <button id="butonss" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
+                        @Html.ActionLink("Musteri Kaydet", "Deneme", "Home", new { cusid = item.CustomerId }, "")
+                    </button>
+                </td>
             </tr>
         }
 
@@ -65,3 +44,51 @@
 
 
 </table>
+
+<!-- Modal -->
+<div class="modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table class="table" id="ornek">
+                    <thead>
+                        <tr>
+                            <td>Muşteri Id</td>
+                            <td> Müşteri Adı</td>
+                            <td> Müşteri Telefon</td>
+                            <td> Müşteri Adresi</td>
+                            <td> Müşteri Kayıt Tarihi</td>
+                            <td width="300px"></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Calllogs)
+                        {
+                            <tr>
+                                <td>@item.CallLogId</td>
+                                <td> @item.CalllNumber </td>
+                                <td> @item.CallLogDesc </td>
+                                <td> @item.CallLogStatus </td>
+                                <td> @item.CreatingTime </td>
+                                <td><button>ekle</button></td>
+                            </tr>
+                        }
+
+                    </tbody>
+
+
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
