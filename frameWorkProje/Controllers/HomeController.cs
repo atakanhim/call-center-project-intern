@@ -56,8 +56,13 @@ namespace frameWorkProje.Controllers
          
             using (var c = new Context())
             {
-                var callItem = c.CallLogs.Where(x => x.CustomerId == cusid).FirstOrDefault();
-                callogList.Add(callItem);
+                callogList = (from call in c.CallLogs
+                              join cust in c.Customers
+                              on call.CustomerId equals cust.CustomerId           
+                            where (call.CustomerId==cusid)
+                            select call
+                                  ).ToList();
+
                 mymodel.Calllogs = callogList;
             }
                 
