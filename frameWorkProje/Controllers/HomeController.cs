@@ -47,16 +47,18 @@ namespace frameWorkProje.Controllers
         public ActionResult Deneme(int cusid=0)
         {// Anasayfa
          // 2 modeli anı sayfaya gondermeye calışmak 
-            var value1 = jm.GetList();
+            var callogList = new List<CallLog>();
             var value2 = customerManager.CustomerList();
             ViewModel mymodel = new ViewModel();
             mymodel.Customers = value2;
-            mymodel.Jobs = value1;
+        
 
+         
             using (var c = new Context())
             {
-                var calls = c.CallLogs.Where(x => x.CustomerId == cusid).ToList();
-                mymodel.Calllogs = calls;
+                var callItem = c.CallLogs.Where(x => x.CustomerId == cusid).FirstOrDefault();
+                callogList.Add(callItem);
+                mymodel.Calllogs = callogList;
             }
                 
 
