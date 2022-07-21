@@ -26,7 +26,7 @@ namespace frameWorkProje.Controllers
         public ActionResult ShowRapor(int id=0,string deger="")//user id aldık
         {
             // bu id nin aldığı işleri listeleyeceğiz
-            var jobs = c.Jobs.Where(x => x.UserId == id).ToList();
+            var jobs = c.Jobs.SqlQuery("select * from Jobs where userId='" + id + "' and CreatingTime=Convert(date,'" + DateTime.Now.ToShortDateString()+ "',104)").ToList();
             
             return View(jobs);
         }
