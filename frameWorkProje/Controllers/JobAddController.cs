@@ -32,7 +32,7 @@ namespace frameWorkProje.Controllers
             {
                 // çagrı seçmemiş demektir
                 // js ile kontrol ediliyor zaten burasıda 2. kontrol yeri
-            }
+            } 
             else if(sessionUserId == 0)
             {
                 // çagrı seçmemiş demektir
