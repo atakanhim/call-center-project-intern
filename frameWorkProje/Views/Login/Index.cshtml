@@ -25,7 +25,7 @@
             @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", placeholder = "Kullanici Adı" })<br />
 
             @Html.LabelFor(m => m.PassWord)
-            @Html.TextBoxFor(m => m.PassWord, new { @class = "form-control", placeholder = "Şifre" })<br />
+            @Html.PasswordFor(m => m.PassWord, new { @class = "form-control", placeholder = "Şifre"})<br />
 
             <input type="submit" class="fadeIn fourth" value="Log In">
         }

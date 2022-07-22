@@ -47,9 +47,12 @@ namespace frameWorkProje.Controllers
                     user.CallLogStatus = false;// cagri durumu false oluyor böylece yanıtlanmıs demek
                     cm.CallLogUpdate(user);
                     // daha sonra job ekleniyor 
-                    job.CreatingTime = DateTime.Now;
-                    job.UpdatingTime = DateTime.Now;
-                   
+                    DateTime date = DateTime.Now;
+                    var shortDate = date.Date;
+                    job.CreatingTime = shortDate;
+                    job.UpdatingTime = shortDate;
+
+
                     job.UserId = sessionUserId;// personel id giren kişi çekilece
 
 

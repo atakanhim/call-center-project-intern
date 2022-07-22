@@ -43,7 +43,13 @@ namespace frameWorkProje.Controllers
             }
 
         }
+        [AllowAnonymous]
+        public ActionResult IndexDataTable()
+        {
 
+            var values = jm.GetList();
+            return View(values);
+        }
         public bool isAdmin()
         {
             if (Convert.ToInt32(Session["roleId"]) == 2)
