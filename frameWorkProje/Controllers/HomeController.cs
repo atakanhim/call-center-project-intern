@@ -15,9 +15,13 @@ namespace frameWorkProje.Controllers
     public class HomeController : Controller
     {
         JobManager jm = new JobManager(new EfJobRepository());
-        CustomerManager customerManager = new CustomerManager(new EfCustomerRepository());
-        CallLogManager callLogManager = new CallLogManager(new EfCallLogRepository());
-        public ActionResult Index(string ad = "", int? numara = null, string siralama = "")
+        public ActionResult Index()
+        {
+
+            var values = jm.GetList();
+            return View(values);
+        }
+        public ActionResult IndexDataTable(string ad = "", int? numara = null, string siralama = "")
         {
 
             if (ad == "" && numara == null && siralama == "")
@@ -43,13 +47,7 @@ namespace frameWorkProje.Controllers
             }
 
         }
-        [AllowAnonymous]
-        public ActionResult IndexDataTable()
-        {
-
-            var values = jm.GetList();
-            return View(values);
-        }
+       
         public bool isAdmin()
         {
             if (Convert.ToInt32(Session["roleId"]) == 2)

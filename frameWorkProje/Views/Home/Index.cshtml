@@ -1,82 +1,353 @@
-﻿@using EntityLayer.Concreate
+﻿
+
+@using EntityLayer.Concreate
 @model IEnumerable<Job>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewBag.Title = "Index";
+}
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.bootstrap4.min.css">
+@*<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">*@
+
+@section Scripts{
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('#jobTable').DataTable({
+
+                language: {
+                    "emptyTable": "Tabloda herhangi bir veri mevcut değil",
+                    "info": "_TOTAL_ kayıttan _START_ - _END_ arasındaki kayıtlar gösteriliyor",
+                    "infoEmpty": "Kayıt yok",
+                    "infoFiltered": "(_MAX_ kayıt içerisinden bulunan)",
+                    "infoThousands": ".",
+                    "lengthMenu": "Sayfada _MENU_ kayıt göster",
+                    "loadingRecords": "Yükleniyor...",
+                    "processing": "İşleniyor...",
+                    "search": "Ara:",
+                    "zeroRecords": "Eşleşen kayıt bulunamadı",
+                    "paginate": {
+                        "first": "İlk",
+                        "last": "Son",
+                        "next": "Sonraki",
+                        "previous": "Önceki"
+                    },
+                    "aria": {
+                        "sortAscending": ": artan sütun sıralamasını aktifleştir",
+                        "sortDescending": ": azalan sütun sıralamasını aktifleştir"
+                    },
+                    "select": {
+                        "rows": {
+                            "_": "%d kayıt seçildi",
+                            "1": "1 kayıt seçildi"
+                        },
+                        "cells": {
+                            "1": "1 hücre seçildi",
+                            "_": "%d hücre seçildi"
+                        },
+                        "columns": {
+                            "1": "1 sütun seçildi",
+                            "_": "%d sütun seçildi"
+                        }
+                    },
+                    "autoFill": {
+                        "cancel": "İptal",
+                        "fillHorizontal": "Hücreleri yatay olarak doldur",
+                        "fillVertical": "Hücreleri dikey olarak doldur",
+                        "fill": "Bütün hücreleri <i>%d<\/i> ile doldur"
+                    },
+                    "buttons": {
+                        "collection": "Koleksiyon <span class=\"ui-button-icon-primary ui-icon ui-icon-triangle-1-s\"><\/span>",
+                        "colvis": "Sütun görünürlüğü",
+                        "colvisRestore": "Görünürlüğü eski haline getir",
+                        "copySuccess": {
+                            "1": "1 satır panoya kopyalandı",
+                            "_": "%ds satır panoya kopyalandı"
+                        },
+                        "copyTitle": "Panoya kopyala",
+                        "csv": "CSV",
+                        "excel": "Excel",
+                        "pageLength": {
+                            "-1": "Bütün satırları göster",
+                            "_": "%d satır göster"
+                        },
+                        "pdf": "PDF",
+                        "print": "Yazdır",
+                        "copy": "Kopyala",
+                        "copyKeys": "Tablodaki veriyi kopyalamak için CTRL veya u2318 + C tuşlarına basınız. İptal etmek için bu mesaja tıklayın veya escape tuşuna basın.",
+                        "createState": "Şuanki Görünümü Kaydet",
+                        "removeAllStates": "Tüm Görünümleri Sil",
+                        "removeState": "Aktif Görünümü Sil",
+                        "renameState": "Aktif Görünümün Adını Değiştir",
+                        "savedStates": "Kaydedilmiş Görünümler",
+                        "stateRestore": "Görünüm -&gt; %d",
+                        "updateState": "Aktif Görünümün Güncelle"
+                    },
+                    "searchBuilder": {
+                        "add": "Koşul Ekle",
+                        "button": {
+                            "0": "Arama Oluşturucu",
+                            "_": "Arama Oluşturucu (%d)"
+                        },
+                        "condition": "Koşul",
+                        "conditions": {
+                            "date": {
+                                "after": "Sonra",
+                                "before": "Önce",
+                                "between": "Arasında",
+                                "empty": "Boş",
+                                "equals": "Eşittir",
+                                "not": "Değildir",
+                                "notBetween": "Dışında",
+                                "notEmpty": "Dolu"
+                            },
+                            "number": {
+                                "between": "Arasında",
+                                "empty": "Boş",
+                                "equals": "Eşittir",
+                                "gt": "Büyüktür",
+                                "gte": "Büyük eşittir",
+                                "lt": "Küçüktür",
+                                "lte": "Küçük eşittir",
+                                "not": "Değildir",
+                                "notBetween": "Dışında",
+                                "notEmpty": "Dolu"
+                            },
+                            "string": {
+                                "contains": "İçerir",
+                                "empty": "Boş",
+                                "endsWith": "İle biter",
+                                "equals": "Eşittir",
+                                "not": "Değildir",
+                                "notEmpty": "Dolu",
+                                "startsWith": "İle başlar",
+                                "notContains": "İçermeyen",
+                                "notStarts": "Başlamayan",
+                                "notEnds": "Bitmeyen"
+                            },
+                            "array": {
+                                "contains": "İçerir",
+                                "empty": "Boş",
+                                "equals": "Eşittir",
+                                "not": "Değildir",
+                                "notEmpty": "Dolu",
+                                "without": "Hariç"
+                            }
+                        },
+                        "data": "Veri",
+                        "deleteTitle": "Filtreleme kuralını silin",
+                        "leftTitle": "Kriteri dışarı çıkart",
+                        "logicAnd": "ve",
+                        "logicOr": "veya",
+                        "rightTitle": "Kriteri içeri al",
+                        "title": {
+                            "0": "Arama Oluşturucu",
+                            "_": "Arama Oluşturucu (%d)"
+                        },
+                        "value": "Değer",
+                        "clearAll": "Filtreleri Temizle"
+                    },
+                    "searchPanes": {
+                        "clearMessage": "Hepsini Temizle",
+                        "collapse": {
+                            "0": "Arama Bölmesi",
+                            "_": "Arama Bölmesi (%d)"
+                        },
+                        "count": "{total}",
+                        "countFiltered": "{shown}\/{total}",
+                        "emptyPanes": "Arama Bölmesi yok",
+                        "loadMessage": "Arama Bölmeleri yükleniyor ...",
+                        "title": "Etkin filtreler - %d",
+                        "showMessage": "Tümünü Göster",
+                        "collapseMessage": "Tümünü Gizle"
+                    },
+                    "thousands": ".",
+                    "datetime": {
+                        "amPm": [
+                            "öö",
+                            "ös"
+                        ],
+                        "hours": "Saat",
+                        "minutes": "Dakika",
+                        "next": "Sonraki",
+                        "previous": "Önceki",
+                        "seconds": "Saniye",
+                        "unknown": "Bilinmeyen",
+                        "weekdays": {
+                            "6": "Paz",
+                            "5": "Cmt",
+                            "4": "Cum",
+                            "3": "Per",
+                            "2": "Çar",
+                            "1": "Sal",
+                            "0": "Pzt"
+                        },
+                        "months": {
+                            "9": "Ekim",
+                            "8": "Eylül",
+                            "7": "Ağustos",
+                            "6": "Temmuz",
+                            "5": "Haziran",
+                            "4": "Mayıs",
+                            "3": "Nisan",
+                            "2": "Mart",
+                            "11": "Aralık",
+                            "10": "Kasım",
+                            "1": "Şubat",
+                            "0": "Ocak"
+                        }
+                    },
+                    "decimal": ",",
+                    "editor": {
+                        "close": "Kapat",
+                        "create": {
+                            "button": "Yeni",
+                            "submit": "Kaydet",
+                            "title": "Yeni kayıt oluştur"
+                        },
+                        "edit": {
+                            "button": "Düzenle",
+                            "submit": "Güncelle",
+                            "title": "Kaydı düzenle"
+                        },
+                        "error": {
+                            "system": "Bir sistem hatası oluştu (Ayrıntılı bilgi)"
+                        },
+                        "multi": {
+                            "info": "Seçili kayıtlar bu alanda farklı değerler içeriyor. Seçili kayıtların hepsinde bu alana aynı değeri atamak için buraya tıklayın; aksi halde her kayıt bu alanda kendi değerini koruyacak.",
+                            "noMulti": "Bu alan bir grup olarak değil ancak tekil olarak düzenlenebilir.",
+                            "restore": "Değişiklikleri geri al",
+                            "title": "Çoklu değer"
+                        },
+                        "remove": {
+                            "button": "Sil",
+                            "confirm": {
+                                "_": "%d adet kaydı silmek istediğinize emin misiniz?",
+                                "1": "Bu kaydı silmek istediğinizden emin misiniz?"
+                            },
+                            "submit": "Sil",
+                            "title": "Kayıtları sil"
+                        }
+                    },
+                    "stateRestore": {
+                        "creationModal": {
+                            "button": "Kaydet",
+                            "columns": {
+                                "search": "Kolon Araması",
+                                "visible": "Kolon Görünümü"
+                            },
+                            "name": "Görünüm İsmi",
+                            "order": "Sıralama",
+                            "paging": "Sayfalama",
+                            "scroller": "Kaydırma (Scrool)",
+                            "search": "Arama",
+                            "searchBuilder": "Arama Oluşturucu",
+                            "select": "Seçimler",
+                            "title": "Yeni Görünüm Oluştur",
+                            "toggleLabel": "Kaydedilecek Olanlar"
+                        },
+                        "duplicateError": "Bu Görünüm Daha Önce Tanımlanmış",
+                        "emptyError": "Görünüm Boş Olamaz",
+                        "emptyStates": "Herhangi Bir Görünüm Yok",
+                        "removeConfirm": "Görünümü Silmek İstediğinize Eminminisiniz?",
+                        "removeError": "Görünüm Silinemedi",
+                        "removeJoiner": "ve",
+                        "removeSubmit": "Sil",
+                        "removeTitle": "Görünüm Sil",
+                        "renameButton": "Değiştir",
+                        "renameLabel": "Görünüme Yeni İsim Ver -&gt; %s:",
+                        "renameTitle": "Görünüm İsmini Değiştir"
+                    }
+                }
+
+            });
+        });
+
+    </script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js" crossorigin="anonymous"></script>*@
+
+    @*<script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js" crossorigin="anonymous"></script>
+            <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js" crossorigin="anonymous"></script>
+            <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.colVis.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.bootstrap4.min.js" crossorigin="anonymous"></script>*@
+
+
 }
 
+<div class="card mb-4 mt-2">
+    <div class="card-header">
+        <i class="fas fa-table mr-1"></i>
 
-<h3 style="text-align:right">
-    @Html.ActionLink("yeni is kayıt olustur", "CreateJob", "JobAdd")
-</h3>
-
-<h1 style="text-align:center;margin-top:30px"> İŞ KAYITLARI</h1>
-
-<!-- 4 5 farklı sıralanmış tablo gonderecegim js ile kontrol edip ona göre listetecegim
-
-
-    -->
-<form method="get" id="filter">
-    <div class="form-group">
-        <input type="text" name="ad" class="form-control" placeholder="Ada Gore Filtrele " />
+        <h1 style="text-align:center;margin-top:30px"> İŞ KAYITLARI</h1>
     </div>
-    <div class="form-group">
-        <input type="number" name="numara" class="form-control" placeholder="Çağrı koduna filtrele " />
+    <h3 style="text-align:right">
+        @Html.ActionLink("yeni is kayıt olustur", "CreateJob", "JobAdd")
+    </h3>
+
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="jobTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+
+                        <th> ÇAĞRI OLUŞTURAN MUSTERİ ADI</th>
+
+                        <th> İŞ AÇIKLAMASI</th>
+                        <th> İŞ DURUMU</th>
+                        <th> ÇAGRI KODU</th>
+                        @if (Convert.ToInt32(Session["roleId"]) == 2)
+                        {
+                            <th> ILGILENEN PERSONEL </th>
+                        }
+
+                        <th>*</th>
+
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th> ÇAĞRI OLUŞTURAN MUSTERİ ADI</th>
+
+                        <th> İŞ AÇIKLAMASI</th>
+                        <th> İŞ DURUMU</th>
+                        <th> ÇAGRI KODU</th>
+                        @if (Convert.ToInt32(Session["roleId"]) == 2)
+                        {
+                            <th> ILGILENEN PERSONEL </th>
+                        }
+
+                        <th>*</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td> @item.CallLog.Customer.CustomerName </td>
+                            <td> @item.JobDescription </td>
+                            <td> @item.JobStatus </td>
+                            <td> @item.CallLogId </td>
+                            @if (Convert.ToInt32(Session["roleId"]) == 2)
+                            {
+                                <td>@item.User.UserName</td>
+                            }
+                            <td>@Html.ActionLink("Detaay", "Index", "CallLog", new { id = item.CallLogId, persoId = item.UserId }, new { id = item.CallLogId })  </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
-    <div class="form-group">
-        <p>CagrıKoduna Gore</p>
-        <select name="siralama">
-            <option value="ASC">
-                ARTAN
-            </option>
-            <option value="DESC">
-                AZALAN
-            </option>
-        </select>
-    </div>
-    <div class="form-group">
-        <input type="submit" name="submit" class="form-control" placeholder="Adı " />
-    </div>
-</form>
-<br />
-<br />
-
-<table class="table" id="ornek">
-    <thead>
-        <tr>
-
-            <td> ÇAĞRI OLUŞTURAN MUSTERİ ADI</td>
-
-            <td> İŞ AÇIKLAMASI</td>
-            <td> İŞ DURUMU</td>
-            <td> ÇAGRI KODU</td>
-            @if (Convert.ToInt32(Session["roleId"]) == 2)
-            {
-                <td> ILGILENEN PERSONEL </td>
-            }
-
-            <td>*</td>
-
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td> @item.CallLog.Customer.CustomerName </td>
-                <td> @item.JobDescription </td>
-                <td> @item.JobStatus </td>
-                <td> @item.CallLogId </td>
-                @if (Convert.ToInt32(Session["roleId"]) == 2)
-                {
-                    <td>@item.User.UserName</td>
-                }
-                <td>@Html.ActionLink("Detaay", "Index", "CallLog", new { id = item.CallLogId,persoId=item.UserId }, new { id = item.CallLogId })  </td>
-
-            </tr>
-        }
-    </tbody>
-
-
-</table>
-
+</div>
