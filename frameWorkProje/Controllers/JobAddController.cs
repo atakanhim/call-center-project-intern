@@ -32,7 +32,7 @@ namespace frameWorkProje.Controllers
             {
                 // çagrı seçmemiş demektir
                 // js ile kontrol ediliyor zaten burasıda 2. kontrol yeri
-            }
+            } 
             else if(sessionUserId == 0)
             {
                 // çagrı seçmemiş demektir
@@ -47,9 +47,12 @@ namespace frameWorkProje.Controllers
                     user.CallLogStatus = false;// cagri durumu false oluyor böylece yanıtlanmıs demek
                     cm.CallLogUpdate(user);
                     // daha sonra job ekleniyor 
-                    job.CreatingTime = DateTime.Now;
-                    job.UpdatingTime = DateTime.Now;
-                   
+                    DateTime date = DateTime.Now;
+                    var shortDate = date.Date;
+                    job.CreatingTime = shortDate;
+                    job.UpdatingTime = shortDate;
+
+
                     job.UserId = sessionUserId;// personel id giren kişi çekilece
 
 

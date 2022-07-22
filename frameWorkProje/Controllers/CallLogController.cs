@@ -42,11 +42,10 @@ namespace frameWorkProje.Controllers
                             model = callLogManager.GetById(id);//bunu adminde çagırırız
                             return View(model);
                         }
-                        else
-                        {
-                            return RedirectToAction("Index", "Home");// personel ise tüm herkesin cagrılarına gidemez.     
-                        }
+                       
                     }
+                    return RedirectToAction("Index", "Home");// personel ise tüm herkesin cagrılarına gidemez.     
+                    
                 }
 
             }

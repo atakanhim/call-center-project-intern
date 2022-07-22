@@ -15,9 +15,23 @@ namespace frameWorkProje.Controllers
     public class HomeController : Controller
     {
         JobManager jm = new JobManager(new EfJobRepository());
-        CustomerManager customerManager = new CustomerManager(new EfCustomerRepository());
-        CallLogManager callLogManager = new CallLogManager(new EfCallLogRepository());
         public ActionResult Index(string ad = "", int? numara = null, string siralama = "")
+        {
+            var values = jm.GetJobWithfilter(ad, numara, siralama, isAdmin(), Convert.ToInt32(Session["userId"]));
+            if (isAdmin())
+            {
+                values = jm.GetList();
+                return View(values);
+            }
+            else
+            {
+                var values2 = jm.GetJobWithfilter("", null, "", isAdmin(), Convert.ToInt32(Session["userId"]));
+                return View(values2);
+            }
+     
+
+        }
+        public ActionResult IndexDataTable(string ad = "", int? numara = null, string siralama = "")
         {
 
             if (ad == "" && numara == null && siralama == "")
