@@ -61,17 +61,9 @@
     <Compile Include="EntityFramework\EfCustomerRepository.cs" />
     <Compile Include="EntityFramework\EfJobRepository.cs" />
     <Compile Include="EntityFramework\EfUserRepository.cs" />
-    <Compile Include="Migrations\202207181345362_mg1.cs" />
-    <Compile Include="Migrations\202207181345362_mg1.designer.cs">
-      <DependentUpon>202207181345362_mg1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202207181350155_mg11.cs" />
-    <Compile Include="Migrations\202207181350155_mg11.designer.cs">
-      <DependentUpon>202207181350155_mg11.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202207191056594_deletes.cs" />
-    <Compile Include="Migrations\202207191056594_deletes.designer.cs">
-      <DependentUpon>202207191056594_deletes.cs</DependentUpon>
+    <Compile Include="Migrations\202207241022588_mg34.cs" />
+    <Compile Include="Migrations\202207241022588_mg34.designer.cs">
+      <DependentUpon>202207241022588_mg34.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -88,14 +80,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202207181345362_mg1.resx">
-      <DependentUpon>202207181345362_mg1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202207181350155_mg11.resx">
-      <DependentUpon>202207181350155_mg11.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202207191056594_deletes.resx">
-      <DependentUpon>202207191056594_deletes.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202207241022588_mg34.resx">
+      <DependentUpon>202207241022588_mg34.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

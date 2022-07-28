@@ -14,10 +14,15 @@
 @section Scripts{
 
     <script type="text/javascript">
+
+
+       
         $(document).ready(function () {
 
-            $('#jobTable').DataTable({
+       
 
+            var table = $('#jobTable').DataTable({
+                
                 language: {
                     "emptyTable": "Tabloda herhangi bir veri mevcut değil",
                     "info": "_TOTAL_ kayıttan _START_ - _END_ arasındaki kayıtlar gösteriliyor",
@@ -262,8 +267,45 @@
                         "renameTitle": "Görünüm İsmini Değiştir"
                     }
                 }
-                
+                      
+            })
+
+            // 1 kere tıklandıgında select 2 kere oldugunda gidicek .
+            $('#jobTable tbody').on('dblclick', 'tr', function () {
+                var datam = table.row(this).data();
+                $persoid = $("#persoId").val();
+
+                if ($(this).hasClass('active')) {
+                    $(this).removeClass('selected');
+              
+                }
+                else {
+                    table.$('tr.selected').removeClass('selected');
+                    $(this).addClass('selected');
+                    window.location.href = "CallLog/Index/" + datam[3] + "?persoId=" + $persoid;
+                 
+                }
+
+         
             });
+
+
+            //$(document).on("click", "tr.rows", function (e) {
+            //    alert(e.target.innerHTML);
+            //});
+
+            //$(".target").click(function (event) {
+
+           
+            //    var $calls = $(".callogId").val();
+            //    var $perso = $(".persoId").val();// 10 geldi yani veriyi aldık
+            //    alert(e.target.innerHTML);
+            //    alert("ata");
+            //    window.location.href = "CallLog/Index/" + $calls + "?persoId=" + $perso;
+
+             
+            //})
+          
         });
 
     </script>
@@ -311,6 +353,8 @@
                         }
 
                         <th>*</th>
+                        <th style="display:none">*</th>
+                        <th style="display:none">*</th>
 
                     </tr>
                 </thead>
@@ -327,12 +371,14 @@
                         }
 
                         <th>*</th>
+                        <th style="display:none">*</th>
+                        <th style="display:none">*</th>
                     </tr>
                 </tfoot>
                 <tbody>
                     @foreach (var item in Model)
                     {
-                        <tr>
+                        <tr class="rows">
                             <td> @item.CallLog.Customer.CustomerName </td>
                             <td> @item.JobDescription </td>
                             <td> @item.JobStatus </td>
@@ -341,8 +387,9 @@
                             {
                                 <td>@item.User.UserName</td>
                             }
-                            <td>@Html.ActionLink("Detaay", "Index", "CallLog", new { id = item.CallLogId, persoId = item.UserId }, new { id = item.CallLogId })  </td>
-
+                            <td>@Html.ActionLink("Detaay", "Index", "CallLog", new { id = item.CallLogId, persoId = item.UserId }, new { @class = "btn btn-primary" }) </td>
+                            <td style="display:none"> <input class="callogId" type="number" value="@item.CallLogId" /></td>
+                            <td style="display:none"> <input id="persoId" type="number" value="@item.UserId" /></td>
                         </tr>
                     }
                 </tbody>
