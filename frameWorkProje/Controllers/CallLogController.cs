@@ -57,7 +57,7 @@ namespace frameWorkProje.Controllers
         {
             // veri geliyor
             var updaet = callLogManager.GetById(call.CallLogId);
-            updaet.CallLogDesc = call.CallLogDesc;
+            updaet.CallLogDesc = call.CallLogDesc;// çağrı durumunu false yaparsa otomatik işte silinecek 
             updaet.UpdatingTime = DateTime.Now;
             callLogManager.CallLogUpdate(updaet);
 
