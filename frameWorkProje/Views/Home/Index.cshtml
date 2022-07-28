@@ -269,26 +269,27 @@
                 }
                       
             })
-
-            // 1 kere tıklandıgında select 2 kere oldugunda gidicek .
+            // job silme işlemiyada false yapma işlemi
+            //  2 kere oldugunda gidicek .
             $('#jobTable tbody').on('dblclick', 'tr', function () {
                 var datam = table.row(this).data();
                 $persoid = $("#persoId").val();
+                window.location.href = "CallLog/Index/" + datam[3] + "?persoId=" + $persoid;
+            });
 
+            // 1 kere tıkladıgında selected
+            $('#jobTable tbody').on('click', 'tr', function () {
                 if ($(this).hasClass('active')) {
                     $(this).removeClass('selected');
-              
+
                 }
                 else {
                     table.$('tr.selected').removeClass('selected');
                     $(this).addClass('selected');
-                    window.location.href = "CallLog/Index/" + datam[3] + "?persoId=" + $persoid;
-                 
                 }
 
-         
-            });
 
+            });
 
             //$(document).on("click", "tr.rows", function (e) {
             //    alert(e.target.innerHTML);
@@ -352,7 +353,7 @@
                             <th> ILGILENEN PERSONEL </th>
                         }
 
-                        <th>*</th>
+                   
                         <th style="display:none">*</th>
                         <th style="display:none">*</th>
 
@@ -370,7 +371,7 @@
                             <th> ILGILENEN PERSONEL </th>
                         }
 
-                        <th>*</th>
+                     
                         <th style="display:none">*</th>
                         <th style="display:none">*</th>
                     </tr>
@@ -387,7 +388,7 @@
                             {
                                 <td>@item.User.UserName</td>
                             }
-                            <td>@Html.ActionLink("Detaay", "Index", "CallLog", new { id = item.CallLogId, persoId = item.UserId }, new { @class = "btn btn-primary" }) </td>
+                            @*<td>@Html.ActionLink("Detaay", "Index", "CallLog", new { id = item.CallLogId, persoId = item.UserId }, new { @class = "btn btn-primary" }) </td>*@
                             <td style="display:none"> <input class="callogId" type="number" value="@item.CallLogId" /></td>
                             <td style="display:none"> <input id="persoId" type="number" value="@item.UserId" /></td>
                         </tr>
