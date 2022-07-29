@@ -34,7 +34,7 @@ namespace frameWorkProje.Controllers
 
                 int gun = Convert.ToInt32(deger);
                  jobs = c.Jobs.SqlQuery("select * from Jobs where userId='" + id + "' and  CreatingTime between Convert(date,'" + DateTime.Now.AddDays(-gun) + "',104) " +
-             " and Convert(date,'" + DateTime.Now + "',104) ").ToList();
+                    " and Convert(date,'" + DateTime.Now + "',104) ").ToList();
                 foreach (var item in jobs)
                 {
                     if(item.JobStatus=="deaktif")

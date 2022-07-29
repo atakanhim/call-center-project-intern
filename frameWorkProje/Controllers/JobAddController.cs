@@ -21,7 +21,15 @@ namespace frameWorkProje.Controllers
 
             return View(values);
         }
+        [HttpPost]
+        public ActionResult JobDelete(Job jobModel)
+        {
+            // job status false yapılacak
+            // job idsini alıp ordan calllog calllog durumu false olacak falan filan
+            var values = cm.CallLogList();
 
+            return RedirectToAction("Index","Home");
+        }
 
         [HttpPost]
         public ActionResult CreateJob(Job job)// 

@@ -2,6 +2,8 @@
 using DataAccessLayer.Concreate;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concreate;
+using frameWorkProje.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,10 +21,17 @@ namespace frameWorkProje.Controllers
         // GET: CallLog
         public ActionResult Index(int id = 0, int persoId = 0)
         {
+            // burada cagri idyi aliıp o cagri id kayıtlı iş çekip iş sonlansın mı diye sorluacak
+            int cagriId = id;
+            Job jobModel = jm.GetByFilter(x => x.CallLogId == cagriId);// ilgili cagri modelini de gönderecez bunun için viewmodel kullanıcaz
+                
+
+            
             var userId = Convert.ToInt32(Session["userId"]);// user ıd çagırıyoruz
             var roleId = Convert.ToInt32(Session["roleId"]);// rolu cagırıyoruz
+
             var model = new CallLog();
-            if (id <= 0 || persoId <= 0)
+            if (cagriId <= 0 || persoId <= 0)
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -37,27 +46,34 @@ namespace frameWorkProje.Controllers
                     var jobList = jm.GetJobWithfilter("", null, "", false, Convert.ToInt32(Session["userId"]));
                     foreach (var item in jobList)
                     {
-                        if (item.UserId == persoId && item.CallLogId == id)
+                        if (item.UserId == persoId && item.CallLogId == cagriId)
                         {
-                            model = callLogManager.GetById(id);//bunu adminde çagırırız
+                            model = callLogManager.GetById(cagriId);//bunu adminde çagırırız
                             return View(model);
                         }
-                       
+
                     }
                     return RedirectToAction("Index", "Home");// personel ise tüm herkesin cagrılarına gidemez.     
-                    
+
                 }
 
             }
 
-            return View(model);
+
+            CallLogViewModel callLogViewModel = new CallLogViewModel();
+
+            callLogViewModel.Calllog = model;
+            callLogViewModel.Job = jobModel;
+
+
+            return View(callLogViewModel);
         }
         [HttpPost]
         public ActionResult Index(CallLog call)
         {
             // veri geliyor
             var updaet = callLogManager.GetById(call.CallLogId);
-            updaet.CallLogDesc = call.CallLogDesc;
+            updaet.CallLogDesc = call.CallLogDesc;// çağrı durumunu false yaparsa otomatik işte silinecek 
             updaet.UpdatingTime = DateTime.Now;
             callLogManager.CallLogUpdate(updaet);
 
@@ -77,7 +93,7 @@ namespace frameWorkProje.Controllers
                           select call
                               ).ToList();
 
-             
+
             return View(callogList);
         }
         public bool isAdmin()
