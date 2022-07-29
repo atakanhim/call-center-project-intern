@@ -27,6 +27,7 @@ namespace frameWorkProje.Controllers
             // job status false yapılacak
             // job idsini alıp ordan calllog calllog durumu false olacak falan filan
             var values = cm.CallLogList();
+            var jap = jm.GetByFilter(x => x.CallLogId == jobModel.CallLogId);
 
             return RedirectToAction("Index","Home");
         }

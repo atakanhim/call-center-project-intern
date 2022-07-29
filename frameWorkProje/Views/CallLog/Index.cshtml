@@ -33,6 +33,7 @@ else
     <table class="table" style="margin-left:-185px">
         <tr>
             <th>
+             
                 @Html.DisplayNameFor(model => model.Calllog.CallLogId)
             </th>
             <th>
@@ -108,6 +109,7 @@ else
     <table class="table" style="margin-left:-185px">
         <tr>
             <th style="display:none">
+
                 @Html.DisplayNameFor(model => model.Job.JobId)
             </th>
             <th>
@@ -162,7 +164,7 @@ else
                         <option value="@jobSta1">
                             @jobSta1
                         </option>
-                        <option value="!@jobSta2">
+                        <option value="@jobSta2">
                             @jobSta2
                         </option>
                     </select>
