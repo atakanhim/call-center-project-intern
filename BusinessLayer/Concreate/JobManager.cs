@@ -4,6 +4,7 @@ using EntityLayer.Concreate;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,7 +19,14 @@ namespace BusinessLayer.Concreate
             _jobDal = jobDal;
         }
 
-     
+        public Job GetByFilter(Expression<Func<Job, bool>> filter)
+        {
+            return _jobDal.GetEntityWithFilter(filter);
+        }
+
+
+
+
 
         public Job GetById(int id)
         {

@@ -1,14 +1,26 @@
-﻿@model EntityLayer.Concreate.CallLog
+﻿@model frameWorkProje.Models.CallLogViewModel
 
 @{
     ViewBag.Title = "Index";
 
-    var ya = Model.CallLogStatus.Value;
+    var ya = Model.Calllog.CallLogStatus.Value;
     var za = !ya;
+
+    var onemli = Model.Job.IsImportant.Value;
+    var onemliDe = !onemli;
+
+    var jobSta1 = Model.Job.JobStatus;
+    var jobSta2 = "aktif";
+
+    if (jobSta1 == "aktif")
+    {
+        jobSta2 = "deaktif";
+    }
+
 }
 
-<h2>ÇAĞRI DETAY SAYFASI</h2>
-@if (Model == null)
+
+@if (Model.Calllog == null)
 {
     <h1>@ViewBag.hata</h1>
 
@@ -16,28 +28,30 @@
 
 else
 {
+    <h2>ÇAĞRI DETAY SAYFASI</h2>
+
     <table class="table" style="margin-left:-185px">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.CallLogId)
+                @Html.DisplayNameFor(model => model.Calllog.CallLogId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Customer.CustomerName)
+                @Html.DisplayNameFor(model => model.Calllog.Customer.CustomerName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CallLogDesc)
+                @Html.DisplayNameFor(model => model.Calllog.CallLogDesc)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CallLogStatus)
+                @Html.DisplayNameFor(model => model.Calllog.CallLogStatus)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CreatingTime)
+                @Html.DisplayNameFor(model => model.Calllog.CreatingTime)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.UpdatingTime)
+                @Html.DisplayNameFor(model => model.Calllog.UpdatingTime)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CalllNumber)
+                @Html.DisplayNameFor(model => model.Calllog.CalllNumber)
             </th>
             <th>*</th>
         </tr>
@@ -49,33 +63,33 @@ else
 
             <tr>
                 <td>
-                    @Html.TextBoxFor(c => c.CallLogId, new { @readonly = true })
+                    @Html.TextBoxFor(c => c.Calllog.CallLogId, new { @readonly = true })
                 </td>
                 <td>
-                    @Html.TextBoxFor(c => c.Customer.CustomerName, new { @readonly = true })
+                    @Html.TextBoxFor(c => c.Calllog.Customer.CustomerName, new { @readonly = true })
                 </td>
                 <td>
-                    @Html.TextBoxFor(c => c.CallLogDesc)
+                    @Html.TextBoxFor(c => c.Calllog.CallLogDesc)
                 </td>
                 <td>
-                    <select name="CallLogStatus">
+                    <select name="CallLogStatus" disabled>
                         <option value="@ya">
                             @ya
                         </option>
-                        <option value="!@za">
+                        <option value="@za">
                             @za
                         </option>
 
 
                     </select>
                 <td>
-                    @Html.TextBoxFor(c => c.CreatingTime, new { @readonly = true })
+                    @Html.TextBoxFor(c => c.Calllog.CreatingTime, new { @readonly = true })
                 </td>
                 <td>
-                    @Html.TextBoxFor(c => c.UpdatingTime, new { @readonly = true })
+                    @Html.TextBoxFor(c => c.Calllog.UpdatingTime, new { @readonly = true })
                 </td>
                 <td>
-                    @Html.TextBoxFor(c => c.CalllNumber, new { @readonly = true })
+                    @Html.TextBoxFor(c => c.Calllog.CalllNumber, new { @readonly = true })
                 </td>
                 <td>
                     <button type="submit" class="btn btn-primary">Update</button>
@@ -85,6 +99,88 @@ else
         }
 
 
+
+
     </table>
 
+    <h2> BU ÇAĞRIYA SAHİP İŞ </h2>
+
+    <table class="table" style="margin-left:-185px">
+        <tr>
+            <th style="display:none">
+                @Html.DisplayNameFor(model => model.Job.JobId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Job.JobDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Job.JobMethods)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Job.IsImportant)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Job.JobStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Job.CreatingTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Job.UpdatingTime)
+            </th>
+            <th>
+                Çagrı olusturan persoenel Ad
+            </th>
+            <th>*</th>
+        </tr>
+
+
+        @using (Html.BeginForm("JobDelete", "JobAdd", FormMethod.Post))
+        {
+            <tr>
+                <th style="display:none">
+                    @Html.TextBoxFor(c => c.Job.JobId)
+                </th>
+                <td>
+                    @Html.TextBoxFor(c => c.Job.JobDescription)
+                </td>
+                <td>
+                    @Html.TextBoxFor(c => c.Job.JobMethods)
+                </td>
+                <td>
+                    <select name="IsImportant">
+                        <option value="@onemli">
+                            @onemli
+                        </option>
+                        <option value="@onemliDe">
+                            @onemliDe
+                        </option>
+                    </select>
+                </td>
+                <td>
+                    <select name="JobStatus">
+                        <option value="@jobSta1">
+                            @jobSta1
+                        </option>
+                        <option value="!@jobSta2">
+                            @jobSta2
+                        </option>
+                    </select>
+                <td>
+                    @Html.TextBoxFor(c => c.Job.CreatingTime, new { @readonly = true })
+                </td>
+                <td>
+                    @Html.TextBoxFor(c => c.Job.UpdatingTime, new { @readonly = true })
+                </td>
+                <td>
+                    @Html.TextBoxFor(c => c.Job.User.UserName, new { @readonly = true })
+                </td>
+                <td>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </td>
+            </tr>
+
+        }
+
+    </table>
 }
