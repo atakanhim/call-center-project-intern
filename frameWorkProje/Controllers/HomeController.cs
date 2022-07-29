@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace frameWorkProje.Controllers
 {
@@ -25,8 +26,17 @@ namespace frameWorkProje.Controllers
             }
             else
             {
+                
                 var values2 = jm.GetJobWithfilter("", null, "", isAdmin(), Convert.ToInt32(Session["userId"]));
-                return View(values2);
+                if(values2.Count > 0)
+                    return View(values2);
+                else
+                {
+                    FormsAuthentication.SignOut();
+                    return RedirectToAction("Index","Login");
+                }
+                    
+
             }
      
 
