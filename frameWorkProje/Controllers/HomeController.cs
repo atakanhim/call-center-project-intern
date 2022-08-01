@@ -15,25 +15,25 @@ namespace frameWorkProje.Controllers
     [Authorize(Roles = "personel,admin")]
     public class HomeController : Controller
     {
-        JobManager jm = new JobManager(new EfJobRepository());
+       readonly JobManager jm = new JobManager(new EfJobRepository());
         public ActionResult Index(string ad = "", int? numara = null, string siralama = "")
         {
-            var values = jm.GetJobWithfilter(ad, numara, siralama, isAdmin(), Convert.ToInt32(Session["userId"]));
-            if (isAdmin())
+            var values = jm.GetJobWithfilter(ad, numara, siralama, IsAdmin(), Convert.ToInt32(Session["userId"]));
+            if (IsAdmin())
             {
-                values = jm.GetList();
+                values = jm.GetList(x=>x.JobStatus=="aktif");
                 return View(values);
             }
             else
             {
                 
-                var values2 = jm.GetJobWithfilter("", null, "", isAdmin(), Convert.ToInt32(Session["userId"]));
+                var values2 = jm.GetJobWithfilter("", null, "", IsAdmin(), Convert.ToInt32(Session["userId"]));
                 if(values2.Count > 0)
                     return View(values2);
                 else
                 {
-                    FormsAuthentication.SignOut();
-                    return RedirectToAction("Index","Login");
+                    // hata mesajı
+                    return View(values);
                 }
                     
 
@@ -47,14 +47,14 @@ namespace frameWorkProje.Controllers
             if (ad == "" && numara == null && siralama == "")
             {
 
-                if (isAdmin())
+                if (IsAdmin())
                 {
                     var values = jm.GetList();
                     return View(values);
                 }
                 else
                 {
-                    var values2 = jm.GetJobWithfilter("", null, "", isAdmin(), Convert.ToInt32(Session["userId"]));
+                    var values2 = jm.GetJobWithfilter("", null, "", IsAdmin(), Convert.ToInt32(Session["userId"]));
                     return View(values2);
                 }
 
@@ -62,13 +62,13 @@ namespace frameWorkProje.Controllers
 
             else
             {
-                var values = jm.GetJobWithfilter(ad, numara, siralama, isAdmin(), Convert.ToInt32(Session["userId"]));
+                var values = jm.GetJobWithfilter(ad, numara, siralama, IsAdmin(), Convert.ToInt32(Session["userId"]));
                 return View(values);
             }
 
         }
 
-        public bool isAdmin()
+        public bool IsAdmin()
         {
             if (Convert.ToInt32(Session["roleId"]) == 2)
             {

@@ -14,7 +14,9 @@ namespace BusinessLayer.Abstract
         void JobDelete(Job job);
         void JobUpdate(Job job);
         List<Job> GetList();
+        List<Job> GetList(Expression<Func<Job, bool>> filter);
 
+        void ChangeJubStatus(int jobID);
         Job GetById(int id);
         Job GetByFilter(Expression<Func<Job, bool>> filter);
 
