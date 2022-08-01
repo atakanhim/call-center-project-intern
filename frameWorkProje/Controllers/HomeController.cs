@@ -41,32 +41,7 @@ namespace frameWorkProje.Controllers
      
 
         }
-        public ActionResult IndexDataTable(string ad = "", int? numara = null, string siralama = "")
-        {
-
-            if (ad == "" && numara == null && siralama == "")
-            {
-
-                if (IsAdmin())
-                {
-                    var values = jm.GetList();
-                    return View(values);
-                }
-                else
-                {
-                    var values2 = jm.GetJobWithfilter("", null, "", IsAdmin(), Convert.ToInt32(Session["userId"]));
-                    return View(values2);
-                }
-
-            }
-
-            else
-            {
-                var values = jm.GetJobWithfilter(ad, numara, siralama, IsAdmin(), Convert.ToInt32(Session["userId"]));
-                return View(values);
-            }
-
-        }
+      
 
         public bool IsAdmin()
         {
