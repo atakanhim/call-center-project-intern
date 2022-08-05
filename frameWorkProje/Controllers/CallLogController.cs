@@ -51,7 +51,7 @@ namespace frameWorkProje.Controllers
                 }
                 else
                 {
-                    var jobList = jm.GetJobWithfilter("", null, "", false, Convert.ToInt32(Session["userId"]));
+                    var jobList = jm.GetJobWithfilter("", null, "", false, User.Identity.Name);
                     foreach (var item in jobList)
                     {
                         if (item.UserId == persoId && item.CallLogId == cagriId)
@@ -83,6 +83,8 @@ namespace frameWorkProje.Controllers
 
             return RedirectToAction("Index", "CallLog");
         }
+
+        [Authorize(Roles = "admin")]
         public ActionResult Cagrilar(int id = 0)
         {
             Context c = new Context();

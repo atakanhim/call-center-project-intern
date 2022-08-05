@@ -14,13 +14,13 @@
     <script type="text/javascript">
 
 
-       
+
         $(document).ready(function () {
 
-       
+
 
             var table = $('#jobTable').DataTable({
-                
+
                 language: {
                     "emptyTable": "Tabloda herhangi bir veri mevcut değil",
                     "info": "_TOTAL_ kayıttan _START_ - _END_ arasındaki kayıtlar gösteriliyor",
@@ -265,7 +265,7 @@
                         "renameTitle": "Görünüm İsmini Değiştir"
                     }
                 }
-                      
+
             })
 
 
@@ -288,7 +288,7 @@
                     $(this).addClass('selected');
                 }
             });
-          
+
         });
 
     </script>
@@ -302,7 +302,7 @@
 
 <div class="card mb-4 mt-2">
 
-    <h3 style="text-align:right;margin:14px 23px -10px 0px; ">
+    <h3 style="text-align:right;margin:14px 21px -10px 0px; ">
         <a class="btn btn-outline-success my-2 my-sm-0" href="/JobAdd/CreateJob"> &nbsp; Yeni İş Kaydı Oluştur &nbsp;&nbsp;</a>
     </h3>
 
@@ -317,12 +317,12 @@
                         <th> İŞ AÇIKLAMASI</th>
                         <th> İŞ DURUMU</th>
                         <th> ÇAGRI KODU</th>
-                        @if (Convert.ToInt32(Session["roleId"]) == 2)
+                        @if (System.Web.Security.Roles.GetRolesForUser().Single()=="admin")
                         {
                             <th> ILGILENEN PERSONEL </th>
                         }
 
-                     
+
                         <th style="display:none">*</th>
                         <th style="display:none">*</th>
 
@@ -335,11 +335,11 @@
                         <th> İŞ AÇIKLAMASI</th>
                         <th> İŞ DURUMU</th>
                         <th> ÇAGRI KODU</th>
-                        @if (Convert.ToInt32(Session["roleId"]) == 2)
+                        @if (System.Web.Security.Roles.GetRolesForUser().Single() == "admin")
                         {
                             <th> ILGILENEN PERSONEL </th>
                         }
-                  
+
                         <th style="display:none">*</th>
                         <th style="display:none">*</th>
                     </tr>
@@ -347,22 +347,34 @@
                 <tbody>
                     @foreach (var item in Model)
                     {
+
+
                         <tr class="rows">
                             <td> @item.CallLog.Customer.CustomerName </td>
                             <td> @item.JobDescription </td>
                             <td> @item.JobStatus </td>
                             <td> @item.CallLogId </td>
-                            @if (Convert.ToInt32(Session["roleId"]) == 2)
+                            @if (System.Web.Security.Roles.GetRolesForUser().Single() == "admin")
                             {
                                 <td>@item.User.UserName</td>
                             }
-                          
+
                             <td style="display:none"> <input class="callogId" type="number" value="@item.CallLogId" /></td>
                             <td style="display:none"> <input id="persoId" type="number" value="@item.UserId" /></td>
                         </tr>
+
+
                     }
+
+
+
                 </tbody>
             </table>
         </div>
     </div>
 </div>
+
+
+
+
+

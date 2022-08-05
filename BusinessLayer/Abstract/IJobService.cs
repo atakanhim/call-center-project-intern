@@ -20,6 +20,6 @@ namespace BusinessLayer.Abstract
         Job GetById(int id);
         Job GetByFilter(Expression<Func<Job, bool>> filter);
 
-        List<Job> GetJobWithfilter(string ad="", int? numara = null, string abc = "", bool adminmi=false, int userId = 0);
+        List<Job> GetJobWithfilter(string ad="", int? numara = null, string abc = "", bool adminmi=false, string username  = "");
     }
 }
