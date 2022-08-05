@@ -26,7 +26,11 @@ namespace frameWorkProje.Controllers
         {
             // job status false yapılacak
             // job idsini alıp ordan calllog calllog durumu false olacak falan filan
-            var values = cm.CallLogList();
+            var jap = jm.GetByFilter(x => x.JobId == jobModel.JobId);
+
+            // iş durumu false olacak
+
+            jm.ChangeJubStatus(jap.JobId);
 
             return RedirectToAction("Index","Home");
         }

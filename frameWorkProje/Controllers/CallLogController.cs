@@ -24,9 +24,17 @@ namespace frameWorkProje.Controllers
             // burada cagri idyi aliıp o cagri id kayıtlı iş çekip iş sonlansın mı diye sorluacak
             int cagriId = id;
             Job jobModel = jm.GetByFilter(x => x.CallLogId == cagriId);// ilgili cagri modelini de gönderecez bunun için viewmodel kullanıcaz
-                
+            ViewData["jobId"] = jobModel.JobId;
+            ViewData["jobDesc"] = jobModel.JobDescription;
+            ViewData["JobMethods"] = jobModel.JobMethods;
+            ViewData["isImportant"] = jobModel.IsImportant;
+            ViewData["jobStatus"] = jobModel.JobStatus;
+            ViewData["creatingTime"] = jobModel.CreatingTime;
+            ViewData["updatingTime"] = jobModel.UpdatingTime;
+            ViewData["isOlusturan"] = jobModel.User.UserName;
 
-            
+
+
             var userId = Convert.ToInt32(Session["userId"]);// user ıd çagırıyoruz
             var roleId = Convert.ToInt32(Session["roleId"]);// rolu cagırıyoruz
 
@@ -48,7 +56,7 @@ namespace frameWorkProje.Controllers
                     {
                         if (item.UserId == persoId && item.CallLogId == cagriId)
                         {
-                            model = callLogManager.GetById(cagriId);//bunu adminde çagırırız
+                            model = callLogManager.GetById(cagriId);
                             return View(model);
                         }
 
@@ -60,13 +68,8 @@ namespace frameWorkProje.Controllers
             }
 
 
-            CallLogViewModel callLogViewModel = new CallLogViewModel();
-
-            callLogViewModel.Calllog = model;
-            callLogViewModel.Job = jobModel;
-
-
-            return View(callLogViewModel);
+          
+            return View(model);
         }
         [HttpPost]
         public ActionResult Index(CallLog call)

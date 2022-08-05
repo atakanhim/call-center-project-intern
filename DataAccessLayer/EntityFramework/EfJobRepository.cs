@@ -13,6 +13,22 @@ namespace DataAccessLayer.EntityFramework
 {
     public class EfJobRepository : GenericRepository<Job>, IJobDal
     {
+        public void ChangeJubStatus(int jobID)
+        {
+            Context c = new Context();
+            var job = c.Jobs.Where(x => x.JobId == jobID).FirstOrDefault();
+            if(job.JobStatus=="aktif")
+            {
+                job.JobStatus = "deaktif";
+            }
+            else if (job.JobStatus == "deaktif")
+            {
+                job.JobStatus = "aktif";
+            }
+
+            c.SaveChanges();
+        }
+
         public List<Job> GetJobWithfilter(string ad = "", int? numara = null, string abc = "", bool adminmi = false,int userId=0)
         {
 
@@ -20,7 +36,7 @@ namespace DataAccessLayer.EntityFramework
             Context c = new Context();
             List<Job> jobValue = c.Jobs.ToList();
 
-            
+
             if (ad != "")
             {
                 jobValue = (from job in c.Jobs
@@ -32,6 +48,7 @@ namespace DataAccessLayer.EntityFramework
                             select job
                                 ).ToList();
             }
+            
             if (numara != null)
             {
                 jobValue = (from job in c.Jobs
@@ -53,7 +70,7 @@ namespace DataAccessLayer.EntityFramework
                               on job.CallLogId equals call.CallLogId
                             join cust in c.Customers
                               on call.CustomerId equals cust.CustomerId
-                            where (job.UserId == userId)
+                            where (job.UserId == userId && job.JobStatus=="aktif")
                             select job
                             ).ToList();
 

@@ -1,15 +1,28 @@
-﻿@model frameWorkProje.Models.CallLogViewModel
+﻿@model EntityLayer.Concreate.CallLog
 
 @{
     ViewBag.Title = "Index";
 
-    var ya = Model.Calllog.CallLogStatus.Value;
+    var ya = Model.CallLogStatus.Value;
     var za = !ya;
 
-    var onemli = Model.Job.IsImportant.Value;
-    var onemliDe = !onemli;
+    var onemli=true;
+    var onemliDe=false;
 
-    var jobSta1 = Model.Job.JobStatus;
+    var onemliS = ViewData["isImportant"].ToString();
+    if (onemliS == "true")
+    {
+         onemli = true;
+         onemliDe = !onemli;
+
+    }
+    else if (onemliS == "false")
+    {
+         onemli = false;
+         onemliDe = !onemli;
+    }
+
+    var jobSta1 = ViewData["jobStatus"].ToString();
     var jobSta2 = "aktif";
 
     if (jobSta1 == "aktif")
@@ -20,7 +33,7 @@
 }
 
 
-@if (Model.Calllog == null)
+@if (Model == null)
 {
     <h1>@ViewBag.hata</h1>
 
@@ -33,25 +46,26 @@ else
     <table class="table" style="margin-left:-185px">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Calllog.CallLogId)
+
+               ÇAĞRI ID
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Calllog.Customer.CustomerName)
+                MÜŞTERİ ADI
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Calllog.CallLogDesc)
+               ÇAĞRI AÇIKLAMASI
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Calllog.CallLogStatus)
+                ÇAĞRI DURUMU
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Calllog.CreatingTime)
+               ÇAĞRI OLUŞTURMA ZAMANI
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Calllog.UpdatingTime)
+               ÇAĞRU SON GUNCELLEME ZAMANI
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Calllog.CalllNumber)
+                ÇAĞRU NUMARASI
             </th>
             <th>*</th>
         </tr>
@@ -63,13 +77,13 @@ else
 
             <tr>
                 <td>
-                    @Html.TextBoxFor(c => c.Calllog.CallLogId, new { @readonly = true })
+                    @Html.TextBoxFor(c => c.CallLogId, new { @readonly = true })
                 </td>
                 <td>
-                    @Html.TextBoxFor(c => c.Calllog.Customer.CustomerName, new { @readonly = true })
+                    @Html.TextBoxFor(c => c.Customer.CustomerName, new { @readonly = true })
                 </td>
                 <td>
-                    @Html.TextBoxFor(c => c.Calllog.CallLogDesc)
+                    @Html.TextBoxFor(c => c.CallLogDesc)
                 </td>
                 <td>
                     <select name="CallLogStatus" disabled>
@@ -83,13 +97,13 @@ else
 
                     </select>
                 <td>
-                    @Html.TextBoxFor(c => c.Calllog.CreatingTime, new { @readonly = true })
+                    @Html.TextBoxFor(c => c.CreatingTime, new { @readonly = true })
                 </td>
                 <td>
-                    @Html.TextBoxFor(c => c.Calllog.UpdatingTime, new { @readonly = true })
+                    @Html.TextBoxFor(c => c.UpdatingTime, new { @readonly = true })
                 </td>
                 <td>
-                    @Html.TextBoxFor(c => c.Calllog.CalllNumber, new { @readonly = true })
+                    @Html.TextBoxFor(c => c.CalllNumber, new { @readonly = true })
                 </td>
                 <td>
                     <button type="submit" class="btn btn-primary">Update</button>
@@ -108,28 +122,28 @@ else
     <table class="table" style="margin-left:-185px">
         <tr>
             <th style="display:none">
-                @Html.DisplayNameFor(model => model.Job.JobId)
+                job id
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Job.JobDescription)
+                job desc
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Job.JobMethods)
+                job methods
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Job.IsImportant)
+                onemli mi
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Job.JobStatus)
+                job aciklmasi
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Job.CreatingTime)
+                creating tme
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Job.UpdatingTime)
+                updating time
             </th>
             <th>
-                Çagrı olusturan persoenel Ad
+                iş olusturan persoenel Ad
             </th>
             <th>*</th>
         </tr>
@@ -139,13 +153,13 @@ else
         {
             <tr>
                 <th style="display:none">
-                    @Html.TextBoxFor(c => c.Job.JobId)
+                    <input type="text" value="@ViewData["jobId"]" name="JobId" />
                 </th>
                 <td>
-                    @Html.TextBoxFor(c => c.Job.JobDescription)
+                    <input type="text" value="@ViewData["jobDesc"]" name="JobDescription" />
                 </td>
                 <td>
-                    @Html.TextBoxFor(c => c.Job.JobMethods)
+                    <input type="text" value="@ViewData["JobMethods"]" name="JobMethods" />
                 </td>
                 <td>
                     <select name="IsImportant">
@@ -162,21 +176,21 @@ else
                         <option value="@jobSta1">
                             @jobSta1
                         </option>
-                        <option value="!@jobSta2">
+                        <option value="@jobSta2">
                             @jobSta2
                         </option>
                     </select>
                 <td>
-                    @Html.TextBoxFor(c => c.Job.CreatingTime, new { @readonly = true })
+                    <input type="text" value="@ViewData["creatingTime"]" name="creatingTime" readonly />
                 </td>
                 <td>
-                    @Html.TextBoxFor(c => c.Job.UpdatingTime, new { @readonly = true })
+                    <input type="text" value="@ViewData["updatingTime"]" name="updatingTime" readonly />
                 </td>
                 <td>
-                    @Html.TextBoxFor(c => c.Job.User.UserName, new { @readonly = true })
+                    <input type="text" value="@ViewData["isOlusturan"]" readonly />
                 </td>
                 <td>
-                    <button type="submit" class="btn btn-primary">Update</button>
+                    <button type="submit" class="btn btn-danger">Sil</button>
                 </td>
             </tr>
 

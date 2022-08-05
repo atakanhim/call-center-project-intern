@@ -19,6 +19,11 @@ namespace BusinessLayer.Concreate
             _jobDal = jobDal;
         }
 
+        public void ChangeJubStatus(int jobID)
+        {
+            _jobDal.ChangeJubStatus(jobID);
+        }
+
         public Job GetByFilter(Expression<Func<Job, bool>> filter)
         {
             return _jobDal.GetEntityWithFilter(filter);
@@ -43,6 +48,11 @@ namespace BusinessLayer.Concreate
         public List<Job> GetList()
         {
             return _jobDal.GetListAll();
+        }
+
+        public List<Job> GetList(Expression<Func<Job, bool>> filter)
+        {
+            return _jobDal.GetListAll(filter);
         }
 
         public void JobAdd(Job job)
