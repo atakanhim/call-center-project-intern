@@ -44,8 +44,7 @@ namespace frameWorkProje.Controllers
                     if (user.UserPosition == "admin")
                         roleId = 2;// 2 ise admin
                     FormsAuthentication.SetAuthCookie(user.UserName, false);
-                    Session.Add("userId", user.UserId);
-                    Session.Add("roleId", roleId);
+              
 
                     return RedirectToAction("Index", "Home");
                 }

@@ -9,7 +9,7 @@
 <table class="table" id="ornek">
     <thead>
         <tr>
-            <td>Muşteri Id</td>
+       
             <td> Müşteri Adı</td>
             <td> Müşteri Telefon</td>
             <td> Müşteri Adresi</td>
@@ -21,15 +21,13 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>@item.CustomerId</td>
+ 
                 <td> @item.CustomerName </td>
                 <td> @item.CustomerPhone </td>
                 <td> @item.CustomerAddress </td>
                 <td> @item.CustomerDate </td>
                 <td>
-                    <button id="butonss" type="button">
-                        <p style="color:black">  @Html.ActionLink("Çağrı Kayıtları", "Cagrilar", "CallLog", new { id = item.CustomerId }, "")</p>
-                    </button>
+                    <a class="btn btn-outline-primary my-2 my-sm-0" href="/CallLog/Cagrilar/@item.CustomerId">Kayıtlı Çağrılar</a>
                 </td>
             </tr>
         }

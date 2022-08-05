@@ -29,7 +29,7 @@ namespace DataAccessLayer.EntityFramework
             c.SaveChanges();
         }
 
-        public List<Job> GetJobWithfilter(string ad = "", int? numara = null, string abc = "", bool adminmi = false,int userId=0)
+        public List<Job> GetJobWithfilter(string ad = "", int? numara = null, string abc = "", bool adminmi = false,string username="")
         {
 
 
@@ -70,7 +70,7 @@ namespace DataAccessLayer.EntityFramework
                               on job.CallLogId equals call.CallLogId
                             join cust in c.Customers
                               on call.CustomerId equals cust.CustomerId
-                            where (job.UserId == userId && job.JobStatus=="aktif")
+                            where (us.UserName == username && job.JobStatus=="aktif")
                             select job
                             ).ToList();
 

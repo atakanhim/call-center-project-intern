@@ -22,7 +22,7 @@
                 <a class="navbar-brand" href="/">Çağrı Merkezi</a>
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 
-                    @if (Convert.ToInt32(Session["roleId"]) == 2)
+                    @if (System.Web.Security.Roles.GetRolesForUser().Single()=="admin")
                     {
 
                         <li class="nav-item">
@@ -36,8 +36,8 @@
 
                 </ul>
 
-                <a class="nav-link" style="color:white">Hoşgeldiniz <span style="color:green">@HttpContext.Current.User.Identity.Name </span></a>
-                <a class="btn btn-outline-success my-2 my-sm-0" href="/Login/LogOut">LogOut</a>
+                <a class="nav-link" style="color:white">Kullanıcı Adı :  <span style="color:green">@HttpContext.Current.User.Identity.Name </span></a>
+                <a class="btn btn-outline-danger my-2 my-sm-0" href="/Login/LogOut">LogOut</a>
 
             </div>
         </nav>

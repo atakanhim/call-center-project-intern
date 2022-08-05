@@ -8,20 +8,6 @@
 }
 <br />
 <br />
-@*@using (Html.BeginForm("CustomerAdd", "Customer", FormMethod.Post, new { @class = "mx-1 mx-md-4" }))
-{
-    <div class="form-group">
-        Müşteri adı: <input type="text" name="CustomerName" /><br />
-        @Html.ValidationMessageFor(x => x.CustomerName)
-        <br />
-        Müşteri Adresi: <input type="text" name="CustomerAddress" /><br />
-        @Html.ValidationMessageFor(x => x.CustomerAddress)
-        <br />
-        Müşteri Date: <input type="datetime" name="CustomerDate" value="@DateTime.UtcNow" readonly /><br />
-        Müşteri Telefon: <input type="text" name="CustomerPhone" value="@telefonno" />
-    </div>
-    <button>bas</button>
-}*@
 
 <section class="vh-100" style="background-color: #eee;">
     <div class="container h-100">
@@ -74,7 +60,7 @@
                                     </div>
 
                                     <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                                        <button type="submit" class="btn btn-primary btn-lg">Register</button>
+                                        <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Müşteriyi Kaydet</button>
                                     </div>
 
                                 }

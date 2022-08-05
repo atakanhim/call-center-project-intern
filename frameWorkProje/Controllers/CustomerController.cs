@@ -18,13 +18,13 @@ namespace frameWorkProje.Controllers
         // GET: Customer
         CustomerManager cm = new CustomerManager(new EfCustomerRepository());
         CallLogManager callmanager = new CallLogManager(new EfCallLogRepository());
-        public ActionResult CustomerAdd(long? numra)
+        public ActionResult CustomerAdd(long? id)
         {
             // callg witch customer yapacam
-            if (numra == null)
+            if (id == null)
                 return RedirectToAction("CreateJob", "JobAdd");
 
-            ViewBag.tel = numra;
+            ViewBag.tel = id;
             return View();
         }
         [HttpPost]

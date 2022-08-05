@@ -1,6 +1,7 @@
 ﻿@using EntityLayer.Concreate
 @model List<CallLog>
 @{
+    var x = 1;
     ViewBag.Title = "Cagrilar";
 }
 
@@ -12,7 +13,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-                    <a href="~/Home/Index" class="close" data-dismiss="modal" aria-label="Close">
+                    <a href="~/" class="close" data-dismiss="modal" aria-label="Close">
                         x
                     </a>
                 </div>
@@ -20,26 +21,25 @@
                     <table class="table" id="ornek">
                         <thead>
                             <tr>
-                                <td>Çağrı Kodu</td>
+                        
                                 <td> Çağrı Numarası</td>
                                 <td> Çağrı Açıklaması</td>
                                 <td> Çağrı Durumu</td>
                                 <td> Çağrı Olusturma Zamanı</td>
-                                <td width="300px"></td>
+                                <td width="300px"> *</td>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var item in Model)
                             {
                                 <tr>
-                                    <td>@item.CallLogId</td>
+                             
                                     <td> @item.CalllNumber </td>
                                     <td> @item.CallLogDesc </td>
                                     <td> @item.CallLogStatus </td>
                                     <td> @item.CreatingTime </td>
-                                    <td>
-                                    <td>@Html.ActionLink("Detaay", "Index", "CallLog", new { id = item.CallLogId, persoId = 1 }, new { id = item.CallLogId })  </td>
-
+                                    <td >  <a class="btn btn-outline-success my-2 my-sm-0" href="/CallLog/Index/@item.CallLogId?persoId=@x" >Detay</a> </td>
+                                  
                                 </tr>
                             }
 
