@@ -48,6 +48,7 @@ namespace DataAccessLayer.EntityFramework
                             select job
                                 ).ToList();
             }
+            
             if (numara != null)
             {
                 jobValue = (from job in c.Jobs

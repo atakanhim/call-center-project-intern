@@ -56,7 +56,7 @@ namespace frameWorkProje.Controllers
                     {
                         if (item.UserId == persoId && item.CallLogId == cagriId)
                         {
-                            model = callLogManager.GetById(cagriId);//bunu adminde çagırırız
+                            model = callLogManager.GetById(cagriId);
                             return View(model);
                         }
 
