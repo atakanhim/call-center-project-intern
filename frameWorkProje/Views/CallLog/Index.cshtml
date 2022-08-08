@@ -134,7 +134,7 @@ else
                 onemli mi
             </th>
             <th>
-                job aciklmasi
+                job status
             </th>
             <th>
                 creating tme
@@ -145,16 +145,16 @@ else
             <th>
                 iş olusturan persoenel Ad
             </th>
-            <th>*</th>
+            <th>Change Status</th>
         </tr>
 
 
         @using (Html.BeginForm("JobDelete", "JobAdd", FormMethod.Post))
         {
             <tr>
-                <th style="display:none">
+                <td style="display:none">
                     <input type="text" value="@ViewData["jobId"]" name="JobId" />
-                </th>
+                </td>
                 <td>
                     <input type="text" value="@ViewData["jobDesc"]" name="JobDescription" />
                 </td>
@@ -180,6 +180,7 @@ else
                             @jobSta2
                         </option>
                     </select>
+                </td>
                 <td>
                     <input type="text" value="@ViewData["creatingTime"]" name="creatingTime" readonly />
                 </td>

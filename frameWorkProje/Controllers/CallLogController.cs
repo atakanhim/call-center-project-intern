@@ -35,8 +35,7 @@ namespace frameWorkProje.Controllers
 
 
 
-            var userId = Convert.ToInt32(Session["userId"]);// user ıd çagırıyoruz
-            var roleId = Convert.ToInt32(Session["roleId"]);// rolu cagırıyoruz
+           
 
             var model = new CallLog();
             if (cagriId <= 0 || persoId <= 0)
@@ -47,7 +46,7 @@ namespace frameWorkProje.Controllers
             {
                 if (isAdmin())
                 {
-                    model = callLogManager.GetById(id);//bunu adminde çagırırız
+                    model = callLogManager.GetById(cagriId);//bunu adminde çagırırız
                 }
                 else
                 {
@@ -103,7 +102,7 @@ namespace frameWorkProje.Controllers
         }
         public bool isAdmin()
         {
-            if (Convert.ToInt32(Session["roleId"]) == 2)
+            if (User.IsInRole("admin"))
             {
                 return true;
             }

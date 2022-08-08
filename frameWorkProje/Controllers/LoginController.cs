@@ -40,12 +40,7 @@ namespace frameWorkProje.Controllers
                 var user = c.Users.Where(x => x.UserName == model.UserName && x.UserPassword == model.PassWord).FirstOrDefault();
                 if (user != null)
                 {
-                    var roleId = 1; // 1 ise personel
-                    if (user.UserPosition == "admin")
-                        roleId = 2;// 2 ise admin
                     FormsAuthentication.SetAuthCookie(user.UserName, false);
-              
-
                     return RedirectToAction("Index", "Home");
                 }
                 else

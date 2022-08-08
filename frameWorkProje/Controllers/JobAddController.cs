@@ -2,10 +2,8 @@
 using DataAccessLayer.Concreate;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concreate;
+using frameWorkProje.Singleton;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace frameWorkProje.Controllers
@@ -34,22 +32,18 @@ namespace frameWorkProje.Controllers
 
             return RedirectToAction("Index","Home");
         }
-
+        
         [HttpPost]
         public ActionResult CreateJob(Job job)// 
         {
-            var sessionUserId = Convert.ToInt32(Session["userId"]);
-
+           // var sessionUserId = Convert.ToInt32(Session["userId"]);
+           // burda singleton ile gelen kişi disini veritabanında donum gelen userun bilgilerini database olarak tutacğız.
             if (job.CallLogId == 0)
             {
                 // çagrı seçmemiş demektir
                 // js ile kontrol ediliyor zaten burasıda 2. kontrol yeri
             } 
-            else if(sessionUserId == 0)
-            {
-                // çagrı seçmemiş demektir
-                //  ekleme yapmayacak çünkü session oturumu açılammaıi
-            }
+            
             else
             {
 
@@ -63,9 +57,9 @@ namespace frameWorkProje.Controllers
                     var shortDate = date.Date;
                     job.CreatingTime = shortDate;
                     job.UpdatingTime = shortDate;
+                    job.JobStatus = "aktif";
 
-
-                    job.UserId = sessionUserId;// personel id giren kişi çekilece
+                    job.UserId = FrameWorkProjeSingleton.Instance.currentUSer.UserId;// personel id giren kişi çekilece
 
 
                     jm.JobAdd(job);

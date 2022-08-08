@@ -5,35 +5,39 @@
     ViewBag.Title = "ListCustomers";
 
 }
-<h2 style="text-align:center">Kayıtlı Müşteriler </h2>
-<table class="table" id="ornek">
-    <thead>
-        <tr>
-       
-            <td> Müşteri Adı</td>
-            <td> Müşteri Telefon</td>
-            <td> Müşteri Adresi</td>
-            <td> Müşteri Kayıt Tarihi</td>
-            <td>*</td>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+<a class="headerDesign">KAYITLI MÜŞTERİLER </a>
+
+    <table class="table customTable">
+        <thead class="thead-dark">
             <tr>
- 
-                <td> @item.CustomerName </td>
-                <td> @item.CustomerPhone </td>
-                <td> @item.CustomerAddress </td>
-                <td> @item.CustomerDate </td>
-                <td>
-                    <a class="btn btn-outline-primary my-2 my-sm-0" href="/CallLog/Cagrilar/@item.CustomerId">Kayıtlı Çağrılar</a>
-                </td>
+
+                <th> Müşteri Adı</th>
+                <th> Müşteri Telefon</th>
+                <th> Müşteri Adresi</th>
+                <th> Müşteri Kayıt Tarihi</th>
+                <th></th>
             </tr>
-        }
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
 
-    </tbody>
+                    <td> @item.CustomerName </td>
+                    <td> @item.CustomerPhone </td>
+                    <td> @item.CustomerAddress </td>
+                    <td> @item.CustomerDate </td>
+                    <td>
+                        <a class="btn btn-outline-primary my-2 my-sm-0" href="/CallLog/Cagrilar/@item.CustomerId">Kayıtlı Çağrılar</a>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
 
 
-</table>
-}
+    </table>
+
+
+
+

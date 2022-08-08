@@ -12,9 +12,10 @@ using System.Web.Security;
 
 namespace frameWorkProje.Controllers
 {
-    [Authorize(Roles = "personel,admin")]
+    
     public class HomeController : Controller
     {
+        
        readonly JobManager jm = new JobManager(new EfJobRepository());
         public ActionResult Index(string ad = "", int? numara = null, string siralama = "")
         {
