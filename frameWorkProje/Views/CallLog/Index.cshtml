@@ -60,7 +60,7 @@ else
             <th>
                 ÇAĞRU NUMARASI
             </th>
-            <th>*</th>
+            <th>GUNCELLE</th>
         </tr>
 
 
@@ -79,7 +79,7 @@ else
                     @Html.TextBoxFor(c => c.CallLogDesc)
                 </td>
                 <td>
-                    <select name="CallLogStatus">
+                    <select name="CallLogStatus" disabled>
                         <option value="@ya">
                             @ya
                         </option>
@@ -98,7 +98,7 @@ else
                     @Html.TextBoxFor(c => c.CalllNumber, new { @readonly = true })
                 </td>
                 <td>
-                    <button type="submit" class="btn btn-primary">Update</button>
+                    <button type="submit" class="btn btn-primary">Güncelle</button>
                 </td>
             </tr>
 
@@ -111,7 +111,7 @@ else
 
     <h2> BU ÇAĞRIYA SAHİP İŞ </h2>
 
-    <table class="table">
+    <table class="table" >
         <tr>
             <th style="display:none">
                 İŞ İD
@@ -135,7 +135,7 @@ else
             <th>
                 OLUŞTURAN PERSONEL
             </th>
-            <th>İŞ'i GUNCELLE/KALDIR </th>
+            <th>GUNCELLE/KALDIR</th>
         </tr>
 
 
