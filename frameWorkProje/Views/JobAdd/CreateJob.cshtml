@@ -1,6 +1,6 @@
 ﻿
 @{
-   
+
     ViewData["Title"] = "CreateJob";
 }
 @using EntityLayer.Concreate
@@ -19,81 +19,92 @@
 
 }
 
+<a class="headerDesign" style="font-size:72px">İŞ OLUŞTURMA PANELİ</a>
+
+<a class="headerDesign">ÇAĞRILAR</a>
 @*// burası yeni ekrana alınacak @avait li bişey olacal-->*@
 @if (x != 0)
 {
-    <table class="table">
-        <tr>
-            <th>Musteri Adı</th>
-            <th>Cagri Acıklama</th>
-            <th>Cagrı Durumu</th>
-            <th>Cagrı Numarası</th>
-            <th>*</th>
-        </tr>
-        @foreach (var item in Model)
-        {
-            <tr class="kolon">
-
-                <td>
-                    @if (item.CustomerId != null)
-                    {
-                        @item.Customer.CustomerName
-                    }
-                    else
-                    {
-                        <p class="accept-policy" style="color: blue; text-decoration: underline; text-decoration-color: blue;">MUSTERI KAYITLI DEGIL</p>
-                    }
-                </td>
-                <td> @item.CallLogDesc</td>
-                <td> @item.CallLogStatus</td>
-                <td> @item.CalllNumber</td>
-                @if (item.CustomerId == null)
-                {
-                    <td><a class="btn btn-outline-danger my-2 my-sm-0" href="/Customer/CustomerAdd/@item.CalllNumber">LogOut</a></td>
-
-                }
+    <table class="table customTable">
+        <thead class="thead-dark">
+            <tr>
+                <th>Musteri Adı</th>
+                <th>Cagri Acıklama</th>
+                <th>Cagrı Durumu</th>
+                <th>Cagrı Numarası</th>
+                <th></th>
             </tr>
-        }
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr class="kolon">
+
+                    <td>
+                        @if (item.CustomerId != null)
+                        {
+                            @item.Customer.CustomerName
+                        }
+                        else
+                        {
+                            <p style="font-size:24px;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">MUSTERI KAYITLI DEGIL</p>
+                        }
+                    </td>
+                    <td> @item.CallLogDesc</td>
+                    <td> @item.CallLogStatus</td>
+                    <td> @item.CalllNumber</td>
+                    @if (item.CustomerId == null)
+                    {
+                        <td><a class="btn btn-outline-primary my-2 my-sm-0" href="/Customer/CustomerAdd/@item.CalllNumber">Müşteri Ekle</a></td>
+
+                    }
+                </tr>
+            }
+        </tbody>
+
 
 
     </table>
     <br />
 
-    <h1>İŞ EKLE</h1>
-
-    <h1>@ViewBag.v</h1>
-
+    <p class="headerDesign" style="margin-top:30px">İŞ EKLE</p>
     <form asp-action="CreateJob" asp-controller="JobAdd" method="post">
-        İŞ AÇIKLAMASI: <input id="desc" type="text" name="JobDescription" placeholder="is cok zor" /><br />
-        İŞ ÇÖZÜM YOLLARI: <input id="method" type="text" name="JobMethods" placeholder="yol yok" /><br />
-        ONEMLİ Mİ :
-        <select name="IsImportant">
-            <option value="true">Evet</option>
-            <option value="false">Hayır</option>
-        </select><br />
-        İş Durumunu seçiniz :
-        <select name="JobStatus">
-            <option value="aktif">Aktif</option>
-            <option value="deaktif">DeAktif</option>
-        </select><br />
-        Seçeceğiniz çagrının müşterisini seçiniz :
-        <select name="CallLogId">
-            @foreach (var item in Model)
-            {
-                if (item.CustomerId != null)
+        <div class="form-group">
+            <label for="desc">İş AÇIKLAMASI</label>
+            <input id="desc" type="text" class="form-control" name="JobDescription" aria-describedby="emailHelp" placeholder="is cok zor">
+            @*<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>*@
+        </div>
+        <div class="form-group">
+            <label for="isCozumYol"> İŞ ÇÖZÜM YOLLARI:</label>
+            <input id="isCozumYol" type="text" class="form-control" name="JobMethods" placeholder="yol yok">
+        </div>
+        <div class="form-group">
+            <label for="important">ÖNEMLİ Mİ</label>
+            <select name="IsImportant" class="form-control" id="important">
+                <option value="true">Evet</option>
+                <option value="false">Hayır</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="cusssCustomer">  Seçeceğiniz çagrının müşterisini seçiniz </label>
+            <select name="CallLogId" class="form-control" id="cusssCustomer">
+                @foreach (var item in Model)
                 {
-                    <option id="calllogId" value="@item.CallLogId">
-                        CAGRI, OLUSTURAN :@item.Customer.CustomerName ~&~ KODU: @item.CallLogId
-                    </option>
+                    if (item.CustomerId != null)
+                    {
+                        <option id="calllogId" value="@item.CallLogId">
+                            CAGRI, OLUSTURAN :@item.Customer.CustomerName ~&~ KODU: @item.CallLogId
+                        </option>
+                    }
+
                 }
-
-            }
-        </select><br />
-
-        <button id="bas">İş Oluştur</button>
+            </select>
+        </div>
+  
+        <button style="margin-bottom:30px">İş Oluştur</button>
     </form>
 }
 else
 {
-    <h3> Herhangi bir çağrı kaydı bulunamamıştır.</h3>
+    <h3> Herhangi bir çağrı kaydı bulunamadığı için çağrı eklenememektedir.</h3>
 }

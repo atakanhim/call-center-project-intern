@@ -4,7 +4,7 @@
     ViewBag.Title = "ShowRapor";
 }
 
-<h2 style="text-align:center">Show Rapor</h2>
+<a class="headerDesign">PERSONEL RAPORU</a>
 <form asp-action="ShowRapor" asp-controller="User" method="get">
     <select name="deger">
         <option value="1">
@@ -22,19 +22,30 @@
 
 @if (Model != null)
 {
-    <table class="table">
-        <thead>
+    <table class="table customTable">
+
+      <thead class="thead-dark">
+          <tr>
+
+              <th> ÇAĞRI OLUŞTURAN MUSTERİ ADI</th>
+              <th> İŞ AÇIKLAMASI</th>
+              <th> İŞ DURUMU</th>
+              <th> ÇAGRI KODU</th>
+              <th> ILGILENEN PERSONEL </th>
+              <th>*</th>
+
+          </tr>
+      </thead>
+        <tfoot>
             <tr>
-
-                <td> ÇAĞRI OLUŞTURAN MUSTERİ ADI</td>
-                <td> İŞ AÇIKLAMASI</td>
-                <td> İŞ DURUMU</td>
-                <td> ÇAGRI KODU</td>
-                <td> ILGILENEN PERSONEL </td>
-                <td>*</td>
-
+                <th>
+                    BU PERSONEL TARAFINDAN CEVAPLANAN TELEFON: @ViewBag.count
+                </th>
+                <th>
+                    BU PERSONEL TARAFINDAN TAMAMLANAN İŞ: @ViewBag.tamamlananis
+                </th>
             </tr>
-        </thead>
+        </tfoot>
         <tbody>
 
 
@@ -47,21 +58,14 @@
                 <td> @item.JobStatus </td>
                 <td> @item.CallLogId </td>
                 <td>@item.User.UserName</td>
-                <td>@Html.ActionLink("Cagri Detayı", "Index", "CallLog", new { id = item.CallLogId, persoId = item.UserId }, new { id = item.CallLogId })  </td>
-
+                <td> <a class="btn btn-outline-success my-2 my-sm-0" href="/CallLog/Index/@item.CallLogId?persoId=@item.UserId ">Cagri Detayı</a></td>
             </tr>
 
 
             }
 
-            <tr>
-                <td>
-                    BU PERSONEL TARAFINDAN CEVAPLANAN TELEFON: @ViewBag.count 
-                </td>
-                <td>
-                    BU PERSONEL TARAFINDAN TAMAMLANAN İŞ: @ViewBag.tamamlananis
-                </td>
-            </tr>
+           
+       
         </tbody>
 
 

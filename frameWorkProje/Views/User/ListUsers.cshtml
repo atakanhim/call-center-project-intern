@@ -4,55 +4,65 @@
     ViewBag.Title = "ListUsers";
 }
 
-<h2 style="text-align:center;font-style:italic">PERSONELLER</h2>
-<br style="margin-top:50px" />
-<table class="table">
-    <tr>
-        <th>
-            AD
-        </th>
-        <th>
-            TELEFON NO
-        </th>
-        <th>
-            E-MAIL
-        </th>
-        <th>
-            ADRES
-        </th>
-        <th>
-            POZİSYON
-        </th>
-        <th>
-            KAYIT TARİHİ
-        </th>
-        <th>*</th>
-    </tr>
+<a class="headerDesign">PERSONELLER</a>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @item.UserName
-        </td>
-        <td>
-            @item.UserPhone
-        </td>
-        <td>
-            @item.UserMail
-        </td>
-        <td>
-            @item.UserAddress
-        </td>
-        <td>
-            @item.UserPosition
-        </td>
-        <td>
-             @item.UserDate
-        </td>
-        <td>
-           <a href="~/User/ShowRapor/@item.UserId" class="btn btn-warning"> Personel raporu</a>
-        </td>
-    </tr>
-}
+    <table class="table customTable">
+        <thead class="thead-dark">
+            <tr>
+                <th>
+                    ad
+                </th>
+                <th>
+                    telefon no
+                </th>
+                <th>
+                    email
+                </th>
+                <th>
+                    adres
+                </th>
+                <th>
+                    pozisyon
+                </th>
+                <th>
+                    kayıt tarihi
+                </th>
+                <th></th>
+            </tr>
 
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.UserName
+                    </td>
+                    <td>
+                        @item.UserPhone
+                    </td>
+                    <td>
+                        @item.UserMail
+                    </td>
+                    <td>
+                        @item.UserAddress
+                    </td>
+                    <td>
+                        @item.UserPosition
+                    </td>
+                    <td>
+                        @item.UserDate
+                    </td>
+                    <td>
+                        <a href="~/User/ShowRapor/@item.UserId" class="btn btn-outline-primary my-2 my-sm-0"> Personel raporu</a>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+
+
+
+    </table>
+
+

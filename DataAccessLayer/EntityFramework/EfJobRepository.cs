@@ -21,10 +21,10 @@ namespace DataAccessLayer.EntityFramework
             {
                 job.JobStatus = "deaktif";
             }
-            else if (job.JobStatus == "deaktif")
-            {
-                job.JobStatus = "aktif";
-            }
+            //else if (job.JobStatus == "deaktif")
+            //{
+            //    job.JobStatus = "aktif";
+            //}
 
             c.SaveChanges();
         }

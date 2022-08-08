@@ -4,6 +4,7 @@
 
 @{
     ViewBag.Title = "Index";
+   
 }
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
 
@@ -299,7 +300,7 @@
 
 
 }
-
+<a class="headerDesign">İŞ KAYITLARI</a>
 <div class="card mb-4 mt-2">
 
     <h3 style="text-align:right;margin:14px 21px -10px 0px; ">
@@ -321,29 +322,14 @@
                         {
                             <th> ILGILENEN PERSONEL </th>
                         }
-
+                        
 
                         <th style="display:none">*</th>
                         <th style="display:none">*</th>
 
                     </tr>
                 </thead>
-                <tfoot>
-                    <tr>
-                        <th> ÇAĞRI OLUŞTURAN MUSTERİ ADI</th>
-
-                        <th> İŞ AÇIKLAMASI</th>
-                        <th> İŞ DURUMU</th>
-                        <th> ÇAGRI KODU</th>
-                        @if (System.Web.Security.Roles.GetRolesForUser().Single() == "admin")
-                        {
-                            <th> ILGILENEN PERSONEL </th>
-                        }
-
-                        <th style="display:none">*</th>
-                        <th style="display:none">*</th>
-                    </tr>
-                </tfoot>
+               
                 <tbody>
                     @foreach (var item in Model)
                     {

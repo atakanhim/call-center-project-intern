@@ -3,6 +3,7 @@ using DataAccessLayer.Concreate;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concreate;
 using frameWorkProje.Models;
+using frameWorkProje.Singleton;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +13,10 @@ using System.Web.Security;
 
 namespace frameWorkProje.Controllers
 {
-    [Authorize(Roles = "personel,admin")]
+    
     public class HomeController : Controller
     {
+        
        readonly JobManager jm = new JobManager(new EfJobRepository());
         public ActionResult Index(string ad = "", int? numara = null, string siralama = "")
         {
@@ -36,16 +38,10 @@ namespace frameWorkProje.Controllers
      
 
         }
-      
 
-        public bool IsAdmin()
-        {
-            if (System.Web.Security.Roles.GetRolesForUser().Single() == "admin")
-            {
 
-                return true;
-            }
-            return false;
-        }
+        public bool IsAdmin() => FrameWorkProjeSingleton.Instance.isAdmin();
+
+
     }
 }
