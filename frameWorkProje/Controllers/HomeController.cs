@@ -3,6 +3,7 @@ using DataAccessLayer.Concreate;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concreate;
 using frameWorkProje.Models;
+using frameWorkProje.Singleton;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,16 +38,10 @@ namespace frameWorkProje.Controllers
      
 
         }
-      
 
-        public bool IsAdmin()
-        {
-            if (System.Web.Security.Roles.GetRolesForUser().Single() == "admin")
-            {
 
-                return true;
-            }
-            return false;
-        }
+        public bool IsAdmin() => FrameWorkProjeSingleton.Instance.isAdmin();
+
+
     }
 }

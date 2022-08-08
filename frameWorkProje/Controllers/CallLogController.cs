@@ -3,6 +3,7 @@ using DataAccessLayer.Concreate;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concreate;
 using frameWorkProje.Models;
+using frameWorkProje.Singleton;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -44,13 +45,13 @@ namespace frameWorkProje.Controllers
             }
             else
             {
-                if (isAdmin())
+                if (FrameWorkProjeSingleton.Instance.isAdmin())
                 {
                     model = callLogManager.GetById(cagriId);//bunu adminde çagırırız
                 }
                 else
                 {
-                    var jobList = jm.GetJobWithfilter("", null, "", false, User.Identity.Name);
+                    var jobList = jm.GetJobWithfilter("", null, "", false, FrameWorkProjeSingleton.Instance.currentUSer.UserName);
                     foreach (var item in jobList)
                     {
                         if (item.UserId == persoId && item.CallLogId == cagriId)
@@ -97,16 +98,9 @@ namespace frameWorkProje.Controllers
                           select call
                               ).ToList();
 
-
+            ViewBag.userId = Singleton.FrameWorkProjeSingleton.Instance.currentUSer.UserId;
             return View(callogList);
         }
-        public bool isAdmin()
-        {
-            if (User.IsInRole("admin"))
-            {
-                return true;
-            }
-            return false;
-        }
+     
     }
 }

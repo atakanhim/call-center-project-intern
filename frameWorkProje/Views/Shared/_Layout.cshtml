@@ -44,12 +44,17 @@
         </nav>
 
 
-        <div class="container">@*container bilerek kaldırdık full kullanmak istiyorum sayfayı*@
+        <div style="margin:50px 70px;">@*container bilerek kaldırdık full kullanmak istiyorum sayfayı*@
+
             @RenderBody()
+            
+
+
         </div>
 
         @Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/bootstrap")
+
         @RenderSection("scripts", required: false)
     </body>
 </html>

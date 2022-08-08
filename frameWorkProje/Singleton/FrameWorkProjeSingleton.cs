@@ -31,13 +31,20 @@ namespace frameWorkProje.Singleton
             }
         }
 
-        public void SetLoginUser()
+        private void SetLoginUser()
         {
             var user = userManager.GetByName(HttpContext.Current.User.Identity.Name.ToString());
             currentUSer = user;
         }
-      
 
-       
+        public bool isAdmin()
+        {
+            if (currentUSer.UserPosition=="admin")
+            {
+                return true;
+            }
+            return false;
+        }
+
     }
 }
