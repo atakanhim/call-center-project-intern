@@ -22,32 +22,27 @@ namespace frameWorkProje.Controllers
         // GET: CallLog
         public ActionResult Index(int id = 0, int persoId = 0)
         {
-            // burada cagri idyi aliıp o cagri id kayıtlı iş çekip iş sonlansın mı diye sorluacak
-            int cagriId = id;
-            Job jobModel = jm.GetByFilter(x => x.CallLogId == cagriId);// ilgili cagri modelini de gönderecez bunun için viewmodel kullanıcaz
-            ViewData["jobId"] = jobModel.JobId;
-            ViewData["jobDesc"] = jobModel.JobDescription;
-            ViewData["JobMethods"] = jobModel.JobMethods;
-            ViewData["isImportant"] = jobModel.IsImportant;
-            ViewData["jobStatus"] = jobModel.JobStatus;
-            ViewData["creatingTime"] = jobModel.CreatingTime;
-            ViewData["updatingTime"] = jobModel.UpdatingTime;
-            ViewData["isOlusturan"] = jobModel.User.UserName;
-
-
-
-           
-
-            var model = new CallLog();
-            if (cagriId <= 0 || persoId <= 0)
+            if (id <= 0 || persoId <= 0)
             {
-                return RedirectToAction("Index", "Home");
+               return RedirectToAction("Index", "Home");
             }
-            else
-            {
+     
+                // burada cagri idyi aliıp o cagri id kayıtlı iş çekip iş sonlansın mı diye sorluacak
+                int cagriId = id;
+                Job jobModel = jm.GetByFilter(x => x.CallLogId == cagriId);// ilgili cagri modelini de gönderecez bunun için viewmodel kullanıcaz
+                ViewData["jobId"] = jobModel.JobId;
+                ViewData["jobDesc"] = jobModel.JobDescription;
+                ViewData["JobMethods"] = jobModel.JobMethods;
+                ViewData["isImportant"] = jobModel.IsImportant;
+                ViewData["creatingTime"] = jobModel.CreatingTime;
+                ViewData["updatingTime"] = jobModel.UpdatingTime;
+                ViewData["isOlusturan"] = jobModel.User.UserName;
+
+                var model = new CallLog();
+
                 if (FrameWorkProjeSingleton.Instance.isAdmin())
                 {
-                    model = callLogManager.GetById(cagriId);//bunu adminde çagırırız
+                    model = callLogManager.GetById(cagriId);// admin ise tüm çağrılara giribilri demektir.
                 }
                 else
                 {
@@ -62,14 +57,12 @@ namespace frameWorkProje.Controllers
 
                     }
                     return RedirectToAction("Index", "Home");// personel ise tüm herkesin cagrılarına gidemez.     
-
                 }
 
-            }
+                return View(model);
 
-
-          
-            return View(model);
+            
+           
         }
         [HttpPost]
         public ActionResult Index(CallLog call)
@@ -81,7 +74,7 @@ namespace frameWorkProje.Controllers
             callLogManager.CallLogUpdate(updaet);
 
 
-            return RedirectToAction("Index", "CallLog");
+            return RedirectToAction("Index", "CallLog",new {id=call.CallLogId,persoId=FrameWorkProjeSingleton.Instance.currentUSer.UserId});
         }
 
         [Authorize(Roles = "admin")]
@@ -101,6 +94,6 @@ namespace frameWorkProje.Controllers
             ViewBag.userId = Singleton.FrameWorkProjeSingleton.Instance.currentUSer.UserId;
             return View(callogList);
         }
-     
+
     }
 }

@@ -6,30 +6,23 @@
     var ya = Model.CallLogStatus.Value;
     var za = !ya;
 
-    var onemli=true;
-    var onemliDe=false;
+    var onemli = true;
+    var onemliDe = false;
 
     var onemliS = ViewData["isImportant"].ToString();
-    if (onemliS == "true")
+    if (onemliS == "True")
     {
-         onemli = true;
-         onemliDe = !onemli;
+        onemli = true;
+        onemliDe = !onemli;
 
     }
-    else if (onemliS == "false")
+    else if (onemliS == "False")
     {
-         onemli = false;
-         onemliDe = !onemli;
+        onemli = false;
+        onemliDe = !onemli;
     }
 
-    var jobSta1 = ViewData["jobStatus"].ToString();
-    var jobSta2 = "aktif";
-
-    if (jobSta1 == "aktif")
-    {
-        jobSta2 = "deaktif";
-    }
-
+    var jobId = Convert.ToInt32(ViewData["jobId"].ToString());
 }
 
 
@@ -43,26 +36,26 @@ else
 {
     <h2>ÇAĞRI DETAY SAYFASI</h2>
 
-    <table class="table" style="margin-left:-185px">
+    <table class="table">
         <tr>
-            <th>
+            <th style="display:none">
 
-               ÇAĞRI ID
+                ÇAĞRI ID
             </th>
             <th>
                 MÜŞTERİ ADI
             </th>
             <th>
-               ÇAĞRI AÇIKLAMASI
+                ÇAĞRI AÇIKLAMASI
             </th>
             <th>
                 ÇAĞRI DURUMU
             </th>
             <th>
-               ÇAĞRI OLUŞTURMA ZAMANI
+                ÇAĞRI OLUŞTURMA ZAMANI
             </th>
             <th>
-               ÇAĞRU SON GUNCELLEME ZAMANI
+                ÇAĞRU SON GUNCELLEME ZAMANI
             </th>
             <th>
                 ÇAĞRU NUMARASI
@@ -76,7 +69,7 @@ else
 
 
             <tr>
-                <td>
+                <td style="display:none">
                     @Html.TextBoxFor(c => c.CallLogId, new { @readonly = true })
                 </td>
                 <td>
@@ -86,14 +79,13 @@ else
                     @Html.TextBoxFor(c => c.CallLogDesc)
                 </td>
                 <td>
-                    <select name="CallLogStatus" disabled>
+                    <select name="CallLogStatus">
                         <option value="@ya">
                             @ya
                         </option>
                         <option value="@za">
                             @za
                         </option>
-
 
                     </select>
                 <td>
@@ -119,37 +111,35 @@ else
 
     <h2> BU ÇAĞRIYA SAHİP İŞ </h2>
 
-    <table class="table" style="margin-left:-185px">
+    <table class="table">
         <tr>
             <th style="display:none">
-                job id
+                İŞ İD
             </th>
             <th>
-                job desc
+                İŞ AÇIKLAMASI
             </th>
             <th>
-                job methods
+                İŞ ÇÖZME YÖNTEMLERİ
             </th>
             <th>
-                onemli mi
+                ÖNEMLİ Mİ?
+            </th>
+
+            <th>
+                OLUŞTURMA ZAMANI
             </th>
             <th>
-                job status
+                SON GUNCELLEME ZAMANI
             </th>
             <th>
-                creating tme
+                OLUŞTURAN PERSONEL
             </th>
-            <th>
-                updating time
-            </th>
-            <th>
-                iş olusturan persoenel Ad
-            </th>
-            <th>Change Status</th>
+            <th>İŞ'i GUNCELLE/KALDIR </th>
         </tr>
 
 
-        @using (Html.BeginForm("JobDelete", "JobAdd", FormMethod.Post))
+        @using (Html.BeginForm("JobUpdate", "JobAdd", FormMethod.Post))
         {
             <tr>
                 <td style="display:none">
@@ -163,24 +153,16 @@ else
                 </td>
                 <td>
                     <select name="IsImportant">
-                        <option value="@onemli">
+                        <option value="@onemli.ToString()">
                             @onemli
                         </option>
-                        <option value="@onemliDe">
+                        <option value="@onemliDe.ToString()">
                             @onemliDe
                         </option>
                     </select>
                 </td>
-                <td>
-                    <select name="JobStatus">
-                        <option value="@jobSta1">
-                            @jobSta1
-                        </option>
-                        <option value="@jobSta2">
-                            @jobSta2
-                        </option>
-                    </select>
-                </td>
+
+
                 <td>
                     <input type="text" value="@ViewData["creatingTime"]" name="creatingTime" readonly />
                 </td>
@@ -191,7 +173,9 @@ else
                     <input type="text" value="@ViewData["isOlusturan"]" readonly />
                 </td>
                 <td>
-                    <button type="submit" class="btn btn-danger">Sil</button>
+                    <button type="submit" class="btn btn-primary">Güncelle</button>
+                    <a class="btn btn-outline-danger my-2 my-sm-0" href="/JobAdd/JobDelete/@jobId">Kaldır</a>
+
                 </td>
             </tr>
 

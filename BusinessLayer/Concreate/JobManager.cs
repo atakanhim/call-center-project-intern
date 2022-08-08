@@ -70,7 +70,7 @@ namespace BusinessLayer.Concreate
 
         public void JobUpdate(Job job)
         {
-            throw new NotImplementedException();
+            _jobDal.Update(job);
         }
 
       
