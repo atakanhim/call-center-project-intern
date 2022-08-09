@@ -8,21 +8,29 @@
 
     var onemli = true;
     var onemliDe = false;
+    var jobId = 1;
 
-    var onemliS = ViewData["isImportant"].ToString();
-    if (onemliS == "True")
+    if (ViewBag.listele !="listele")
     {
-        onemli = true;
-        onemliDe = !onemli;
+        var onemliS = ViewData["isImportant"].ToString();
+        if (onemliS == "True")
+        {
+            onemli = true;
+            onemliDe = !onemli;
+
+        }
+        else if (onemliS == "False")
+        {
+            onemli = false;
+            onemliDe = !onemli;
+        }
+        jobId = Convert.ToInt32(ViewData["jobId"].ToString());
 
     }
-    else if (onemliS == "False")
-    {
-        onemli = false;
-        onemliDe = !onemli;
-    }
 
-    var jobId = Convert.ToInt32(ViewData["jobId"].ToString());
+
+
+
 }
 
 
@@ -98,7 +106,7 @@ else
                     @Html.TextBoxFor(c => c.CalllNumber, new { @readonly = true })
                 </td>
                 <td>
-                    <button type="submit" class="btn btn-primary">Güncelle</button>
+                    <button type="submit" class="btn btn-outline-primary my-2 my-sm-0">Güncelle</button>
                 </td>
             </tr>
 
@@ -109,77 +117,87 @@ else
 
     </table>
 
-    <h2> BU ÇAĞRIYA SAHİP İŞ </h2>
-
-    <table class="table" >
-        <tr>
-            <th style="display:none">
-                İŞ İD
-            </th>
-            <th>
-                İŞ AÇIKLAMASI
-            </th>
-            <th>
-                İŞ ÇÖZME YÖNTEMLERİ
-            </th>
-            <th>
-                ÖNEMLİ Mİ?
-            </th>
-
-            <th>
-                OLUŞTURMA ZAMANI
-            </th>
-            <th>
-                SON GUNCELLEME ZAMANI
-            </th>
-            <th>
-                OLUŞTURAN PERSONEL
-            </th>
-            <th>GUNCELLE/KALDIR</th>
-        </tr>
 
 
-        @using (Html.BeginForm("JobUpdate", "JobAdd", FormMethod.Post))
-        {
+
+
+    if (ViewBag.listele != "listele")
+    {
+        <h2> BU ÇAĞRIYA SAHİP İŞ </h2>
+
+        <table class="table">
             <tr>
-                <td style="display:none">
-                    <input type="text" value="@ViewData["jobId"]" name="JobId" />
-                </td>
-                <td>
-                    <input type="text" value="@ViewData["jobDesc"]" name="JobDescription" />
-                </td>
-                <td>
-                    <input type="text" value="@ViewData["JobMethods"]" name="JobMethods" />
-                </td>
-                <td>
-                    <select name="IsImportant">
-                        <option value="@onemli.ToString()">
-                            @onemli
-                        </option>
-                        <option value="@onemliDe.ToString()">
-                            @onemliDe
-                        </option>
-                    </select>
-                </td>
+                <th style="display:none">
+                    İŞ İD
+                </th>
+                <th>
+                    İŞ AÇIKLAMASI
+                </th>
+                <th>
+                    İŞ ÇÖZME YÖNTEMLERİ
+                </th>
+                <th>
+                    ÖNEMLİ Mİ?
+                </th>
 
-
-                <td>
-                    <input type="text" value="@ViewData["creatingTime"]" name="creatingTime" readonly />
-                </td>
-                <td>
-                    <input type="text" value="@ViewData["updatingTime"]" name="updatingTime" readonly />
-                </td>
-                <td>
-                    <input type="text" value="@ViewData["isOlusturan"]" readonly />
-                </td>
-                <td>
-                    <button type="submit" class="btn btn-primary">Güncelle</button>
-                    <a class="btn btn-outline-danger my-2 my-sm-0" href="/JobAdd/JobDelete/@jobId">Kaldır</a>
-
-                </td>
+                <th>
+                    OLUŞTURMA ZAMANI
+                </th>
+                <th>
+                    SON GUNCELLEME ZAMANI
+                </th>
+                <th>
+                    OLUŞTURAN PERSONEL
+                </th>
+                <th>GUNCELLE/KALDIR</th>
             </tr>
 
-        }
 
-    </table>
+            @using (Html.BeginForm("JobUpdate", "JobAdd", FormMethod.Post))
+            {
+                <tr>
+                    <td style="display:none">
+                        <input type="text" value="@ViewData["jobId"]" name="JobId" />
+                    </td>
+                    <td>
+                        <input type="text" value="@ViewData["jobDesc"]" name="JobDescription" />
+                    </td>
+                    <td>
+                        <input type="text" value="@ViewData["JobMethods"]" name="JobMethods" />
+                    </td>
+                    <td>
+                        <select name="IsImportant">
+                            <option value="@onemli.ToString()">
+                                @onemli
+                            </option>
+                            <option value="@onemliDe.ToString()">
+                                @onemliDe
+                            </option>
+                        </select>
+                    </td>
+
+
+                    <td>
+                        <input type="text" value="@ViewData["creatingTime"]" name="creatingTime" readonly />
+                    </td>
+                    <td>
+                        <input type="text" value="@ViewData["updatingTime"]" name="updatingTime" readonly />
+                    </td>
+                    <td>
+                        <input type="text" value="@ViewData["isOlusturan"]" readonly />
+                    </td>
+                    <td>
+                        <button type="submit" class="btn btn-outline-primary my-2 my-sm-0">Güncelle</button>
+                        <a class="btn btn-outline-danger my-2 my-sm-0" href="/JobAdd/JobDelete/@jobId">Kaldır</a>
+
+                    </td>
+                </tr>
+
+            }
+
+        </table>
+    }
+
+
+
 }

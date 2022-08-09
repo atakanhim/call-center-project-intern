@@ -6,53 +6,47 @@
 }
 @if (Model.Count > 0)
 {
-    <div class="">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-                    <a href="~/" class="close" data-dismiss="modal" aria-label="Close">
-                        x
-                    </a>
-                </div>
-                <div class="modal-body">
-                    <table class="table" id="ornek">
-                        <thead>
-                            <tr>
-                        
-                                <td> Çağrı Numarası</td>
-                                <td> Çağrı Açıklaması</td>
-                                <td> Çağrı Durumu</td>
-                                <td> Çağrı Olusturma Zamanı</td>
-                                <td width="300px"> *</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in Model)
-                            {
-                                <tr>
-                             
-                                    <td> @item.CalllNumber </td>
-                                    <td> @item.CallLogDesc </td>
-                                    <td> @item.CallLogStatus </td>
-                                    <td> @item.CreatingTime </td>
-                                    <td >  <a class="btn btn-outline-success my-2 my-sm-0" href="/CallLog/Index/@item.CallLogId?persoId=@x" >Detay</a> </td>
-                                  
-                                </tr>
-                            }
 
-                        </tbody>
+    foreach (var item in Model)
+    {
+        <a class="headerDesign">@item.Customer.CustomerName MÜŞTERİSİNİN KAYITLARI </a>
+    }
+
+    <table class="table customTable">
+        <thead class="thead-dark">
+            <tr>
+
+                <th> Çağrı Numarası</th>
+                <th> Çağrı Açıklaması</th>
+                <th> Çağrı Durumu</th>
+                <th> Çağrı Olusturma Zamanı</th>
+                <th width="300px"> </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td> @item.CalllNumber </td>
+                    <td> @item.CallLogDesc </td>
+                    <td> @item.CallLogStatus </td>
+                    <td> @item.CreatingTime </td>
+                    <td>  <a class="btn btn-outline-success my-2 my-sm-0" href="/CallLog/Index/@item.CallLogId?persoId=@x">Detay</a> </td>
+
+                </tr>
+            }
+
+        </tbody>
 
 
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
+    </table>
+
+
 }
 else
 {
     <br />
     <br />
-    <h1 style="text-align:center"> Bu müşteri hiç çağrı oluşturmamış</h1>
+    <a class="headerDesign">Bu müşteri hiç çağrı oluşturmamış</a>
 }

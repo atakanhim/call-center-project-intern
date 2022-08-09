@@ -24,12 +24,14 @@ namespace frameWorkProje.Controllers
         {
             if (id <= 0 || persoId <= 0)
             {
-               return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Home");
             }
-     
-                // burada cagri idyi aliıp o cagri id kayıtlı iş çekip iş sonlansın mı diye sorluacak
-                int cagriId = id;
-                Job jobModel = jm.GetByFilter(x => x.CallLogId == cagriId);// ilgili cagri modelini de gönderecez bunun için viewmodel kullanıcaz
+
+            // burada cagri idyi aliıp o cagri id kayıtlı iş çekip iş sonlansın mı diye sorluacak
+            int cagriId = id;
+            Job jobModel = jm.GetByFilter(x => x.CallLogId == cagriId);// ilgili cagri modelini de gönderecez bunun için viewmodel kullanıcaz
+            if (jobModel != null)
+            {
                 ViewData["jobId"] = jobModel.JobId;
                 ViewData["jobDesc"] = jobModel.JobDescription;
                 ViewData["JobMethods"] = jobModel.JobMethods;
@@ -37,32 +39,38 @@ namespace frameWorkProje.Controllers
                 ViewData["creatingTime"] = jobModel.CreatingTime;
                 ViewData["updatingTime"] = jobModel.UpdatingTime;
                 ViewData["isOlusturan"] = jobModel.User.UserName;
+            }
+            else
+            {
+                ViewBag.listele = "listele";
+            }
 
-                var model = new CallLog();
 
-                if (FrameWorkProjeSingleton.Instance.isAdmin())
+            var model = new CallLog();
+
+            if (FrameWorkProjeSingleton.Instance.isAdmin())
+            {
+                model = callLogManager.GetById(cagriId);// admin ise tüm çağrılara giribilri demektir.
+            }
+            else
+            {
+                var jobList = jm.GetJobWithfilter("", null, "", false, FrameWorkProjeSingleton.Instance.currentUSer.UserName);
+                foreach (var item in jobList)
                 {
-                    model = callLogManager.GetById(cagriId);// admin ise tüm çağrılara giribilri demektir.
-                }
-                else
-                {
-                    var jobList = jm.GetJobWithfilter("", null, "", false, FrameWorkProjeSingleton.Instance.currentUSer.UserName);
-                    foreach (var item in jobList)
+                    if (item.UserId == persoId && item.CallLogId == cagriId)
                     {
-                        if (item.UserId == persoId && item.CallLogId == cagriId)
-                        {
-                            model = callLogManager.GetById(cagriId);
-                            return View(model);
-                        }
-
+                        model = callLogManager.GetById(cagriId);
+                        return View(model);
                     }
-                    return RedirectToAction("Index", "Home");// personel ise tüm herkesin cagrılarına gidemez.     
+
                 }
+                return RedirectToAction("Index", "Home");// personel ise tüm herkesin cagrılarına gidemez.     
+            }
 
-                return View(model);
+            return View(model);
 
-            
-           
+
+
         }
         [HttpPost]
         public ActionResult Index(CallLog call)
@@ -74,7 +82,7 @@ namespace frameWorkProje.Controllers
             callLogManager.CallLogUpdate(updaet);
 
 
-            return RedirectToAction("Index", "CallLog",new {id=call.CallLogId,persoId=FrameWorkProjeSingleton.Instance.currentUSer.UserId});
+            return RedirectToAction("Index", "CallLog", new { id = call.CallLogId, persoId = FrameWorkProjeSingleton.Instance.currentUSer.UserId });
         }
 
         [Authorize(Roles = "admin")]
