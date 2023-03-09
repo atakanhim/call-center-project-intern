@@ -12,10 +12,8 @@ namespace frameWorkProje.Singleton
     {
         UserManager userManager = new UserManager(new EfUserRepository());
         public User currentUSer { get; set; }
-        public FrameWorkProjeSingleton()
-        {
-            SetLoginUser();
-        }
+        private FrameWorkProjeSingleton() { }
+ 
         private static FrameWorkProjeSingleton instance = null;
         public static FrameWorkProjeSingleton Instance
         {
@@ -30,15 +28,15 @@ namespace frameWorkProje.Singleton
 
             }
         }
-
-        private void SetLoginUser()
+        public void SetLoginUser()
         {
             var user = userManager.GetByName(HttpContext.Current.User.Identity.Name.ToString());
-            currentUSer = user;
+            currentUSer = user;// 1 kere çalıştıgı için sıkıntııı , gir çık yapıncaada çalışması lazım
         }
 
         public bool isAdmin()
         {
+           
             if (currentUSer.UserPosition=="admin")
             {
                 return true;

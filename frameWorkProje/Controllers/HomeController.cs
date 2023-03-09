@@ -18,28 +18,19 @@ namespace frameWorkProje.Controllers
     {
         
        readonly JobManager jm = new JobManager(new EfJobRepository());
-        public ActionResult Index(string ad = "", int? numara = null, string siralama = "")
+
+        
+        public ActionResult Index()
         {
-           
-            var values = jm.GetJobWithfilter(ad, numara, siralama, IsAdmin(), User.Identity.Name);
+            FrameWorkProjeSingleton.Instance.SetLoginUser();
+            var values = jm.GetJobWithfilter( IsAdmin(), User.Identity.Name);
             if (IsAdmin())
             {
                 values = jm.GetList(x=>x.JobStatus=="aktif");
                 return View(values);
             }
-            else
-            {          
-                if(values.Count > 0)
-                    return View(values);
-                else
-                    return View(values);
-
-            }
-     
-
+            return View(values);
         }
-
-
         public bool IsAdmin() => FrameWorkProjeSingleton.Instance.isAdmin();
 
 

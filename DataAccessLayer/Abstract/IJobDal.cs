@@ -9,7 +9,7 @@ namespace DataAccessLayer.Abstract
 {
     public interface IJobDal : IGenericDal<Job>
     {
-        List<Job> GetJobWithfilter(string ad="", int? numara = null, string abc = "",bool adminmi=false, string username = "");
+        List<Job> GetJobWithfilter(bool adminmi=false, string username = "");
         void ChangeJubStatus(int jobID);
     }
 }

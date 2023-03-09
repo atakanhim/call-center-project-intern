@@ -29,40 +29,12 @@ namespace DataAccessLayer.EntityFramework
             c.SaveChanges();
         }
 
-        public List<Job> GetJobWithfilter(string ad = "", int? numara = null, string abc = "", bool adminmi = false,string username="")
+        public List<Job> GetJobWithfilter(bool adminmi = false,string username="")
         {
-
-
             Context c = new Context();
             List<Job> jobValue = c.Jobs.ToList();
-
-
-            if (ad != "")
-            {
-                jobValue = (from job in c.Jobs
-                            join call in c.CallLogs
-                              on job.CallLogId equals call.CallLogId
-                            join cust in c.Customers
-                              on call.CustomerId equals cust.CustomerId
-                            where (cust.CustomerName.Contains(ad))
-                            select job
-                                ).ToList();
-            }
-            
-            if (numara != null)
-            {
-                jobValue = (from job in c.Jobs
-                            join call in c.CallLogs
-                              on job.CallLogId equals call.CallLogId
-                            join cust in c.Customers
-                              on call.CustomerId equals cust.CustomerId
-                            where (call.CallLogId == numara)
-                            select job
-                              ).ToList();
-            }
             if (adminmi==false)
-            {
-                
+            {        
                 jobValue = (from job in c.Jobs
                             join us in c.Users
                                 on job.UserId equals us.UserId
@@ -73,24 +45,9 @@ namespace DataAccessLayer.EntityFramework
                             where (us.UserName == username && job.JobStatus=="aktif")
                             select job
                             ).ToList();
-
-            }
-            if (abc == "ASC")
-            {
-                jobValue = jobValue.OrderBy(o => o.CallLogId).ToList();
-            }
-
-            if (abc == "DESC")
-            {
-                jobValue = jobValue.OrderByDescending(o => o.CallLogId).ToList();
-            }
-         
-            return jobValue;
-
-
-           
+            } 
+            return jobValue;     
         }
-
 
 
     }

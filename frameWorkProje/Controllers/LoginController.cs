@@ -3,6 +3,7 @@ using DataAccessLayer.Concreate;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concreate;
 using frameWorkProje.Models;
+using frameWorkProje.Singleton;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -40,7 +41,8 @@ namespace frameWorkProje.Controllers
                 var user = c.Users.Where(x => x.UserName == model.UserName && x.UserPassword == model.PassWord).FirstOrDefault();
                 if (user != null)
                 {
-                    FormsAuthentication.SetAuthCookie(user.UserName, false);
+                    FormsAuthentication.SetAuthCookie(user.UserName, false);    
+                 
                     return RedirectToAction("Index", "Home");
                 }
                 else

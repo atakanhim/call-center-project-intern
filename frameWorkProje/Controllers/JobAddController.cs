@@ -13,7 +13,7 @@ namespace frameWorkProje.Controllers
         JobManager jm = new JobManager(new EfJobRepository());
         CallLogManager cm = new CallLogManager(new EfCallLogRepository());
         public ActionResult CreateJob()
-        {
+        { 
   
             var values = cm.CallLogList();
 
@@ -23,13 +23,10 @@ namespace frameWorkProje.Controllers
         public ActionResult JobDelete(int id)
         {
             // job status false yapılacak
-            // job idsini alıp ordan calllog calllog durumu false olacak falan filan
+            
             var jap = jm.GetByFilter(x => x.JobId == id);
-
-            // iş durumu false olacak
-
+            if(jap != null)
             jm.ChangeJubStatus(jap.JobId);
-
             return RedirectToAction("Index","Home");
 
         }
@@ -37,8 +34,7 @@ namespace frameWorkProje.Controllers
         [HttpPost]
         public ActionResult JobUpdate(Job job)
         {
-            // job status false yapılacak
-            // job idsini alıp ordan calllog calllog durumu false olacak falan filan
+
             var jap = jm.GetByFilter(x => x.JobId == job.JobId);
             jap.JobDescription = job.JobDescription;
             jap.JobMethods = job.JobMethods;
@@ -56,8 +52,7 @@ namespace frameWorkProje.Controllers
         [HttpPost]
         public ActionResult CreateJob(Job job)// 
         {
-           // var sessionUserId = Convert.ToInt32(Session["userId"]);
-           // burda singleton ile gelen kişi disini veritabanında donum gelen userun bilgilerini database olarak tutacğız.
+       
             if (job.CallLogId == 0)
             {
                 // çagrı seçmemiş demektir

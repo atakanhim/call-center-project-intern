@@ -62,15 +62,8 @@ namespace frameWorkProje.Controllers
 
         }
         [Authorize(Roles = "admin")]
-        public ActionResult ListCustomers(int cusid = 0)
+        public ActionResult ListCustomers()
         {
-            Context c = new Context();
-           var dt = DateTime.Now.AddDays(-7);
-           var callogList = (from call in c.Customers
-                          where (call.CustomerDate > dt)
-                          select call
-                              ).ToList();   
-
 
             var customers = cm.CustomerList();
             return View(customers);

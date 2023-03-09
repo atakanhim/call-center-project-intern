@@ -15,33 +15,46 @@
 
 
     <body>
-        <nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"> </span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-                <a class="navbar-brand" href="/">Çağrı Merkezi</a>
-                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+       
+        <nav class="customNavbar">
+            <div class="soltaraf">
 
-                    @if (System.Web.Security.Roles.GetRolesForUser().Single()=="admin")
+                <a href="/">
+                    <img src="~/fotos/call.png" />
+
+                    </a>
+
+
+
+
+                <ul class="liststyleNone">
+
+                    @if (System.Web.Security.Roles.GetRolesForUser().Single() == "admin")
                     {
 
-                        <li class="nav-item">
+                        <li>
                             <a class="nav-link" href="/Customer/ListCustomers">Müşteriler</a>
                         </li>
-                        <li class="nav-item">
+                        <li>
                             <a class="nav-link" href="/User/ListUsers">Personeller</a>
                         </li>
+
                     }
 
 
                 </ul>
-
-                <a class="nav-link" style="color:white">Personel Ad :  <span style="color:green">@HttpContext.Current.User.Identity.Name </span></a>
-                <a class="btn btn-outline-danger my-2 my-sm-0" href="/Login/LogOut">LogOut</a>
-
             </div>
+            
+          
+                <div>
+                    <a class="nav-link" style="color:white;margin-right:20px">Personel Ad:<span style="color:green">@HttpContext.Current.User.Identity.Name </span></a>
+
+
+                    <a class="btn btn-outline-danger my-2 my-sm-0" href="/Login/LogOut">LogOut</a>
+                </div>
+                
         </nav>
+
 
 
         <div style="margin:50px 70px;">@*container bilerek kaldırdık full kullanmak istiyorum sayfayı*@

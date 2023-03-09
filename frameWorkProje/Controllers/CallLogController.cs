@@ -54,7 +54,7 @@ namespace frameWorkProje.Controllers
             }
             else
             {
-                var jobList = jm.GetJobWithfilter("", null, "", false, FrameWorkProjeSingleton.Instance.currentUSer.UserName);
+                var jobList = jm.GetJobWithfilter( false, FrameWorkProjeSingleton.Instance.currentUSer.UserName);
                 foreach (var item in jobList)
                 {
                     if (item.UserId == persoId && item.CallLogId == cagriId)

@@ -1,20 +1,69 @@
-﻿.headerDesign{
-    height:120px;
+﻿.headerDesign {
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:36px;
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+.customTable thead tr th {
+    text-transform: uppercase;
 }
-.customTable thead tr th{
-    text-transform:uppercase;
+
+.customTable tbody tr:hover {
+    cursor: pointer;
+    transition: 0.3s ease;
+    background-color: #fb9403;
 }
-.customTable tbody tr:hover{
-    cursor:pointer;
-    transition:0.3s ease;
-    background-color:#06dcb5;
+
+.customTable tbody tr td:last-child {
+    float: right;
 }
-.customTable tbody tr td:last-child{
-    float:right;
+
+
+.customNavbar {
+    background-color: #fb9403;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    height: 90px;
 }
+
+    .customNavbar > div, .customNavbar > div > a {
+        float: left;
+    }
+
+.soltaraf,.soltaraf a, .soltaraf a img, .soltaraf ul {
+    height: 100%;
+    float: left;
+}
+
+
+
+.liststyleNone {
+    margin-top: 5px;
+    list-style-type: none;
+    float: left;
+}
+
+    .liststyleNone li {
+ 
+        margin-right:62px;
+        float: left;
+        font-size: 26px;
+        transition: 0.3s ease;
+    }
+
+        .liststyleNone li:hover {
+            margin-right: 0px;
+            margin-top:-20px;
+            font-size: 40px;
+            color: white;
+        }
+
+        .liststyleNone li a {
+
+            color: inherit;
+        }

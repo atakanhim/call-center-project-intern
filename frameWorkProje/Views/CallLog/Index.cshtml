@@ -10,7 +10,7 @@
     var onemliDe = false;
     var jobId = 1;
 
-    if (ViewBag.listele !="listele")
+    if (ViewBag.listele != "listele")
     {
         var onemliS = ViewData["isImportant"].ToString();
         if (onemliS == "True")
@@ -33,7 +33,7 @@
 
 }
 
-
+<a class="headerDesign" style="font-size:72px">ÇAĞRI DETAY SAYFASI</a>
 @if (Model == null)
 {
     <h1>@ViewBag.hata</h1>
@@ -42,7 +42,7 @@
 
 else
 {
-    <h2>ÇAĞRI DETAY SAYFASI</h2>
+    <h2>ÇAĞRI BİLGİLERİ</h2>
 
     <table class="table">
         <tr>
@@ -119,7 +119,8 @@ else
 
 
 
-
+   
+    <br />
 
     if (ViewBag.listele != "listele")
     {

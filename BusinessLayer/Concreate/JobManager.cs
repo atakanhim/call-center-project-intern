@@ -39,9 +39,9 @@ namespace BusinessLayer.Concreate
         }
 
       
-        public List<Job> GetJobWithfilter(string ad="", int? numara = null, string abc = "", bool adminmi=false, string username = "")
+        public List<Job> GetJobWithfilter(bool adminmi=false, string username = "")
         {
-            var value = _jobDal.GetJobWithfilter(ad, numara, abc,adminmi, username);
+            var value = _jobDal.GetJobWithfilter(adminmi, username);
             return (value);
         }
 
